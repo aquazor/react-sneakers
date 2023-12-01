@@ -1,0 +1,33 @@
+:root {
+  --bg-color: #e7f6ff;
+  --gray-light: #9d9d9d;
+  --gray-dark: #5c5c5c;
+  --font-base: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.section__padding {
+  padding: 45px 60px;
+}
