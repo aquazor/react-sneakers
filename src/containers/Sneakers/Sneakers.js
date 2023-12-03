@@ -75,6 +75,10 @@ const Sneakers = () => {
     <section className="sneakers section__padding">
       <div className="sneakers__heading">
         <h1>Все кроссовки</h1>
+        <div className="sneakers__heading-inputBlock flex__center">
+          <img src={images.search} alt="Search" />
+          <input type="text" placeholder="Поиск..." />
+        </div>
       </div>
 
       <div className="sneakers__content">{renderedSneakers}</div>

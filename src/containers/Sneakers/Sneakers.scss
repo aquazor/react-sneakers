@@ -1,5 +1,10 @@
 .sneakers {
   &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
     margin-bottom: 40px;
 
     h1 {
@@ -7,6 +12,24 @@
       font-size: 2rem;
       font-weight: 700;
       color: #000;
+    }
+
+    &-inputBlock {
+      position: relative;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--gray-200);
+
+      input {
+        min-width: 200px;
+        margin-left: 10px;
+        color: var(--gray-400);
+        outline: none;
+      }
+
+      input::placeholder {
+        color: var(--gray-300);
+      }
     }
   }
 
@@ -27,14 +50,16 @@
     justify-content: center;
     gap: 14px;
 
+    position: relative;
+
     border-radius: 40px;
-    border: 1px solid #f3f3f3;
+    border: 1px solid var(--gray-200);
     background: #fff;
-    transition: box-shadow 300ms ease;
+    transition: box-shadow 200ms ease, transform 200ms ease;
 
     &:hover {
-      cursor: pointer;
-      box-shadow: 0px 14px 30px 0px rgba(0, 0, 0, 0.05);
+      box-shadow: 0px 10px 35px 0px rgba(0, 0, 0, 0.08);
+      transform: translateY(-8px);
     }
 
     h5 {
@@ -60,7 +85,7 @@
           font-size: 0.6875rem;
           font-weight: 500;
           text-transform: uppercase;
-          color: var(--gray-light);
+          color: var(--gray-300);
           margin-bottom: 2px;
         }
 
@@ -71,12 +96,12 @@
           color: #000;
         }
       }
+    }
 
-      button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+    &_button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
     }
   }
 }

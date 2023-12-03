@@ -1,7 +1,8 @@
 :root {
   --bg-color: #e7f6ff;
-  --gray-light: #9d9d9d;
-  --gray-dark: #5c5c5c;
+  --gray-200: #f3f3f3;
+  --gray-300: #9d9d9d;
+  --gray-400: #5c5c5c;
   --font-base: 'Inter', sans-serif;
 }
 
@@ -9,6 +10,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
 }
 
 a {
@@ -22,12 +27,54 @@ ol {
   list-style: none;
 }
 
+button,
+input {
+  font-family: var(--font-base);
+}
+
 button {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
+input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+img {
+  vertical-align: middle;
+  object-fit: contain;
+}
+
 .section__padding {
   padding: 45px 60px;
+}
+
+.flex__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main__button {
+  width: 100%;
+  padding: 18px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  border-radius: 18px;
+  background-color: #9dd458;
+  transition: background-color 100ms ease;
+
+  &:hover {
+    background-color: lighten(#9dd458, 4%);
+  }
+
+  &:active {
+    background-color: darken(#9dd458, 4%);
+  }
 }

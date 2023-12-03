@@ -1,3 +1,5 @@
+import Button from './Button/Button';
+import Drawer from './Drawer/Drawer';
 import SneakerCard from './SneakersCard/SneakersCard';
 
-export { SneakerCard };
+export { SneakerCard, Button, Drawer };
