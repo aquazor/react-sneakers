@@ -1,8 +1,9 @@
 import './Drawer.scss';
-import Button from '../Button/Button';
 import { images } from '../../constants/images';
+import Button from '../Button/Button';
+import DrawerList from '../DrawerList/DrawerList';
 
-const Drawer = ({ isOpen, setIsOpen }) => {
+const Drawer = ({ setIsOpen }) => {
   return (
     <div className="drawer">
       <div className="drawer__overlay" onClick={() => setIsOpen(false)}></div>
@@ -14,80 +15,7 @@ const Drawer = ({ isOpen, setIsOpen }) => {
           </Button>
         </div>
 
-        <ul className="drawer__content-sneakersList">
-          <li className="drawer__content-sneakersList_item">
-            <img src={images.sneakers1} width={70} height={70} alt="Sneakers" />
-
-            <div className="drawer__content-sneakersList_item-description">
-              <h5>Мужские Кроссовки Nike Air Max 270</h5>
-              <b>11111 руб.</b>
-            </div>
-
-            <Button className="drawer__content-sneakersList_item-button flex__center">
-              <img src={images.crossButton} width={32} height={32} alt="Like" />
-            </Button>
-          </li>
-          <li className="drawer__content-sneakersList_item">
-            <img src={images.sneakers1} width={70} height={70} alt="Sneakers" />
-
-            <div className="drawer__content-sneakersList_item-description">
-              <h5>Мужские Кроссовки Nike Air Max 270</h5>
-              <b>11111 руб.</b>
-            </div>
-
-            <Button className="drawer__content-sneakersList_item-button flex__center">
-              <img src={images.crossButton} width={32} height={32} alt="Like" />
-            </Button>
-          </li>
-          <li className="drawer__content-sneakersList_item">
-            <img src={images.sneakers1} width={70} height={70} alt="Sneakers" />
-
-            <div className="drawer__content-sneakersList_item-description">
-              <h5>Мужские Кроссовки Nike Air Max 270</h5>
-              <b>11111 руб.</b>
-            </div>
-
-            <Button className="drawer__content-sneakersList_item-button flex__center">
-              <img src={images.crossButton} width={32} height={32} alt="Like" />
-            </Button>
-          </li>
-          <li className="drawer__content-sneakersList_item">
-            <img src={images.sneakers1} width={70} height={70} alt="Sneakers" />
-
-            <div className="drawer__content-sneakersList_item-description">
-              <h5>Мужские Кроссовки Nike Air Max 270</h5>
-              <b>11111 руб.</b>
-            </div>
-
-            <Button className="drawer__content-sneakersList_item-button flex__center">
-              <img src={images.crossButton} width={32} height={32} alt="Like" />
-            </Button>
-          </li>
-          <li className="drawer__content-sneakersList_item">
-            <img src={images.sneakers1} width={70} height={70} alt="Sneakers" />
-
-            <div className="drawer__content-sneakersList_item-description">
-              <h5>Мужские Кроссовки Nike Air Max 270</h5>
-              <b>11111 руб.</b>
-            </div>
-
-            <Button className="drawer__content-sneakersList_item-button flex__center">
-              <img src={images.crossButton} width={32} height={32} alt="Like" />
-            </Button>
-          </li>
-          <li className="drawer__content-sneakersList_item">
-            <img src={images.sneakers1} width={70} height={70} alt="Sneakers" />
-
-            <div className="drawer__content-sneakersList_item-description">
-              <h5>Мужские Кроссовки Nike Air Max 270</h5>
-              <b>11111 руб.</b>
-            </div>
-
-            <Button className="flex__center">
-              <img src={images.crossButton} width={32} height={32} alt="Like" />
-            </Button>
-          </li>
-        </ul>
+        <DrawerList />
 
         <div className="drawer__content-footer">
           <ul className="drawer__content-footer_price">

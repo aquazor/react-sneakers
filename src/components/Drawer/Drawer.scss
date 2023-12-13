@@ -17,12 +17,10 @@
     position: fixed;
     right: 0;
     height: 100%;
-    max-width: 400px;
+    width: 400px;
     padding: 30px;
     background-color: #fff;
     z-index: 5;
-
-    overflow-y: scroll;
   }
 
   &__content-heading {
@@ -41,50 +39,6 @@
 
       &:hover {
         opacity: 1;
-      }
-    }
-  }
-
-  &__content-sneakersList {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    &_item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px;
-      border-radius: 20px;
-      border: 1px solid var(--gray-200);
-      overflow: hidden;
-
-      &-description {
-        margin: 0 10px 0 20px;
-        font-family: var(--font-base);
-        color: #000;
-
-        h5 {
-          font-size: 1rem;
-          font-weight: 400;
-          margin-bottom: 6px;
-        }
-
-        b {
-          font-size: 0.875rem;
-          font-weight: 700;
-        }
-      }
-
-      button {
-        opacity: 0.5;
-        align-self: flex-end;
-        transition: opacity 100ms ease;
-
-        &:hover {
-          opacity: 1;
-        }
       }
     }
   }

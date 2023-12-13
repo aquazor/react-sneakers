@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import './SneakersCard.scss';
+import { useContext, useState } from 'react';
+import CartContext from '../../context/sneakers';
 import { images } from '../../constants/images';
 import Button from '../Button/Button';
 
 const SneakerCard = ({ card }) => {
+  const { addToCart } = useContext(CartContext);
+
   const [isAdded, setIsAdded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+
+  const handleClick = (item) => {
+    setIsAdded((current) => !current);
+    addToCart(item);
+  };
 
   return (
     <div className="sneakers__content-card">
@@ -20,7 +29,7 @@ const SneakerCard = ({ card }) => {
 
         <Button
           className="sneakers__content-card_price-button flex__center "
-          onClick={() => setIsAdded((current) => !current)}
+          onClick={() => handleClick(card)}
         >
           <img
             src={isAdded ? images.plusButtonActive : images.plusButton}

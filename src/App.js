@@ -1,7 +1,7 @@
 import './App.scss';
 import { useState } from 'react';
-import { Drawer } from './components';
 import { Header, Sneakers } from './containers';
+import { Drawer } from './components';
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,7 @@ const App = () => {
         <Sneakers />
       </main>
 
-      {isOpen && <Drawer isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isOpen && <Drawer setIsOpen={setIsOpen} />}
     </div>
   );
 };

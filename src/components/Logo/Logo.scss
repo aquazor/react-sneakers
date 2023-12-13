@@ -2,11 +2,11 @@
   display: flex;
   cursor: pointer;
 
-  &-image {
+  &__image {
     margin-right: 16px;
   }
 
-  &-text {
+  &__text {
     h2 {
       font-family: var(--font-base);
       font-size: 1.25rem;
