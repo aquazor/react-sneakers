@@ -2,83 +2,88 @@
   "items": [
     {
       "id": 1,
+      "isAddedToCart": null,
       "url": "img/sneakers-1.png",
       "description": "Кроссовки Puma X Aka Boku Future Rider",
       "price": 8499
     },
     {
       "id": 2,
+      "isAddedToCart": null,
       "url": "img/sneakers-2.png",
       "description": "Мужские Кроссовки Under Armour Curry 8",
       "price": 15199
     },
     {
       "id": 3,
+      "isAddedToCart": null,
       "url": "img/sneakers-3.png",
       "description": "Мужские Кроссовки Nike Kyrie 7",
       "price": 11299
     },
     {
       "id": 4,
+      "isAddedToCart": null,
       "url": "img/sneakers-4.png",
       "description": "Мужские Кроссовки Nike Kyrie Flytrap IV",
       "price": 11299
     },
     {
       "id": 5,
+      "isAddedToCart": null,
       "url": "img/sneakers-5.png",
       "description": "Мужские Кроссовки Jordan Air Jordan 11",
       "price": 10799
     },
     {
       "id": 6,
+      "isAddedToCart": null,
       "url": "img/sneakers-6.png",
       "description": "ММужские Кроссовки Nike LeBron XVIII",
       "price": 16499
     },
     {
       "id": 7,
+      "isAddedToCart": null,
       "url": "img/sneakers-7.png",
       "description": "Мужские Кроссовки Nike Lebron XVIII Low",
       "price": 13999
     },
     {
       "id": 8,
+      "isAddedToCart": null,
       "url": "img/sneakers-8.png",
       "description": "Мужские Кроссовки Nike Blazer Mid Suede",
       "price": 8499
     },
     {
       "id": 9,
+      "isAddedToCart": null,
       "url": "img/sneakers-9.png",
       "description": "Мужские Кроссовки Nike Blazer Mid Suede",
       "price": 8999
     },
     {
       "id": 10,
+      "isAddedToCart": null,
       "url": "img/sneakers-10.png",
       "description": "Кроссовки Puma X Aka Boku Future Rider",
       "price": 8499
     },
     {
       "id": 11,
+      "isAddedToCart": null,
       "url": "img/sneakers-11.png",
       "description": "Мужские Кроссовки Nike Blazer Mid Suede",
       "price": 8499
     },
     {
       "id": 12,
+      "isAddedToCart": null,
       "url": "img/sneakers-12.png",
       "description": "Мужские Кроссовки Nike Air Max 270",
       "price": 12999
     }
   ],
-  "cart": [
-    {
-      "id": 5,
-      "url": "img/sneakers-5.png",
-      "description": "Мужские Кроссовки Jordan Air Jordan 11",
-      "price": 10799
-    }
-  ]
+  "cart": []
 }

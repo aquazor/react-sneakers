@@ -1,19 +1,13 @@
 import './Sneakers.scss';
 import { images } from '../../constants/images';
 import { SneakerCard } from '../../components';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import SneakersContext from '../../context/sneakers';
 
 const Sneakers = () => {
-  const { sneakers, fetchSneakers } = useContext(SneakersContext);
+  const { sneakers } = useContext(SneakersContext);
 
-  useEffect(() => {
-    fetchSneakers();
-  }, []);
-
-  const renderedCards = sneakers.map((card, index) => (
-    <SneakerCard key={index} card={card} />
-  ));
+  const renderedItems = sneakers.map((item) => <SneakerCard key={item.id} item={item} />);
 
   return (
     <section className="sneakers section__padding">
@@ -25,7 +19,7 @@ const Sneakers = () => {
         </div>
       </div>
 
-      <div className="sneakers__content">{renderedCards}</div>
+      <div className="sneakers__content">{renderedItems}</div>
     </section>
   );
 };

@@ -1,18 +1,13 @@
 import './DrawerList.scss';
-import { useContext, useEffect } from 'react';
-import SneakersContext from '../../context/sneakers';
+import { useCartContext } from '../../context';
 import DrawerListItem from '../DrawerListItem/DrawerListItem';
 
 const DrawerList = () => {
-  const { cart, fetchCart, removeFromCart } = useContext(SneakersContext);
+  const { cart, removeFromCart } = useCartContext();
 
-  useEffect(() => {
-    fetchCart();
-  }, [fetchCart]);
-
-  const renderedSneakers = cart.map((item, index) => (
-    <DrawerListItem item={item} onRemove={removeFromCart} key={index} />
-  ));
+  const renderedSneakers = cart.map((item) => {
+    return <DrawerListItem item={item} onRemove={removeFromCart} key={item.id} />;
+  });
 
   return (
     <ul className="drawer__content-sneakersList">

@@ -1,9 +1,18 @@
 import './App.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Header, Sneakers } from './containers';
 import { Drawer } from './components';
+import { useCartContext, useSneakersContext } from './context';
 
 const App = () => {
+  const { fetchSneakers } = useSneakersContext();
+  const { fetchCart } = useCartContext();
+
+  useEffect(() => {
+    fetchSneakers();
+    fetchCart();
+  }, [fetchSneakers, fetchCart]);
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
