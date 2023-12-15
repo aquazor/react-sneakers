@@ -12,11 +12,13 @@
     gap: 1rem 2rem;
 
     li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+      }
 
       span {
         font-family: var(--font-base);

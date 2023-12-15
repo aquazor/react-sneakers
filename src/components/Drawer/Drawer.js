@@ -1,9 +1,25 @@
 import './Drawer.scss';
+import { useEffect } from 'react';
 import { images } from '../../constants/images';
 import Button from '../Button/Button';
 import DrawerList from '../DrawerList/DrawerList';
 
-const Drawer = ({ setIsOpen }) => {
+const Drawer = ({ isOpen, setIsOpen }) => {
+  useEffect(() => {
+    const BODY = document.body;
+
+    if (isOpen) {
+      const lockPadding = window.innerWidth - BODY.offsetWidth + 'px';
+      BODY.style.paddingRight = lockPadding;
+      BODY.setAttribute('block-scroll', '');
+    }
+
+    return () => {
+      BODY.style.paddingRight = 0 + 'px';
+      BODY.removeAttribute('block-scroll');
+    };
+  }, [isOpen]);
+
   return (
     <div className="drawer">
       <div className="drawer__overlay" onClick={() => setIsOpen(false)}></div>

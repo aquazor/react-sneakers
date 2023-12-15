@@ -1,24 +1,28 @@
 import './SneakersCard.scss';
-import { useContext, useEffect, useState } from 'react';
-import CartContext from '../../context/cart';
+import { useEffect, useState } from 'react';
 import { images } from '../../constants/images';
+import { useCartContext, useFavoritesContext } from '../../context';
 import Button from '../Button/Button';
 
 const SneakerCard = ({ item }) => {
-  const { cart, addToCart, removeFromCart } = useContext(CartContext);
+  const { cart, addToCart, removeFromCart } = useCartContext();
+  const { favorites, addToFavorites, removeFromFavorites } = useFavoritesContext();
 
   const [isAddedToCart, setIsAddedToCart] = useState(false);
-  const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
+  const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
 
-  const alreadyInCart = cart.some((el) => el.id === item.id);
+  const alreadyInCart = cart?.some((el) => el.id === item.id);
+  const alreadyInFavorites = favorites?.some((el) => el.id === item.id);
 
   useEffect(() => {
-    if (alreadyInCart) {
-      setIsAddedToCart(true);
-    } else {
-      setIsAddedToCart(false);
-    }
-  }, [alreadyInCart]);
+    const result = {
+      inCart: alreadyInCart && true,
+      inFavorites: alreadyInFavorites && true,
+    };
+
+    setIsAddedToFavorites(result.inFavorites);
+    setIsAddedToCart(result.inCart);
+  }, [alreadyInCart, alreadyInFavorites]);
 
   const handleAddToCart = (obj) => {
     if (alreadyInCart) {
@@ -27,6 +31,16 @@ const SneakerCard = ({ item }) => {
     }
 
     addToCart(obj);
+  };
+
+  const handleAddToFavorites = (obj) => {
+    if (alreadyInFavorites) {
+      removeFromFavorites(obj.id);
+      return;
+    }
+
+    addToFavorites(obj);
+    setIsAddedToFavorites();
   };
 
   return (
@@ -56,10 +70,10 @@ const SneakerCard = ({ item }) => {
 
       <Button
         className="sneakers__content-card_button flex__center"
-        onClick={() => setIsAddedToFavorite((current) => !current)}
+        onClick={() => handleAddToFavorites(item)}
       >
         <img
-          src={isAddedToFavorite ? images.favoriteButtonActive : images.favoriteButton}
+          src={isAddedToFavorites ? images.favoriteButtonActive : images.favoriteButton}
           width={32}
           height={32}
           alt="Like"

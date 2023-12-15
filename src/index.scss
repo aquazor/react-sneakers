@@ -78,3 +78,8 @@ img {
     background-color: darken(#9dd458, 4%);
   }
 }
+
+.block-scroll,
+[block-scroll] {
+  overflow: hidden;
+}

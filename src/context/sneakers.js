@@ -21,5 +21,4 @@ const SneakersProvider = ({ children }) => {
   return <SneakersContext.Provider value={value}>{children}</SneakersContext.Provider>;
 };
 
-export { SneakersProvider };
-export default SneakersContext;
+export { SneakersContext, SneakersProvider };

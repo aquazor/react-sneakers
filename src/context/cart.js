@@ -37,5 +37,5 @@ const CartProvider = ({ children }) => {
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
-export { CartProvider };
-export default CartContext;
+export {CartContext, CartProvider };
+

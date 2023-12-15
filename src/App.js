@@ -1,29 +1,43 @@
 import './App.scss';
 import { useEffect, useState } from 'react';
-import { Header, Sneakers } from './containers';
-import { Drawer } from './components';
-import { useCartContext, useSneakersContext } from './context';
+import { Routes, Route } from 'react-router-dom';
+
+import { Drawer, Header } from './components';
+import { useCartContext, useFavoritesContext, useSneakersContext } from './context';
+import Section from './components/Section/Section';
 
 const App = () => {
-  const { fetchSneakers } = useSneakersContext();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { sneakers, fetchSneakers } = useSneakersContext();
+  const { favorites, fetchFavorites } = useFavoritesContext();
+
   const { fetchCart } = useCartContext();
 
   useEffect(() => {
     fetchSneakers();
+    fetchFavorites();
     fetchCart();
-  }, [fetchSneakers, fetchCart]);
-
-  const [isOpen, setIsOpen] = useState(false);
+  }, [fetchSneakers, fetchFavorites, fetchCart]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" id="wrapper">
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <main>
-        <Sneakers />
+        <Routes>
+          <Route
+            path="/"
+            element={<Section heading={'Все кроссовки'} items={sneakers} />}
+          />
+          <Route
+            path="/favorites"
+            element={<Section heading={'Понравившееся товары'} items={favorites} link />}
+          />
+        </Routes>
       </main>
 
-      {isOpen && <Drawer setIsOpen={setIsOpen} />}
+      {isOpen && <Drawer isOpen={isOpen} setIsOpen={setIsOpen} />}
     </div>
   );
 };

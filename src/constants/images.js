@@ -6,6 +6,7 @@ import favoriteButtonActive from '../assets/favorite-button-active.svg';
 import search from '../assets/search.svg';
 import crossButton from '../assets/cross-button.svg';
 import arrowRight from '../assets/arrow-right.svg';
+import goBackButton from '../assets/go-back-button.svg';
 
 import profile from '../assets/profile.svg';
 import plusButton from '../assets/plus-button.svg';
@@ -23,4 +24,5 @@ export const images = {
   crossButton,
   search,
   arrowRight,
+  goBackButton,
 };
