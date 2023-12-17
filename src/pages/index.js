@@ -1,4 +1,4 @@
-import Sneakers from './Sneakers/Sneakers';
-import Favorites from './Favorites/Favorites';
+import SneakersPage from './SneakersPage/SneakersPage';
+import FavoritesPage from './FavoritesPage/FavoritesPage';
 
-export { Sneakers, Favorites };
+export { SneakersPage, FavoritesPage };

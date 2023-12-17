@@ -1,18 +1,18 @@
 import './App.scss';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-
-import { Drawer, Header } from './components';
 import { useCartContext, useFavoritesContext, useSneakersContext } from './context';
-import Section from './components/Section/Section';
+
+import { FavoritesPage, SneakersPage } from './pages';
+import { Drawer, Header } from './components';
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { sneakers, fetchSneakers } = useSneakersContext();
-  const { favorites, fetchFavorites } = useFavoritesContext();
+  const { fetchSneakers } = useSneakersContext();
 
-  const { fetchCart } = useCartContext();
+  const { fetchItems: fetchFavorites } = useFavoritesContext();
+  const { fetchItems: fetchCart } = useCartContext();
 
   useEffect(() => {
     fetchSneakers();
@@ -26,14 +26,8 @@ const App = () => {
 
       <main>
         <Routes>
-          <Route
-            path="/"
-            element={<Section heading={'Все кроссовки'} items={sneakers} />}
-          />
-          <Route
-            path="/favorites"
-            element={<Section heading={'Понравившееся товары'} items={favorites} link />}
-          />
+          <Route path="/" element={<SneakersPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
         </Routes>
       </main>
 

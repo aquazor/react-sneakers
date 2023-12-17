@@ -1,11 +1,11 @@
-import { useContext, createContext } from 'react';
+import { createContext, useContext } from 'react';
 import { CartContext, CartProvider } from './cart';
 import { SneakersContext, SneakersProvider } from './sneakers';
 import { FavoritesContext, FavoritesProvider } from './favorites';
 
 const useCartContext = () => useContext(CartContext);
-const useSneakersContext = () => useContext(SneakersContext);
 const useFavoritesContext = () => useContext(FavoritesContext);
+const useSneakersContext = () => useContext(SneakersContext);
 
 const GlobalContext = createContext();
 
@@ -22,11 +22,11 @@ const GlobalProvider = ({ children }) => {
 };
 
 export {
-  useCartContext,
-  useSneakersContext,
   CartProvider,
-  SneakersProvider,
   FavoritesProvider,
+  SneakersProvider,
+  useCartContext,
   useFavoritesContext,
+  useSneakersContext,
   GlobalProvider,
 };

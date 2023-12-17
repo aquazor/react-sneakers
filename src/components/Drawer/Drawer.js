@@ -38,12 +38,12 @@ const Drawer = ({ isOpen, setIsOpen }) => {
             <li className="drawer__content-footer_price-total">
               <span>Итого: </span>
               <div></div>
-              <span>22 222 руб.</span>
+              <span>22 222 ₸</span>
             </li>
             <li className="drawer__content-footer_price-tax">
               <span>Налог 5%: </span>
               <div></div>
-              <span>1111 руб.</span>
+              <span>1111 ₸</span>
             </li>
           </ul>
 

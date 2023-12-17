@@ -1,0 +1,18 @@
+.inputBlock {
+  position: relative;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+
+  input {
+    min-width: 200px;
+    margin-left: 10px;
+    line-height: 1.5;
+    color: var(--gray-400);
+    outline: none;
+  }
+
+  input::placeholder {
+    color: var(--gray-300);
+  }
+}

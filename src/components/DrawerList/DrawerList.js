@@ -3,7 +3,7 @@ import { useCartContext } from '../../context';
 import DrawerListItem from '../DrawerListItem/DrawerListItem';
 
 const DrawerList = () => {
-  const { cart, removeFromCart } = useCartContext();
+  const { items: cart, removeItem: removeFromCart } = useCartContext();
 
   const renderedSneakers = cart.map((item) => {
     return <DrawerListItem item={item} onRemove={removeFromCart} key={item.id} />;
