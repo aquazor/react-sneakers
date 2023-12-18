@@ -1,5 +1,5 @@
 import './SneakersCard.scss';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { images } from '../../constants/images';
 import { useCartContext, useFavoritesContext } from '../../context';
 
@@ -10,7 +10,7 @@ const constants = {
   favorites: 'favorites',
 };
 
-const SneakerCard = ({ item }) => {
+const SneakerCard = memo(({ item }) => {
   const {
     items: cart,
     addItem: addToCart,
@@ -43,6 +43,7 @@ const SneakerCard = ({ item }) => {
         }
         addToCart(obj);
         break;
+
       case constants.favorites:
         if (alreadyInFavorites) {
           removeFromFavorites(obj.id);
@@ -51,6 +52,7 @@ const SneakerCard = ({ item }) => {
 
         addToFavorites(obj);
         break;
+
       default:
         throw new Error('u kek');
     }
@@ -65,7 +67,7 @@ const SneakerCard = ({ item }) => {
       <div className="sneakers__card-price">
         <div className="sneakers__card-price_left">
           <span>ЦЕНА: </span>
-          <b>{item.price} ₸</b>
+          <b>{item.price.toLocaleString('ru-RU')} ₸</b>
         </div>
 
         <Button
@@ -94,6 +96,6 @@ const SneakerCard = ({ item }) => {
       </Button>
     </div>
   );
-};
+});
 
 export default SneakerCard;

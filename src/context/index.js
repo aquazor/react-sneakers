@@ -3,9 +3,9 @@ import { CartContext, CartProvider } from './cart';
 import { SneakersContext, SneakersProvider } from './sneakers';
 import { FavoritesContext, FavoritesProvider } from './favorites';
 
+const useSneakersContext = () => useContext(SneakersContext);
 const useCartContext = () => useContext(CartContext);
 const useFavoritesContext = () => useContext(FavoritesContext);
-const useSneakersContext = () => useContext(SneakersContext);
 
 const GlobalContext = createContext();
 

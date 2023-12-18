@@ -3,10 +3,10 @@ import { useCartContext } from '../../context';
 import DrawerListItem from '../DrawerListItem/DrawerListItem';
 
 const DrawerList = () => {
-  const { items: cart, removeItem: removeFromCart } = useCartContext();
+  const { items, removeItem } = useCartContext();
 
-  const renderedSneakers = cart.map((item) => {
-    return <DrawerListItem item={item} onRemove={removeFromCart} key={item.id} />;
+  const renderedSneakers = items.map((item) => {
+    return <DrawerListItem item={item} onRemove={removeItem} key={item.id} />;
   });
 
   return (

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useFavoritesContext } from '../../context';
-import { Section } from '../../components';
 import { images } from '../../constants/images';
+import { Section } from '../../components';
 
 const FavoritesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');

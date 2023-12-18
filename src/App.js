@@ -9,8 +9,7 @@ import { Drawer, Header } from './components';
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { fetchSneakers } = useSneakersContext();
-
+  const { fetchItems: fetchSneakers } = useSneakersContext();
   const { fetchItems: fetchFavorites } = useFavoritesContext();
   const { fetchItems: fetchCart } = useCartContext();
 

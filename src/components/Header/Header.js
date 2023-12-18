@@ -1,9 +1,10 @@
 import './Header.scss';
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { images } from '../../constants/images';
 import { Logo } from '../../components';
 
-const Header = ({ setIsOpen }) => {
+const Header = memo(({ setIsOpen }) => {
   return (
     <header className="header section__padding">
       <Link to={'/'}>
@@ -34,6 +35,6 @@ const Header = ({ setIsOpen }) => {
       </ul>
     </header>
   );
-};
+});
 
 export default Header;

@@ -4,18 +4,18 @@ import axios from 'axios';
 const SneakersContext = createContext();
 
 const SneakersProvider = ({ children }) => {
-  const [sneakers, setSneakers] = useState([]);
+  const [items, setItems] = useState([]);
 
-  const fetchSneakers = useCallback(async () => {
+  const fetchItems = useCallback(async () => {
     const response = await axios.get('http://localhost:3005/items');
 
-    setSneakers(response.data);
+    setItems(response.data);
   }, []);
 
   const value = {
-    sneakers,
-    setSneakers,
-    fetchSneakers,
+    items,
+    setItems,
+    fetchItems,
   };
 
   return <SneakersContext.Provider value={value}>{children}</SneakersContext.Provider>;

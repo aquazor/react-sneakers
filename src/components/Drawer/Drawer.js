@@ -1,10 +1,15 @@
 import './Drawer.scss';
 import { useEffect } from 'react';
+import { useCartContext } from '../../context';
 import { images } from '../../constants/images';
 import Button from '../Button/Button';
 import DrawerList from '../DrawerList/DrawerList';
 
+const taxAmount = 69;
+
 const Drawer = ({ isOpen, setIsOpen }) => {
+  const { items } = useCartContext();
+
   useEffect(() => {
     const BODY = document.body;
 
@@ -19,6 +24,10 @@ const Drawer = ({ isOpen, setIsOpen }) => {
       BODY.removeAttribute('block-scroll');
     };
   }, [isOpen]);
+
+  const price = items.reduce((sum, item) => sum + item.price, 0);
+  const tax = (price * taxAmount) / 100;
+  const totalPrice = price + tax;
 
   return (
     <div className="drawer">
@@ -36,14 +45,20 @@ const Drawer = ({ isOpen, setIsOpen }) => {
         <div className="drawer__content-footer">
           <ul className="drawer__content-footer_price">
             <li className="drawer__content-footer_price-total">
-              <span>Итого: </span>
+              <span>До налога:</span>
               <div></div>
-              <span>22 222 ₸</span>
+              <span>{price.toLocaleString('ru-RU')} ₸</span>
+            </li>
+
+            <li className="drawer__content-footer_price-tax">
+              <span>Налог {taxAmount}%:</span>
+              <div></div>
+              <span>{tax.toLocaleString('ru-RU')} ₸</span>
             </li>
             <li className="drawer__content-footer_price-tax">
-              <span>Налог 5%: </span>
+              <span>После налога:</span>
               <div></div>
-              <span>1111 ₸</span>
+              <span>{totalPrice.toLocaleString('ru-RU')} ₸</span>
             </li>
           </ul>
 
