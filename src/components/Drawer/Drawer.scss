@@ -75,16 +75,30 @@
     }
 
     &_button {
-      position: relative;
-
       button {
-        background-image: url(../../assets/arrow-right.svg);
-        background-repeat: no-repeat;
-        background-position: 88% 50%;
         transition: background-position 200ms ease-in-out;
+        background-repeat: no-repeat;
+      }
 
-        &:hover {
-          background-position: 92% 50%;
+      &--forward {
+        button {
+          background-image: url(../../assets/arrow-right.svg);
+          background-position: 88% 50%;
+
+          &:hover {
+            background-position: 92% 50%;
+          }
+        }
+      }
+
+      &--backward {
+        button {
+          background-image: url(../../assets/arrow-left.svg);
+          background-position: 12% 50%;
+
+          &:hover {
+            background-position: 8% 50%;
+          }
         }
       }
     }

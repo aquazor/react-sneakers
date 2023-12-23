@@ -1,11 +1,11 @@
 import { createContext, useContext } from 'react';
 import { CartContext, CartProvider } from './cart';
 import { SneakersContext, SneakersProvider } from './sneakers';
-import { FavoritesContext, FavoritesProvider } from './favorites';
+import { FavoriteContext, FavoriteProvider } from './favorite';
 
 const useSneakersContext = () => useContext(SneakersContext);
 const useCartContext = () => useContext(CartContext);
-const useFavoritesContext = () => useContext(FavoritesContext);
+const useFavoriteContext = () => useContext(FavoriteContext);
 
 const GlobalContext = createContext();
 
@@ -13,9 +13,9 @@ const GlobalProvider = ({ children }) => {
   return (
     <CartProvider>
       <SneakersProvider>
-        <FavoritesProvider>
+        <FavoriteProvider>
           <GlobalContext.Provider value={''}>{children}</GlobalContext.Provider>
-        </FavoritesProvider>
+        </FavoriteProvider>
       </SneakersProvider>
     </CartProvider>
   );
@@ -23,10 +23,10 @@ const GlobalProvider = ({ children }) => {
 
 export {
   CartProvider,
-  FavoritesProvider,
+  FavoriteProvider,
   SneakersProvider,
   useCartContext,
-  useFavoritesContext,
+  useFavoriteContext,
   useSneakersContext,
   GlobalProvider,
 };

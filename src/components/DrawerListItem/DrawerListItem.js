@@ -1,8 +1,11 @@
 import './DrawerListItem.scss';
-import Button from '../Button/Button';
+import { useCartContext } from '../../context';
 import { images } from '../../constants/images';
+import Button from '../Button/Button';
 
-const DrawerListItem = ({ item, onRemove }) => {
+const DrawerListItem = ({ item }) => {
+  const { removeCartItem, isLoadingCartItem } = useCartContext();
+
   return (
     <li className="drawer__content-sneakersList_item">
       <img src={item.url} width={70} height={70} alt="Sneakers" />
@@ -10,7 +13,11 @@ const DrawerListItem = ({ item, onRemove }) => {
         <h5>{item.description}</h5>
         <b>{item.price.toLocaleString('ru-RU')} ₸</b>
       </div>
-      <Button className="flex__center" onClick={() => onRemove(item.id)}>
+      <Button
+        className="flex__center"
+        onClick={() => removeCartItem(item)}
+        disabled={isLoadingCartItem[item.id]}
+      >
         <img src={images.crossButton} width={32} height={32} alt="Like" />
       </Button>
     </li>

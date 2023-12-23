@@ -1,7 +1,7 @@
 import './App.scss';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useCartContext, useFavoritesContext, useSneakersContext } from './context';
+import { useCartContext, useFavoriteContext, useSneakersContext } from './context';
 
 import { FavoritesPage, SneakersPage } from './pages';
 import { Drawer, Header } from './components';
@@ -9,15 +9,15 @@ import { Drawer, Header } from './components';
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { fetchItems: fetchSneakers } = useSneakersContext();
-  const { fetchItems: fetchFavorites } = useFavoritesContext();
-  const { fetchItems: fetchCart } = useCartContext();
+  const { fetchSneakersItems } = useSneakersContext();
+  const { fetchFavoriteItems } = useFavoriteContext();
+  const { fetchCartItems } = useCartContext();
 
   useEffect(() => {
-    fetchSneakers();
-    fetchFavorites();
-    fetchCart();
-  }, [fetchSneakers, fetchFavorites, fetchCart]);
+    fetchSneakersItems();
+    fetchCartItems();
+    fetchFavoriteItems();
+  }, [fetchSneakersItems, fetchFavoriteItems, fetchCartItems]);
 
   return (
     <div className="wrapper" id="wrapper">

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useFavoritesContext } from '../../context';
+import { useFavoriteContext } from '../../context';
 import { images } from '../../constants/images';
 import { Section } from '../../components';
 
 const FavoritesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { items } = useFavoritesContext();
+  const { favoriteItems } = useFavoriteContext();
 
   const link = (
     <Link to={'/'}>
@@ -19,7 +19,7 @@ const FavoritesPage = () => {
     : 'Понравившиеся товары';
 
   return (
-    <Section items={items} searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
+    <Section items={favoriteItems} searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
       {link}
       <h1>{heading}</h1>
     </Section>

@@ -1,5 +1,5 @@
 {
-  "items": [
+  "sneakers": [
     {
       "id": 1,
       "url": "img/sneakers-1.png",
@@ -74,18 +74,6 @@
     }
   ],
   "cart": [
-    {
-      "id": 2,
-      "url": "img/sneakers-2.png",
-      "description": "Мужские Кроссовки Under Armour Curry 8",
-      "price": 15199
-    },
-    {
-      "id": 3,
-      "url": "img/sneakers-3.png",
-      "description": "Мужские Кроссовки Nike Kyrie 7",
-      "price": 11299
-    },
     {
       "id": 8,
       "url": "img/sneakers-8.png",

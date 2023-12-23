@@ -4,12 +4,12 @@ import { Section } from '../../components';
 
 const SneakersPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { items } = useSneakersContext();
+  const { sneakersItems } = useSneakersContext();
 
   const heading = searchTerm ? `Поиск по запросу: "${searchTerm}"` : 'Все кроссовки';
 
   return (
-    <Section items={items} searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
+    <Section items={sneakersItems} searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
       <h1>{heading}</h1>
     </Section>
   );

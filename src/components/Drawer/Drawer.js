@@ -8,7 +8,7 @@ import DrawerList from '../DrawerList/DrawerList';
 const taxAmount = 69;
 
 const Drawer = ({ isOpen, setIsOpen }) => {
-  const { items } = useCartContext();
+  const { cartItems } = useCartContext();
 
   useEffect(() => {
     const BODY = document.body;
@@ -25,7 +25,7 @@ const Drawer = ({ isOpen, setIsOpen }) => {
     };
   }, [isOpen]);
 
-  const price = items.reduce((sum, item) => sum + item.price, 0);
+  const price = cartItems.reduce((sum, item) => sum + item.price, 0);
   const tax = (price * taxAmount) / 100;
   const totalPrice = price + tax;
 
@@ -40,32 +40,39 @@ const Drawer = ({ isOpen, setIsOpen }) => {
           </Button>
         </div>
 
-        <DrawerList />
+        <DrawerList setIsOpen={setIsOpen} />
+        {cartItems.length ? (
+          <div className="drawer__content-footer">
+            <ul className="drawer__content-footer_price">
+              <li className="drawer__content-footer_price-total">
+                <span>До налога:</span>
+                <div></div>
+                <span>{price.toLocaleString('ru-RU')} ₸</span>
+              </li>
 
-        <div className="drawer__content-footer">
-          <ul className="drawer__content-footer_price">
-            <li className="drawer__content-footer_price-total">
-              <span>До налога:</span>
-              <div></div>
-              <span>{price.toLocaleString('ru-RU')} ₸</span>
-            </li>
+              <li className="drawer__content-footer_price-tax">
+                <span>Налог {taxAmount}%:</span>
+                <div></div>
+                <span>{tax.toLocaleString('ru-RU')} ₸</span>
+              </li>
+              <li className="drawer__content-footer_price-tax">
+                <span>После налога:</span>
+                <div></div>
+                <span>{totalPrice.toLocaleString('ru-RU')} ₸</span>
+              </li>
+            </ul>
 
-            <li className="drawer__content-footer_price-tax">
-              <span>Налог {taxAmount}%:</span>
-              <div></div>
-              <span>{tax.toLocaleString('ru-RU')} ₸</span>
-            </li>
-            <li className="drawer__content-footer_price-tax">
-              <span>После налога:</span>
-              <div></div>
-              <span>{totalPrice.toLocaleString('ru-RU')} ₸</span>
-            </li>
-          </ul>
-
-          <div className="drawer__content-footer_button">
-            <Button className="main__button">Оформить заказ</Button>
+            <div className="drawer__content-footer_button drawer__content-footer_button--forward">
+              <Button className="main__button">Оформить заказ</Button>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="drawer__content-footer_button drawer__content-footer_button--backward">
+            <Button className="main__button" onClick={() => setIsOpen(false)}>
+              Вернуться назад
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,21 +1,32 @@
 import { createContext, useCallback, useState } from 'react';
 import axios from 'axios';
+import { BASE_URL, SNEAKERS } from '../constants/constants';
 
 const SneakersContext = createContext();
 
 const SneakersProvider = ({ children }) => {
-  const [items, setItems] = useState([]);
+  const [sneakersItems, setSneakersItems] = useState([]);
+  const [isLoadingSneakers, setIsLoadingSneakers] = useState(false);
 
-  const fetchItems = useCallback(async () => {
-    const response = await axios.get('http://localhost:3005/items');
+  const fetchSneakersItems = useCallback(async () => {
+    setIsLoadingSneakers(true);
 
-    setItems(response.data);
+    try {
+      await axios.get(`${BASE_URL}/${SNEAKERS}`).then((res) => {
+        setSneakersItems(res.data);
+        setIsLoadingSneakers(false);
+      });
+    } catch (error) {
+      console.log(`at sneakers.js: ${error}`);
+    }
   }, []);
 
   const value = {
-    items,
-    setItems,
-    fetchItems,
+    sneakersItems,
+    setSneakersItems,
+    fetchSneakersItems,
+    isLoadingSneakers,
+    setIsLoadingSneakers,
   };
 
   return <SneakersContext.Provider value={value}>{children}</SneakersContext.Provider>;
