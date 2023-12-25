@@ -1,18 +1,17 @@
 import './Section.scss';
-import { useCartContext, useFavoriteContext, useSneakersContext } from '../../context';
+import { useSneakersContext } from '../../context';
 import SneakerCard from '../SneakersCard/SneakersCard';
+import CardSkeleton from '../CardSkeleton/CardSkeleton';
 import Input from '../Input/Input';
 
 const Section = ({ items, searchTerm, setSearchTerm, children }) => {
   const { isLoadingSneakers } = useSneakersContext();
-  const { favoriteItems } = useFavoriteContext();
-  const { cartItems } = useCartContext();
 
   let renderedItems;
 
   if (isLoadingSneakers) {
-    renderedItems = [...Array(8)].map((item, index) => (
-      <SneakerCard key={index} item={item} isLoading={isLoadingSneakers} />
+    renderedItems = [...Array(8)].map((_, index) => (
+      <CardSkeleton className={'sneakers__card'} key={index} />
     ));
   } else {
     const filteredItems = items?.filter((item) =>
@@ -20,18 +19,7 @@ const Section = ({ items, searchTerm, setSearchTerm, children }) => {
     );
 
     renderedItems = filteredItems.map((item) => {
-      const alreadyInFavorites = favoriteItems?.some((obj) => item.id === obj.id);
-      const alreadyInCart = cartItems?.some((obj) => item.id === obj.id);
-
-      return (
-        <SneakerCard
-          key={item.id}
-          item={item}
-          isLoading={isLoadingSneakers}
-          alreadyInFavorites={alreadyInFavorites}
-          alreadyInCart={alreadyInCart}
-        />
-      );
+      return <SneakerCard key={item.id} item={item} isLoading={isLoadingSneakers} />;
     });
   }
 

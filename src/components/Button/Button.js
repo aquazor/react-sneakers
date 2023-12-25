@@ -1,7 +1,9 @@
-const Button = ({ children, className, ...rest }) => {
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+
+const Button = ({ children, className, loading, ...rest }) => {
   return (
-    <button type="button" className={className} {...rest}>
-      {children}
+    <button type="button" disabled={loading} className={className} {...rest}>
+      {loading ? <LoadingSpinner /> : children}
     </button>
   );
 };
