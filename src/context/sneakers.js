@@ -7,17 +7,19 @@ const SneakersContext = createContext();
 const SneakersProvider = ({ children }) => {
   const [sneakersItems, setSneakersItems] = useState([]);
   const [isLoadingSneakers, setIsLoadingSneakers] = useState(false);
+  const [errorLoadingSneakers, setErrorLoadingSneakers] = useState(null);
 
   const fetchSneakersItems = useCallback(async () => {
     setIsLoadingSneakers(true);
 
     try {
-      await axios.get(`${BASE_URL}/${SNEAKERS}`).then((res) => {
-        setSneakersItems(res.data);
-        setIsLoadingSneakers(false);
-      });
+      const response = await axios.get(`${BASE_URL}/${SNEAKERS}`);
+      setSneakersItems(response.data);
     } catch (error) {
-      console.log(`at sneakers.js: ${error}`);
+      setErrorLoadingSneakers('Что-то пошло не так...');
+      console.log(`error fetching sneakers items: ${error}`);
+    } finally {
+      setIsLoadingSneakers(false);
     }
   }, []);
 
@@ -27,6 +29,8 @@ const SneakersProvider = ({ children }) => {
     fetchSneakersItems,
     isLoadingSneakers,
     setIsLoadingSneakers,
+    errorLoadingSneakers,
+    setErrorLoadingSneakers,
   };
 
   return <SneakersContext.Provider value={value}>{children}</SneakersContext.Provider>;

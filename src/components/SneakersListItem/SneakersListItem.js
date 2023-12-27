@@ -1,13 +1,13 @@
-import './SneakersCard.scss';
+import './SneakersListItem.scss';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useCartContext, useFavoriteContext } from '../../context';
 import { images } from '../../constants/images';
-import { CART, FAVORITES } from '../../constants/constants';
+import { CART, FAVORITE } from '../../constants/constants';
 import Button from '../Button/Button';
 
 const SneakerCard = memo(({ item }) => {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
-  const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
+  const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
 
   const { cartItems, addCartItem, removeCartItem, isLoadingCartItem } = useCartContext();
   const { favoriteItems, addFavoriteItem, removeFavoriteItem, isLoadingFavoriteItem } =
@@ -23,8 +23,8 @@ const SneakerCard = memo(({ item }) => {
   );
 
   useEffect(() => {
-    setIsAddedToCart(alreadyInCart && true);
-    setIsAddedToFavorites(alreadyInFavorites && true);
+    setIsAddedToCart(alreadyInCart);
+    setIsAddedToFavorite(alreadyInFavorites);
   }, [alreadyInCart, alreadyInFavorites]);
 
   const handleAdd = useCallback(
@@ -39,7 +39,7 @@ const SneakerCard = memo(({ item }) => {
           addCartItem(obj);
           break;
 
-        case FAVORITES:
+        case FAVORITE:
           if (alreadyInFavorites) {
             removeFavoriteItem(obj);
             return;
@@ -63,7 +63,7 @@ const SneakerCard = memo(({ item }) => {
   );
 
   return (
-    <div className="sneakers__card">
+    <li className="sneakers__card">
       <img src={item.url} width={133} height={112} alt="Sneakers" />
 
       <h5>{item.description}</h5>
@@ -91,16 +91,16 @@ const SneakerCard = memo(({ item }) => {
       <Button
         className="sneakers__card-button flex__center"
         loading={isLoadingFavoriteItem[item.id]}
-        onClick={() => handleAdd(FAVORITES, item)}
+        onClick={() => handleAdd(FAVORITE, item)}
       >
         <img
-          src={isAddedToFavorites ? images.favoriteButtonActive : images.favoriteButton}
+          src={isAddedToFavorite ? images.favoriteButtonActive : images.favoriteButton}
           width={32}
           height={32}
           alt="Like"
         />
       </Button>
-    </div>
+    </li>
   );
 });
 

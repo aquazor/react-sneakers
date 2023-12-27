@@ -41,6 +41,7 @@ const Drawer = ({ isOpen, setIsOpen }) => {
         </div>
 
         <DrawerList setIsOpen={setIsOpen} />
+
         {cartItems.length ? (
           <div className="drawer__content-footer">
             <ul className="drawer__content-footer_price">

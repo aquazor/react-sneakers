@@ -1,8 +1,8 @@
 export const constants = {
   BASE_URL: 'http://localhost:3005',
   CART: 'cart',
-  FAVORITES: 'favorites',
+  FAVORITE: 'favorite',
   SNEAKERS: 'sneakers',
 };
 
-export const { BASE_URL, CART, FAVORITES, SNEAKERS } = constants;
+export const { BASE_URL, CART, FAVORITE, SNEAKERS } = constants;

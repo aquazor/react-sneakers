@@ -2,6 +2,7 @@ import './Header.scss';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { images } from '../../constants/images';
+import { FAVORITE } from '../../constants/constants';
 import { Logo } from '../../components';
 
 const Header = memo(({ setIsOpen }) => {
@@ -20,7 +21,7 @@ const Header = memo(({ setIsOpen }) => {
         </li>
 
         <li className="header__info-favorites">
-          <Link to={'/favorites'}>
+          <Link to={`/${FAVORITE}`}>
             <img src={images.favorite} width={20} height={20} alt="Favorite" />
             <span>Закладки</span>
           </Link>

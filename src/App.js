@@ -2,8 +2,8 @@ import './App.scss';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useCartContext, useFavoriteContext, useSneakersContext } from './context';
-
-import { FavoritesPage, SneakersPage } from './pages';
+import { FAVORITE } from './constants/constants';
+import { FavoritePage, SneakersPage } from './pages';
 import { Drawer, Header } from './components';
 
 const App = () => {
@@ -25,8 +25,8 @@ const App = () => {
 
       <main>
         <Routes>
-          <Route path="/" element={<SneakersPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/" element={<SneakersPage />} exact />
+          <Route path={`/${FAVORITE}`} element={<FavoritePage />} exact />
         </Routes>
       </main>
 

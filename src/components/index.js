@@ -1,21 +1,25 @@
 import Button from './Button/Button';
+import CardSkeleton from './CardSkeleton/CardSkeleton';
 import Drawer from './Drawer/Drawer';
 import DrawerList from './DrawerList/DrawerList';
 import DrawerListItem from './DrawerListItem/DrawerListItem';
 import Header from './Header/Header';
 import Input from './Input/Input';
 import Logo from './Logo/Logo';
-import Section from './Section/Section';
-import SneakerCard from './SneakersCard/SneakersCard';
+import SectionHeader from './SectionHeader/SectionHeader';
+import SneakersList from './SneakersList/SneakersList';
+import SneakersListItem from './SneakersListItem/SneakersListItem';
 
 export {
   Header,
-  Section,
+  SectionHeader,
   Logo,
-  SneakerCard,
+  SneakersListItem,
+  SneakersList,
   Button,
   Drawer,
   DrawerList,
   DrawerListItem,
   Input,
+  CardSkeleton,
 };

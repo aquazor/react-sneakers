@@ -1,0 +1,13 @@
+.section {
+  &__content {
+    --card-width: 210px;
+
+    &-items {
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-columns: repeat(auto-fill, var(--card-width));
+      place-content: center;
+      gap: 2.25rem;
+    }
+  }
+}

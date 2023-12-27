@@ -2,7 +2,7 @@ import ContentLoader from 'react-content-loader';
 
 const CardSkeleton = ({ className, ...rest }) => {
   return (
-    <div className={className}>
+    <li className={className}>
       <ContentLoader
         speed={1}
         width={150}
@@ -18,7 +18,7 @@ const CardSkeleton = ({ className, ...rest }) => {
         <rect x="0" y="176" rx="5" ry="5" width="80" height="30" />
         <rect x="109" y="166" rx="10" ry="10" width="40" height="40" />
       </ContentLoader>
-    </div>
+    </li>
   );
 };
 
