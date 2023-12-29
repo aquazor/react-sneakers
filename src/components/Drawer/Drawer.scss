@@ -1,6 +1,7 @@
 .drawer {
   position: fixed;
   inset: 0;
+  z-index: 5;
 
   &__overlay {
     position: fixed;
@@ -20,7 +21,7 @@
     width: 400px;
     padding: 30px;
     background-color: #fff;
-    z-index: 5;
+    z-index: 6;
   }
 
   &__content-heading {

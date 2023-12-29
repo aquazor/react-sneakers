@@ -13,8 +13,8 @@ const FavoritePage = () => {
       <>
         <Link to={'/'}>
           <img src={images.goBackButton} alt="Go Back" />
-        </Link>{' '}
-        <h1>'Понравившиеся товары'</h1>
+        </Link>
+        <h1>Понравившиеся товары</h1>
       </>
     ),
     []

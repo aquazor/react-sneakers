@@ -1,8 +1,9 @@
 import './SneakersList.scss';
 import { SneakersListItem, CardSkeleton } from '../../components';
+import { useCallback } from 'react';
 
-const SneakersList = ({ data, error, isLoading, searchTerm }) => {
-  const renderItems = () => {
+const SneakersList = ({ data, isLoading, error, searchTerm }) => {
+  const renderItems = useCallback(() => {
     if (isLoading) {
       return [...Array(8)].map((_, index) => (
         <CardSkeleton className={'sneakers__card'} key={index} />
@@ -22,7 +23,7 @@ const SneakersList = ({ data, error, isLoading, searchTerm }) => {
     }
 
     return items.map((item) => <SneakersListItem key={item.id} item={item} />);
-  };
+  }, [data, isLoading, error, searchTerm]);
 
   const renderedItems = renderItems();
 
