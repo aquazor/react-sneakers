@@ -5,7 +5,7 @@ import { images } from '../../constants/images';
 import { CART, FAVORITE } from '../../constants/constants';
 import Button from '../Button/Button';
 
-const SneakerCard = memo(({ item }) => {
+const SneakersListItem = memo(({ item }) => {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
 
@@ -104,4 +104,4 @@ const SneakerCard = memo(({ item }) => {
   );
 });
 
-export default SneakerCard;
+export default SneakersListItem;

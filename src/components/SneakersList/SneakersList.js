@@ -27,10 +27,10 @@ const SneakersList = ({ data, isLoading, error, searchTerm }) => {
 
   const renderedItems = renderItems();
 
-  return (
-    <ul className="section__content-items">
-      {renderedItems.length ? renderedItems : 'Тут пока пусто...'}
-    </ul>
+  return renderedItems.length ? (
+    <ul className="section__content-items">{renderedItems}</ul>
+  ) : (
+    <p>По запросу "{searchTerm}" ничего не найдено.</p>
   );
 };
 

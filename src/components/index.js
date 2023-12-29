@@ -6,6 +6,7 @@ import DrawerListItem from './DrawerListItem/DrawerListItem';
 import Header from './Header/Header';
 import Input from './Input/Input';
 import Logo from './Logo/Logo';
+import SearchPopup from './SearchHintModal/SearchPopup';
 import SectionHeader from './SectionHeader/SectionHeader';
 import SneakersList from './SneakersList/SneakersList';
 import SneakersListItem from './SneakersListItem/SneakersListItem';
@@ -22,4 +23,5 @@ export {
   DrawerListItem,
   Input,
   CardSkeleton,
+  SearchPopup,
 };

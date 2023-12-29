@@ -1,4 +1,3 @@
-import '../Page.scss';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useFavoriteContext } from '../../context';

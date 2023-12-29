@@ -1,16 +1,12 @@
-import '../Page.scss';
 import { useMemo, useState } from 'react';
 import { useSneakersContext } from '../../context';
-import { Input, SectionHeader, SneakersList } from '../../components';
+import { Input, SectionHeader, SneakersList, SearchPopup } from '../../components';
 
 const SneakersPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const { sneakersItems, isLoadingSneakers, errorLoadingSneakers } = useSneakersContext();
 
-  const heading = useMemo(
-    () => <h1>{searchTerm ? `Поиск по запросу: "${searchTerm}"` : 'Все кроссовки'}</h1>,
-    [searchTerm]
-  );
+  const heading = useMemo(() => <h1>Все кроссовки</h1>, []);
 
   return (
     <section className="section section__padding">
@@ -26,6 +22,8 @@ const SneakersPage = () => {
           searchTerm={searchTerm}
         />
       </div>
+
+      <SearchPopup searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
     </section>
   );
 };
