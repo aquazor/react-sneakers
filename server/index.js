@@ -15,6 +15,8 @@ app.post('/auth/register', AuthController.register);
 app.post('/auth/login', AuthController.login);
 
 app.get('/items', ItemsController.getItems);
+
+app.get('/cart', checkAuth, CartController.getItems);
 app.post('/cart/add', checkAuth, CartController.addItem);
 app.delete('/cart/remove', checkAuth, CartController.removeItem);
 

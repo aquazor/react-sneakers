@@ -1,6 +1,24 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants.js';
 
+export const getItems = async (req, res) => {
+  const { userId } = req;
+
+  try {
+    const { data } = await axios.get(`${BASE_URL}/cart/${userId}`);
+
+    const items = data.items;
+
+    if (!items) {
+      return res.status(404).json({ message: `Cart items not found` });
+    }
+
+    return res.json(items);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export const addItem = async (req, res) => {
   const { userId } = req;
   const item = req.body;

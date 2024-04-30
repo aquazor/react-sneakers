@@ -3,23 +3,22 @@ import { useDispatch } from 'react-redux';
 import { Box, Container } from '@mui/material';
 import { PageHeading, CartCard } from '../components';
 import { useSelectCart } from '../hooks/useSelectCart';
-import { setItems } from '../redux/slices/cartSlice';
+import { getCartItems } from '../redux/thunks/cartThunks';
 
 const CartContent = () => {
   const dispatch = useDispatch();
   const { items, isLoading } = useSelectCart();
 
   useEffect(() => {
-    let cart;
+    const getCart = async () => {
+      try {
+        await dispatch(getCartItems());
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-    try {
-      cart = JSON.parse(localStorage.getItem('cart')) || [];
-    } catch (error) {
-      cart = [];
-    }
-
-    dispatch(setItems(cart));
-    localStorage.setItem('cart', JSON.stringify(cart));
+    getCart();
   }, [dispatch]);
 
   const renderContent = () => {

@@ -1,11 +1,33 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosPrivate } from '../../axios';
 import { BASE_URL } from '../../constants';
-import { setIsLoading, addItem, removeItem } from '../slices/cartSlice';
+import { setIsLoading, addItem, removeItem, setItems } from '../slices/cartSlice';
 import { getAuthHeader } from '../../utils/getAuthHeader';
 
+export const getCartItems = createAsyncThunk(
+  'cart/getCartItems',
+  async (_, { dispatch }) => {
+    try {
+      dispatch(setIsLoading(true));
+
+      const { data } = await axiosPrivate.get(`${BASE_URL}/cart`, {
+        headers: { Authorization: getAuthHeader() },
+      });
+
+      localStorage.setItem('cart', JSON.stringify(data));
+      dispatch(setItems(data));
+    } catch (error) {
+      console.log(error);
+
+      throw Error('Internal server error');
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  }
+);
+
 export const addCartItem = createAsyncThunk(
-  'cart/addItem',
+  'cart/addCartItem',
   async (item, { dispatch }) => {
     try {
       dispatch(setIsLoading(true));
@@ -30,7 +52,7 @@ export const addCartItem = createAsyncThunk(
 );
 
 export const removeCartItem = createAsyncThunk(
-  'cart/removeItem',
+  'cart/removeCartItem',
   async (item, { dispatch }) => {
     try {
       await axiosPrivate.delete(`${BASE_URL}/cart/remove`, {
