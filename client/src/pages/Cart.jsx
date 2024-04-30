@@ -4,13 +4,29 @@ import { Box, Container } from '@mui/material';
 import { PageHeading, CartCard } from '../components';
 import { useSelectCart } from '../hooks/useSelectCart';
 import { getCartItems } from '../redux/thunks/cartThunks';
+import { useSelectAuth } from '../hooks/useSelectAuth';
+import { setItems } from '../redux/slices/cartSlice';
+import { getCartFromLocal } from '../utils/getCartFromLocal';
 
 const CartContent = () => {
-  const dispatch = useDispatch();
+  const {
+    userAuth: { token },
+  } = useSelectAuth();
   const { items, isLoading } = useSelectCart();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getCart = async () => {
+      if (!token) {
+        const cartItems = getCartFromLocal();
+
+        dispatch(setItems(cartItems));
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+
+        return;
+      }
+
       try {
         await dispatch(getCartItems());
       } catch (error) {
@@ -19,7 +35,7 @@ const CartContent = () => {
     };
 
     getCart();
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const renderContent = () => {
     if (isLoading) {

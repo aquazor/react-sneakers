@@ -5,25 +5,36 @@ import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/
 import { BASE_URL } from '../constants';
 import { FavoriteButton } from './';
 import { removeCartItem } from '../redux/thunks/cartThunks';
+import { useSelectAuth } from '../hooks/useSelectAuth';
+import { setItems } from '../redux/slices/cartSlice';
+import { getCartFromLocal } from '../utils/getCartFromLocal';
 
 const CartCard = ({ card }) => {
+  const {
+    userAuth: { token },
+  } = useSelectAuth();
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   const removeFromCart = async (item) => {
-    try {
-      setIsLoading(true);
-
-      await dispatch(removeCartItem(item));
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (!token) {
+      const cart = getCartFromLocal();
 
       if (cart.length > 0) {
         const filtered = cart.filter((obj) => obj.id !== item.id);
 
         localStorage.setItem('cart', JSON.stringify(filtered));
-        console.log('Updated cart:', filtered);
+        dispatch(setItems(filtered));
       }
+
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      await dispatch(removeCartItem(item));
     } catch (error) {
       console.log(error);
     } finally {

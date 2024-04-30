@@ -60,6 +60,13 @@ export const removeCartItem = createAsyncThunk(
         data: item,
       });
 
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      if (cart.length > 0) {
+        const filtered = cart.filter((obj) => obj.id !== item.id);
+        localStorage.setItem('cart', JSON.stringify(filtered));
+      }
+
       dispatch(removeItem(item));
     } catch (error) {
       console.log(error);

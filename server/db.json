@@ -66,7 +66,14 @@
     },
     {
       "id": "e230",
-      "items": []
+      "items": [
+        {
+          "id": "6",
+          "url": "sneakers-6.png",
+          "description": "Кроссовки Nike Blazer Mid Vintage Suede Black",
+          "price": 12999
+        }
+      ]
     }
   ]
 }

@@ -3,7 +3,7 @@ import { ThemeProvider } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import { useThemeContext } from './theme/useThemeContext';
-import { Layout, Home, Cart, SignIn, SignUp, RequireAuth } from './pages';
+import { Layout, Home, Cart, SignIn, SignUp } from './pages';
 
 const App = () => {
   const { theme } = useThemeContext();
@@ -15,11 +15,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
-
-          {/* Protected routes */}
-          <Route element={<RequireAuth />}>
-            <Route path="/cart" element={<Cart />} />
-          </Route>
+          <Route path="/cart" element={<Cart />} />
         </Route>
 
         <Route path="/sign-in" element={<SignIn />} />

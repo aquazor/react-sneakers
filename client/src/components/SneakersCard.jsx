@@ -2,25 +2,32 @@ import { useDispatch } from 'react-redux';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import { BASE_URL } from '../constants';
+import { getCartFromLocal } from '../utils/getCartFromLocal';
 import { FavoriteButton } from './';
 import { addCartItem } from '../redux/thunks/cartThunks';
+import { setItems } from '../redux/slices/cartSlice';
+import { useSelectAuth } from '../hooks/useSelectAuth';
 
 const SneakersCard = ({ card }) => {
+  const {
+    userAuth: { token },
+  } = useSelectAuth();
   const dispatch = useDispatch();
 
   const addToCart = async (item) => {
-    let cart;
-
-    try {
-      cart = JSON.parse(localStorage.getItem('cart')) || [];
-    } catch (error) {
-      localStorage.setItem('cart', JSON.stringify([item]));
-      return;
-    }
+    const cart = getCartFromLocal();
 
     const duplicate = cart.find((obj) => obj.id === item.id);
 
     if (duplicate) {
+      return;
+    }
+
+    cart.push(item);
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    if (!token) {
+      dispatch(setItems(cart));
       return;
     }
 
@@ -29,11 +36,6 @@ const SneakersCard = ({ card }) => {
     } catch (error) {
       console.log(error);
     }
-
-    cart.push(item);
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    console.log('Item added to cart:', cart);
   };
 
   return (
