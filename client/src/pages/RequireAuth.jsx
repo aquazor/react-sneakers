@@ -15,7 +15,7 @@ const RequireAuth = () => {
     const authMe = async () => {
       try {
         console.log('Authenticating...');
-        await dispatch(getMe()).unwrap();
+        await dispatch(getMe());
       } catch (error) {
         console.log(error);
       }

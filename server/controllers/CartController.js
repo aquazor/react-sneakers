@@ -15,7 +15,11 @@ export const getItems = async (req, res) => {
 
     return res.json(items);
   } catch (error) {
-    console.log(error.message);
+    if (error?.response?.status === 404) {
+      return res.json([]);
+    }
+
+    return res.status(505).json({ message: 'Error getting cart items' });
   }
 };
 

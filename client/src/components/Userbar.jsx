@@ -8,20 +8,24 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from '@mui/material/Link';
 import { useSelectAuth } from '../hooks/useSelectAuth';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../redux/slices/authSlice';
 
 const Userbar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
+  const handleCloseUserMenu = () => setAnchorElUser(null);
 
   const {
     userAuth: { token },
   } = useSelectAuth();
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  const dispath = useDispatch();
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleLogout = () => {
+    dispath(setToken(null));
+    handleCloseUserMenu();
   };
 
   return (
@@ -54,7 +58,7 @@ const Userbar = () => {
             </Link>
           </MenuItem>
         ) : (
-          <MenuItem onClick={handleCloseUserMenu}>
+          <MenuItem onClick={handleLogout}>
             <Link to="/" component={RouterLink} sx={{ color: 'inherit' }}>
               Logout
             </Link>
