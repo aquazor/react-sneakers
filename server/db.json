@@ -1,0 +1,63 @@
+{
+  "users": [
+    {
+      "id": "61f4",
+      "email": "test01@test.com",
+      "password": "123"
+    },
+    {
+      "id": "9a96",
+      "email": "test02@test.com",
+      "password": "123"
+    },
+    {
+      "id": "fa2c",
+      "email": "test03@test.com",
+      "password": "123"
+    }
+  ],
+  "items": [
+    {
+      "id": "1",
+      "url": "sneakers-1.png",
+      "description": "Кроссовки Puma X Aka Boku Future Rider",
+      "price": 8499
+    },
+    {
+      "id": "2",
+      "url": "sneakers-2.png",
+      "description": "Кроссовки Jordan Air Jordan 11",
+      "price": 10799
+    },
+    {
+      "id": "3",
+      "url": "sneakers-3.png",
+      "description": "Кроссовки Nike LeBron XVIII",
+      "price": 16499
+    },
+    {
+      "id": "4",
+      "url": "sneakers-4.png",
+      "description": "Кроссовки Nike Lebron XVIII Low",
+      "price": 13999
+    },
+    {
+      "id": "5",
+      "url": "sneakers-5.png",
+      "description": "Кроссовки Nike Blazer Mid Suede",
+      "price": 8499
+    },
+    {
+      "id": "6",
+      "url": "sneakers-6.png",
+      "description": "Кроссовки Nike Blazer Mid Vintage Suede Black",
+      "price": 12999
+    }
+  ],
+  "cart": [
+    {
+      "id": "61f4",
+      "items": []
+    }
+  ]
+}
