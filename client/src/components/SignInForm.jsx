@@ -1,4 +1,4 @@
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -14,7 +14,9 @@ import { login } from '../redux/thunks/authThunks';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location?.state?.from || '/';
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -31,7 +33,7 @@ const SignInForm = () => {
     try {
       await dispatch(login(data)).unwrap();
 
-      navigate('/');
+      navigate(from);
     } catch (error) {
       console.log(error);
     }

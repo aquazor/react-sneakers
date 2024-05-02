@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { axiosPrivate } from '../axios';
 import { setIsLoading, setItems } from '../redux/slices/sneakersSlice';
-import Header from '../components/Header';
-import { BASE_URL } from '../constants';
+import { Header } from '../components';
 
 const Layout = () => {
   const dispatch = useDispatch();
@@ -14,7 +13,7 @@ const Layout = () => {
       try {
         dispatch(setIsLoading(true));
 
-        const { data } = await axiosPrivate.get(`${BASE_URL}/items`);
+        const { data } = await axiosPrivate.get('/items');
 
         dispatch(setItems(data));
       } catch (error) {

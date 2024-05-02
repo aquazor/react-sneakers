@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -22,6 +22,8 @@ const Userbar = () => {
   } = useSelectAuth();
 
   const dispath = useDispatch();
+  const location = useLocation();
+  const from = location?.pathname || '/';
 
   const handleLogout = () => {
     dispath(setToken(null));
@@ -53,7 +55,12 @@ const Userbar = () => {
       >
         {!token ? (
           <MenuItem onClick={handleCloseUserMenu}>
-            <Link to="/sign-in" component={RouterLink} sx={{ color: 'inherit' }}>
+            <Link
+              to="/sign-in"
+              state={{ from }}
+              component={RouterLink}
+              sx={{ color: 'inherit' }}
+            >
               Sign In
             </Link>
           </MenuItem>

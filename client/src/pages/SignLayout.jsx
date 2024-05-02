@@ -1,8 +1,18 @@
+import { Navigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import ToggleTheme from '../components/ToggleTheme';
+import { useSelectAuth } from '../hooks/useSelectAuth';
 
 const SignLayout = ({ children }) => {
+  const {
+    userAuth: { token },
+  } = useSelectAuth();
+
+  if (token) {
+    return <Navigate to={'/'} />;
+  }
+
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
       <Grid

@@ -1,11 +1,11 @@
-import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { BASE_URL, SECRET_KEY } from '../constants.js';
+import { SECRET_KEY } from '../constants.js';
+import { axiosClient } from '../axios.js';
 
 export const getMe = async (req, res) => {
   const userId = req.userId;
 
-  const { data } = await axios.get(`${BASE_URL}/users?id=${userId}`);
+  const { data } = await axiosClient.get(`/users?id=${userId}`);
 
   if (data.length === 0) {
     return res.status(404).json({ message: 'Not found' });
@@ -20,7 +20,7 @@ export const getMe = async (req, res) => {
 export const register = async (req, res) => {
   const { email, password } = req.body;
 
-  const existingUser = await axios.get(`${BASE_URL}/users?email=${email}`);
+  const existingUser = await axiosClient.get(`/users?email=${email}`);
 
   if (existingUser.data.length > 0) {
     return res.status(400).json({ message: 'User already exists' });
@@ -31,7 +31,7 @@ export const register = async (req, res) => {
     password,
   };
 
-  await axios.post(`${BASE_URL}/users`, newUser);
+  await axiosClient.post(`/users`, newUser);
 
   return res.status(201).json({ message: 'User registered successfully' });
 };
@@ -40,7 +40,7 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   // Поиск пользователя по email
-  const { data } = await axios.get(`${BASE_URL}/users?email=${email}`);
+  const { data } = await axiosClient.get(`/users?email=${email}`);
 
   const userData = data[0];
 

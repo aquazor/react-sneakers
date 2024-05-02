@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosPrivate } from '../../axios';
-import { BASE_URL } from '../../constants';
 import { setIsLoading, addItem, removeItem, setItems } from '../slices/cartSlice';
 import { getAuthHeader } from '../../utils/getAuthHeader';
+import { getCartFromLocal } from '../../utils/getCartFromLocal';
 
 export const getCartItems = createAsyncThunk(
   'cart/getCartItems',
@@ -10,7 +10,7 @@ export const getCartItems = createAsyncThunk(
     try {
       dispatch(setIsLoading(true));
 
-      const { data } = await axiosPrivate.get(`${BASE_URL}/cart`, {
+      const { data } = await axiosPrivate.get('/cart', {
         headers: { Authorization: getAuthHeader() },
       });
 
@@ -32,7 +32,7 @@ export const addCartItem = createAsyncThunk(
     try {
       dispatch(setIsLoading(true));
 
-      await axiosPrivate.post(`${BASE_URL}/cart/add`, item, {
+      await axiosPrivate.post('/cart/add', item, {
         headers: { Authorization: getAuthHeader() },
       });
 
@@ -55,7 +55,7 @@ export const removeCartItem = createAsyncThunk(
   'cart/removeCartItem',
   async (item, { dispatch }) => {
     try {
-      await axiosPrivate.delete(`${BASE_URL}/cart/remove`, {
+      await axiosPrivate.delete('/cart/remove', {
         headers: { Authorization: getAuthHeader() },
         data: item,
       });
@@ -79,3 +79,21 @@ export const removeCartItem = createAsyncThunk(
     }
   }
 );
+
+export const syncItems = createAsyncThunk('cart/syncCart', async () => {
+  try {
+    const cart = getCartFromLocal();
+
+    await axiosPrivate.post('/cart/sync', cart, {
+      headers: { Authorization: getAuthHeader() },
+    });
+  } catch (error) {
+    console.log(error);
+
+    if (error?.response?.status === 422) {
+      throw Error('Item not provided');
+    }
+
+    throw Error('Internal server error');
+  }
+});
