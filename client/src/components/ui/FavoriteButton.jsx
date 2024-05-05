@@ -15,13 +15,21 @@ const FavoriteButton = ({ absolute, ...rest }) => {
       sx={{
         position,
         color: 'pink',
-        opacity: 0.8,
+        opacity: 0.65,
+        transition: 'opacity 200ms',
         '&:hover': {
           opacity: 1,
+          '& svg': {
+            scale: '1.1',
+          },
         },
       }}
     >
-      <FavoriteRoundedIcon />
+      <FavoriteRoundedIcon
+        sx={{
+          transition: 'scale 200ms',
+        }}
+      />
     </IconButton>
   );
 };

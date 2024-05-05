@@ -130,22 +130,16 @@
       "id": "714a",
       "items": [
         {
-          "id": "2",
-          "url": "sneakers-2.png",
-          "description": "Кроссовки Jordan Air Jordan 11",
-          "price": 10799
-        },
-        {
-          "id": "6",
-          "url": "sneakers-6.png",
-          "description": "Кроссовки Nike Blazer Mid Vintage Suede Black",
-          "price": 12999
-        },
-        {
           "id": "1",
           "url": "sneakers-1.png",
           "description": "Кроссовки Puma X Aka Boku Future Rider",
           "price": 8499
+        },
+        {
+          "id": "4",
+          "url": "sneakers-4.png",
+          "description": "Кроссовки Nike Lebron XVIII Low",
+          "price": 13999
         }
       ]
     }

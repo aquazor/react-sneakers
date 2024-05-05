@@ -8,6 +8,8 @@ export const syncAndGetItems = createAsyncThunk(
   'cart/syncAndGetItems',
   async (_, { dispatch }) => {
     try {
+      dispatch(setIsLoading(true));
+
       const localCartItems = getCartFromLocal();
 
       const { data } = await axiosPrivate.post('/cart', localCartItems, {
@@ -26,6 +28,8 @@ export const syncAndGetItems = createAsyncThunk(
       }
 
       throw Error('Internal server error');
+    } finally {
+      dispatch(setIsLoading(false));
     }
   }
 );

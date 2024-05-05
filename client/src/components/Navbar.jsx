@@ -15,51 +15,44 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={handleOpenNavMenu}
-          color="inherit"
-        >
-          <MenuIcon />
-        </IconButton>
+    <Box sx={{ flexGrow: 1, display: 'flex' }}>
+      <IconButton
+        sx={{ display: { md: 'none' } }}
+        size="large"
+        aria-label="account of current user"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        onClick={handleOpenNavMenu}
+        color="inherit"
+      >
+        <MenuIcon />
+      </IconButton>
 
-        <Menu
-          id="menu-appbar"
-          anchorEl={anchorElNav}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          open={Boolean(anchorElNav)}
-          onClose={handleCloseNavMenu}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-          }}
-        >
-          <MenuItem onClick={handleCloseNavMenu}>
-            <Link to="/cart" component={RouterLink} sx={{ color: 'inherit' }}>
-              Cart
-            </Link>
-          </MenuItem>
-        </Menu>
-      </Box>
-
-      <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, ml: 2 }}>
-        <Link to="/cart" component={RouterLink} sx={{ color: 'inherit' }}>
-          Cart
-        </Link>
-      </Box>
-    </>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorElNav}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        open={Boolean(anchorElNav)}
+        onClose={handleCloseNavMenu}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+        }}
+      >
+        <MenuItem onClick={handleCloseNavMenu}>
+          <Link to="/cart" component={RouterLink} sx={{ color: 'inherit' }}>
+            Cart
+          </Link>
+        </MenuItem>
+      </Menu>
+    </Box>
   );
 };
 

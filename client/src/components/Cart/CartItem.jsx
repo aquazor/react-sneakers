@@ -1,39 +1,44 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
-import { BASE_URL } from '../constants';
-import { getCartFromLocal } from '../utils/getCartFromLocal';
-import { FavoriteButton } from './';
-import { addCartItem } from '../redux/thunks/cartThunks';
-import { setItems } from '../redux/slices/cartSlice';
-import { useSelectAuth } from '../hooks/useSelectAuth';
+import { removeCartItem } from '../../redux/thunks/cartThunks';
+import { useSelectAuth } from '../../hooks/useSelectAuth';
+import { setItems } from '../../redux/slices/cartSlice';
+import { getCartFromLocal } from '../../utils/getCartFromLocal';
+import { BASE_URL } from '../../constants';
+import { FavoriteButton } from '../';
 
-const SneakersCard = ({ card }) => {
+const CartItem = ({ card }) => {
   const {
     userAuth: { token },
   } = useSelectAuth();
+  const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useDispatch();
 
-  const addToCart = async (item) => {
-    const cart = getCartFromLocal();
-    const duplicate = cart.find((obj) => obj.id === item.id);
-
-    if (duplicate) {
-      return;
-    }
-
-    cart.push(item);
-    localStorage.setItem('cart', JSON.stringify(cart));
-
+  const removeFromCart = async (item) => {
     if (!token) {
-      dispatch(setItems(cart));
+      const cart = getCartFromLocal();
+
+      if (cart.length > 0) {
+        const filtered = cart.filter((obj) => obj.id !== item.id);
+
+        localStorage.setItem('cart', JSON.stringify(filtered));
+        dispatch(setItems(filtered));
+      }
+
       return;
     }
 
     try {
-      await dispatch(addCartItem(item));
+      setIsLoading(true);
+
+      await dispatch(removeCartItem(item));
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -90,23 +95,17 @@ const SneakersCard = ({ card }) => {
           </Box>
 
           <IconButton
-            onClick={() => addToCart(card)}
+            onClick={() => removeFromCart(card)}
+            disabled={isLoading}
+            title="Remove from cart"
             sx={{
-              transition: 'opacity 200ms',
-              opacity: 0.8,
+              opacity: 0.5,
               '&:hover': {
-                opacity: 1,
-                '& svg': {
-                  scale: '1.1',
-                },
+                opacity: 0.8,
               },
             }}
           >
-            <AddShoppingCartIcon
-              sx={{
-                transition: 'scale 200ms',
-              }}
-            />
+            <DeleteIcon />
           </IconButton>
         </Box>
       </CardContent>
@@ -114,4 +113,4 @@ const SneakersCard = ({ card }) => {
   );
 };
 
-export default SneakersCard;
+export default CartItem;
