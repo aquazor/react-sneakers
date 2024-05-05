@@ -1,21 +1,41 @@
 import { axiosClient } from '../axios.js';
 
-export const getItems = async (req, res) => {
+export const syncAndGetItems = async (req, res) => {
   const { userId } = req;
+  const localCartItems = req.body; // localStorage cart items
+
+  if (!localCartItems) {
+    return res.status(422).json({ message: 'Missing items' });
+  }
 
   try {
+    // 1. Get items from db
     const { data } = await axiosClient.get(`/cart/${userId}`);
+    const serverCartItems = data.items;
 
-    return res.json(data.items);
+    if (serverCartItems.length !== localCartItems.length) {
+      // 3. If for some reason lengths dont match return server items without syncing
+      console.log('server items returned');
+      return res.json(serverCartItems);
+    }
+
+    // 4. Else sync server items with local items
+    const updatedUser = { id: userId, items: localCartItems };
+
+    try {
+      const { data } = await axiosClient.put(`/cart/${userId}`, updatedUser);
+      return res.json(data.items);
+    } catch (error) {
+      console.log('Error syncing items');
+    }
   } catch (error) {
     if (error?.response?.status === 404) {
-      // if user was not found create a new user
-
-      const newUser = { id: userId, items: [] };
+      // 2. If user was not found create a new user with local items
+      const newUser = { id: userId, items: localCartItems };
 
       try {
         await axiosClient.post(`/cart`, newUser);
-        return res.json([]);
+        return res.json(newUser.items);
       } catch (error) {
         return res.status(500).json({ message: 'Error creating new cart' });
       }
@@ -23,6 +43,8 @@ export const getItems = async (req, res) => {
 
     return res.status(500).json({ message: 'Error getting cart items' });
   }
+
+  return res.json(localCartItems);
 };
 
 export const addItem = async (req, res) => {
@@ -100,33 +122,27 @@ export const removeItem = async (req, res) => {
   return res.json({ message: 'Item removed successfully' });
 };
 
-export const syncItems = async (req, res) => {
-  const { userId } = req;
-  const items = req.body;
+// export const getItems = async (req, res) => {
+//   const { userId } = req;
 
-  if (!items) {
-    return res.status(422).json({ message: 'Missing items' });
-  }
+//   try {
+//     const { data } = await axiosClient.get(`/cart/${userId}`);
 
-  const updatedUser = { id: userId, items };
+//     return res.json(data.items);
+//   } catch (error) {
+//     if (error?.response?.status === 404) {
+//       // if user was not found create a new user
 
-  try {
-    await axiosClient.put(`/cart/${userId}`, updatedUser);
-  } catch (error) {
-    if (error?.response?.status === 404) {
-      // if user was not found create a new user with cart items
+//       const newUser = { id: userId, items: [] };
 
-      try {
-        await axiosClient.post(`/cart`, updatedUser);
-        return res.json([]);
-      } catch (error) {
-        return res.status(500).json({ message: 'Error creating new cart' });
-      }
-    }
+//       try {
+//         await axiosClient.post(`/cart`, newUser);
+//         return res.json([]);
+//       } catch (error) {
+//         return res.status(500).json({ message: 'Error creating new cart' });
+//       }
+//     }
 
-    return res.status(500).json({ message: 'Error syncing cart' });
-  }
-
-  console.log('Cart synced successfully');
-  return res.json({ message: 'Cart synced successfully' });
-};
+//     return res.status(500).json({ message: 'Error getting cart items' });
+//   }
+// };

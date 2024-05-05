@@ -16,7 +16,6 @@ const SneakersCard = ({ card }) => {
 
   const addToCart = async (item) => {
     const cart = getCartFromLocal();
-
     const duplicate = cart.find((obj) => obj.id === item.id);
 
     if (duplicate) {
@@ -24,8 +23,8 @@ const SneakersCard = ({ card }) => {
     }
 
     cart.push(item);
-
     localStorage.setItem('cart', JSON.stringify(cart));
+
     if (!token) {
       dispatch(setItems(cart));
       return;

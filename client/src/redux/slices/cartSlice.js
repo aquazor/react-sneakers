@@ -11,6 +11,10 @@ export const cartSlice = createSlice({
       state.items = action.payload;
     },
     addItem: (state, action) => {
+      if (!state.items) {
+        state.items = [];
+      }
+
       state.items.push(action.payload);
     },
     removeItem: (state, action) => {

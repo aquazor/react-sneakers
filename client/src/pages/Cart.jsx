@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Box, Container } from '@mui/material';
 import { PageHeading, CartCard } from '../components';
 import { useSelectCart } from '../hooks/useSelectCart';
-import { getCartItems, syncItems } from '../redux/thunks/cartThunks';
+import { syncAndGetItems } from '../redux/thunks/cartThunks';
 import { setItems } from '../redux/slices/cartSlice';
 import { useSelectAuth } from '../hooks/useSelectAuth';
 import { getCartFromLocal } from '../utils/getCartFromLocal';
@@ -28,8 +28,7 @@ const CartContent = () => {
 
     const syncAndGetCart = async () => {
       try {
-        await dispatch(syncItems());
-        await dispatch(getCartItems());
+        await dispatch(syncAndGetItems());
       } catch (error) {
         console.log(error);
       }

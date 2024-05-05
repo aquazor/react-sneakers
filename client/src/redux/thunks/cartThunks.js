@@ -4,24 +4,28 @@ import { setIsLoading, addItem, removeItem, setItems } from '../slices/cartSlice
 import { getAuthHeader } from '../../utils/getAuthHeader';
 import { getCartFromLocal } from '../../utils/getCartFromLocal';
 
-export const getCartItems = createAsyncThunk(
-  'cart/getCartItems',
+export const syncAndGetItems = createAsyncThunk(
+  'cart/syncAndGetItems',
   async (_, { dispatch }) => {
     try {
-      dispatch(setIsLoading(true));
+      const localCartItems = getCartFromLocal();
 
-      const { data } = await axiosPrivate.get('/cart', {
+      const { data } = await axiosPrivate.post('/cart', localCartItems, {
         headers: { Authorization: getAuthHeader() },
       });
 
       localStorage.setItem('cart', JSON.stringify(data));
       dispatch(setItems(data));
+
+      return data;
     } catch (error) {
       console.log(error);
 
+      if (error?.response?.status === 422) {
+        throw Error('Item not provided');
+      }
+
       throw Error('Internal server error');
-    } finally {
-      dispatch(setIsLoading(false));
     }
   }
 );
@@ -80,20 +84,26 @@ export const removeCartItem = createAsyncThunk(
   }
 );
 
-export const syncItems = createAsyncThunk('cart/syncCart', async () => {
-  try {
-    const cart = getCartFromLocal();
+// export const getCartItems = createAsyncThunk(
+//   'cart/getCartItems',
+//   async (_, { dispatch }) => {
+//     try {
+//       dispatch(setIsLoading(true));
 
-    await axiosPrivate.post('/cart/sync', cart, {
-      headers: { Authorization: getAuthHeader() },
-    });
-  } catch (error) {
-    console.log(error);
+//       const { data } = await axiosPrivate.get('/cart', {
+//         headers: { Authorization: getAuthHeader() },
+//       });
 
-    if (error?.response?.status === 422) {
-      throw Error('Item not provided');
-    }
+//       localStorage.setItem('cart', JSON.stringify(data));
+//       dispatch(setItems(data));
 
-    throw Error('Internal server error');
-  }
-});
+//       return data;
+//     } catch (error) {
+//       console.log(error);
+
+//       throw Error('Internal server error');
+//     } finally {
+//       dispatch(setIsLoading(false));
+//     }
+//   }
+// );
