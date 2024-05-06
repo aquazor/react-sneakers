@@ -9,12 +9,14 @@ import SignUpForm from './SignUpForm';
 import SneakersItem from './Sneakers/SneakersItem';
 import SneakersItemsList from './Sneakers/SneakersItemList';
 import SneakersItemLoader from './Sneakers/SneakersItemLoader';
+import SortPanel from './Sort/SortPanel';
 import ToggleTheme from './ToggleTheme';
 import Userbar from './Userbar';
 import FavoriteButton from './ui/FavoriteButton';
 import PageHeading from './ui/PageHeading';
 
 export {
+  SortPanel,
   CartEmpty,
   CartSummary,
   CartItemsList,

@@ -27,7 +27,7 @@ const SneakersItemsList = ({ items, isLoading }) => {
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, 210px)',
         placeContent: 'center',
-        gap: 4,
+        gap: 3,
       }}
     >
       {renderContent()}

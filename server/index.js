@@ -1,13 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import { configDotenv } from 'dotenv';
 import { AuthController, CartController, ItemsController } from './controllers/index.js';
 import { checkAuth } from './utils/index.js';
+import { PORT } from './constants.js';
 
 const app = express();
-configDotenv();
-
-const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(cors());

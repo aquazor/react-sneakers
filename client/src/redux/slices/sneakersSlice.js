@@ -5,6 +5,7 @@ export const sneakersSlice = createSlice({
   initialState: {
     items: [],
     isLoading: null,
+    sortValue: '',
   },
   reducers: {
     setItems: (state, action) => {
@@ -13,9 +14,12 @@ export const sneakersSlice = createSlice({
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setSortValue: (state, action) => {
+      state.sortValue = action.payload;
+    },
   },
 });
 
-export const { setItems, setIsLoading } = sneakersSlice.actions;
+export const { setItems, setIsLoading, setSortValue } = sneakersSlice.actions;
 
 export default sneakersSlice.reducer;

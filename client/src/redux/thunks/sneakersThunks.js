@@ -1,22 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { axiosPrivate } from '../../axios';
-import { setIsLoading, setItems } from '../slices/sneakersSlice';
+import { axiosClient } from '../../axios';
+import { setItems } from '../slices/sneakersSlice';
 
 export const getSneakersItems = createAsyncThunk(
   'sneakers/getSneakersItems',
-  async (_, { dispatch }) => {
+  async (sortField, { dispatch }) => {
     try {
-      dispatch(setIsLoading(true));
+      let url = '/items';
 
-      const { data } = await axiosPrivate.get('/items');
+      if (sortField) {
+        url += sortField;
+      }
+
+      const { data } = await axiosClient.get(url);
 
       dispatch(setItems(data));
     } catch (error) {
       console.log(error);
 
       throw Error('Internal server error');
-    } finally {
-      dispatch(setIsLoading(false));
     }
   }
 );

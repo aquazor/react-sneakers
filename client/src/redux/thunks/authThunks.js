@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { axiosPrivate } from '../../axios';
+import { axiosClient } from '../../axios';
 import { BASE_URL } from '../../constants';
 import { setIsLoading, setToken, setUser } from '../slices/authSlice';
 import { getAuthHeader } from '../../utils/getAuthHeader';
@@ -8,7 +8,7 @@ export const getMe = createAsyncThunk('auth/getMe', async (_, { dispatch }) => {
   try {
     dispatch(setIsLoading(true));
 
-    const { data } = await axiosPrivate.get(`${BASE_URL}/auth/getMe`, {
+    const { data } = await axiosClient.get(`${BASE_URL}/auth/getMe`, {
       headers: { Authorization: getAuthHeader() },
     });
 
@@ -34,7 +34,7 @@ export const register = createAsyncThunk(
     try {
       dispatch(setIsLoading(true));
 
-      const { data } = await axiosPrivate.post(`${BASE_URL}/auth/register`, userData);
+      const { data } = await axiosClient.post(`${BASE_URL}/auth/register`, userData);
 
       console.log(data);
     } catch (error) {
@@ -55,7 +55,7 @@ export const login = createAsyncThunk('auth/login', async (userData, { dispatch 
   try {
     dispatch(setIsLoading(true));
 
-    const { data } = await axiosPrivate.post(`${BASE_URL}/auth/login`, userData);
+    const { data } = await axiosClient.post(`${BASE_URL}/auth/login`, userData);
 
     dispatch(setUser(data.user));
     dispatch(setToken(data.token));
