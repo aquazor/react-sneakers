@@ -1,28 +1,32 @@
 import { useDispatch } from 'react-redux';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
-import { BASE_URL } from '../constants';
-import { getCartFromLocal } from '../utils/getCartFromLocal';
-import { FavoriteButton } from './';
-import { addCartItem } from '../redux/thunks/cartThunks';
-import { setItems } from '../redux/slices/cartSlice';
-import { useSelectAuth } from '../hooks/useSelectAuth';
+import { getCartFromLocal } from '../../utils/getCartFromLocal';
+import { addCartItem } from '../../redux/thunks/cartThunks';
+import { setItems } from '../../redux/slices/cartSlice';
+import { useSelectAuth } from '../../hooks/useSelectAuth';
+import { useSelectCart } from '../../hooks/useSelectCart';
+import { BASE_URL } from '../../constants';
+import { FavoriteButton } from '../';
 
-const SneakersCard = ({ card }) => {
+const SneakersItem = ({ item }) => {
   const {
     userAuth: { token },
   } = useSelectAuth();
+  const { items } = useSelectCart();
+
   const dispatch = useDispatch();
 
-  const addToCart = async (item) => {
-    const cart = getCartFromLocal();
-    const duplicate = cart.find((obj) => obj.id === item.id);
+  const isInCart = Boolean(items?.find((obj) => obj.id === item.id));
 
-    if (duplicate) {
+  const addToCart = async (item) => {
+    if (isInCart) {
       return;
     }
 
+    const cart = getCartFromLocal();
     cart.push(item);
+
     localStorage.setItem('cart', JSON.stringify(cart));
 
     if (!token) {
@@ -50,7 +54,7 @@ const SneakersCard = ({ card }) => {
         >
           <CardMedia
             sx={{ height: 120, width: 130, backgroundSize: 'contain' }}
-            image={`${BASE_URL}/images/${card.url}`}
+            image={`${BASE_URL}/images/${item.url}`}
           />
 
           <FavoriteButton absolute />
@@ -63,7 +67,7 @@ const SneakersCard = ({ card }) => {
             fontSize={'1rem'}
             lineHeight={1.2}
           >
-            {card.description}
+            {item.description}
           </Typography>
         </Box>
 
@@ -85,12 +89,13 @@ const SneakersCard = ({ card }) => {
               ЦЕНА:
             </Typography>
             <Typography variant="body1" fontWeight={700}>
-              {card.price} грн.
+              {item.price} грн.
             </Typography>
           </Box>
 
           <IconButton
-            onClick={() => addToCart(card)}
+            disabled={isInCart}
+            onClick={() => addToCart(item)}
             sx={{
               transition: 'opacity 200ms',
               opacity: 0.8,
@@ -102,7 +107,7 @@ const SneakersCard = ({ card }) => {
               },
             }}
           >
-            <AddShoppingCartIcon
+            <ShoppingCartIcon
               sx={{
                 transition: 'scale 200ms',
               }}
@@ -114,4 +119,4 @@ const SneakersCard = ({ card }) => {
   );
 };
 
-export default SneakersCard;
+export default SneakersItem;

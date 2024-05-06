@@ -1,6 +1,6 @@
 import ContentLoader from 'react-content-loader';
 
-const SneakersCardLoader = () => {
+const SneakersItemLoader = () => {
   return (
     <ContentLoader
       speed={1}
@@ -19,4 +19,4 @@ const SneakersCardLoader = () => {
   );
 };
 
-export default SneakersCardLoader;
+export default SneakersItemLoader;

@@ -29,6 +29,11 @@
       "id": "714a",
       "email": "kek02@kek.com",
       "password": "12341234Rt"
+    },
+    {
+      "id": "4be0",
+      "email": "kek03@kek.com",
+      "password": "12341234Rt"
     }
   ],
   "items": [
@@ -136,10 +141,21 @@
           "price": 8499
         },
         {
-          "id": "4",
-          "url": "sneakers-4.png",
-          "description": "Кроссовки Nike Lebron XVIII Low",
-          "price": 13999
+          "id": "2",
+          "url": "sneakers-2.png",
+          "description": "Кроссовки Jordan Air Jordan 11",
+          "price": 10799
+        }
+      ]
+    },
+    {
+      "id": "4be0",
+      "items": [
+        {
+          "id": "2",
+          "url": "sneakers-2.png",
+          "description": "Кроссовки Jordan Air Jordan 11",
+          "price": 10799
         }
       ]
     }

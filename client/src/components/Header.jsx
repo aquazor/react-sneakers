@@ -1,11 +1,7 @@
 import { Link as RouterLink } from 'react-router-dom';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import { Container, Box, AppBar, Toolbar, Button } from '@mui/material';
 import ToggleTheme from './ToggleTheme';
-import Button from '@mui/material/Button';
-import { Box, IconButton } from '@mui/material';
 import Navbar from './Navbar';
 import Userbar from './Userbar';
 
@@ -28,11 +24,11 @@ const Header = () => {
 
           <ToggleTheme />
 
-          <Box display={'flex'} gap={1}>
+          <Box display={'flex'} alignItems={'center'} gap={2}>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <IconButton to="/cart" component={RouterLink} sx={{ color: 'inherit' }}>
-                <ShoppingCartIcon />
-              </IconButton>
+              <Button variant="outlined" to="/cart" component={RouterLink}>
+                <ShoppingCartCheckoutIcon />
+              </Button>
             </Box>
             <Userbar />
           </Box>

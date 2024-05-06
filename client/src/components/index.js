@@ -6,8 +6,9 @@ import Header from './Header';
 import Navbar from './Navbar';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
-import SneakersCard from './SneakersCard';
-import SneakersCardLoader from './SneakersCardLoader';
+import SneakersItem from './Sneakers/SneakersItem';
+import SneakersItemsList from './Sneakers/SneakersItemList';
+import SneakersItemLoader from './Sneakers/SneakersItemLoader';
 import ToggleTheme from './ToggleTheme';
 import Userbar from './Userbar';
 import FavoriteButton from './ui/FavoriteButton';
@@ -17,12 +18,13 @@ export {
   CartEmpty,
   CartSummary,
   CartItemsList,
+  SneakersItemsList,
   Header,
   Navbar,
   SignInForm,
   SignUpForm,
-  SneakersCard,
-  SneakersCardLoader,
+  SneakersItem,
+  SneakersItemLoader,
   ToggleTheme,
   Userbar,
   PageHeading,

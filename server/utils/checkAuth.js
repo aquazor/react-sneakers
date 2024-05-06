@@ -22,7 +22,6 @@ export const checkAuth = async (req, res, next) => {
     }
 
     req.userId = decoded.id;
-    console.log('Authed:', decoded.id);
     next();
   } catch (err) {
     res.status(403).json({ message: 'No access' });

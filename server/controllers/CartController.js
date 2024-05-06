@@ -62,7 +62,6 @@ export const addItem = async (req, res) => {
 
     if (!user) {
       // if user was not found create a new user, add an item and post the user
-
       const newUser = { id: userId, items: [{ ...item }] };
 
       try {
@@ -101,9 +100,9 @@ export const removeItem = async (req, res) => {
   }
 
   try {
-    const { data } = await axiosClient.get(`/cart/${userId}`);
+    const { data: cartData } = await axiosClient.get(`/cart/${userId}`);
 
-    const filtered = data.items.filter((obj) => obj.id !== item.id);
+    const filtered = cartData.items.filter((obj) => obj.id !== item.id);
 
     let updated;
     if (filtered.length > 0) {
