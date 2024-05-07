@@ -45,7 +45,7 @@ const CartItemsList = ({ items, isLoading }) => {
       return <CartEmpty />;
     }
 
-    return items?.map((card) => <CartItem key={card.id} card={card} />);
+    return items?.map((item) => <CartItem key={item.id} item={item} />);
   };
 
   return (

@@ -15,8 +15,14 @@ import Authbar from './Authbar';
 import FavoriteButton from './ui/FavoriteButton';
 import PageHeading from './ui/PageHeading';
 import ConfirmLogoutModal from './ConfirmLogoutModal';
+import CardTemplate from './CardTemplate';
+import RemoveItemButton from './ui/RemoveItemButton';
+import AddCartButton from './ui/AddCartButton';
 
 export {
+  AddCartButton,
+  RemoveItemButton,
+  CardTemplate,
   ConfirmLogoutModal,
   SortPanel,
   CartEmpty,
