@@ -11,11 +11,13 @@ import SneakersItemsList from './Sneakers/SneakersItemList';
 import SneakersItemLoader from './Sneakers/SneakersItemLoader';
 import SortPanel from './Sort/SortPanel';
 import ToggleTheme from './ToggleTheme';
-import Userbar from './Userbar';
+import Authbar from './Authbar';
 import FavoriteButton from './ui/FavoriteButton';
 import PageHeading from './ui/PageHeading';
+import ConfirmLogoutModal from './ConfirmLogoutModal';
 
 export {
+  ConfirmLogoutModal,
   SortPanel,
   CartEmpty,
   CartSummary,
@@ -28,7 +30,7 @@ export {
   SneakersItem,
   SneakersItemLoader,
   ToggleTheme,
-  Userbar,
+  Authbar,
   PageHeading,
   CartItem,
   FavoriteButton,

@@ -21,7 +21,7 @@ const SortPanel = () => {
   };
 
   return (
-    <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
+    <Box my={2} display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
       <ButtonGroup color="inherit" variant="text" aria-label="Basic button group">
         <Button>One</Button>
         <Button>Two</Button>

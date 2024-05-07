@@ -4,7 +4,7 @@ import SneakersItemLoader from './SneakersItemLoader';
 
 const SneakersItemsList = ({ items, isLoading }) => {
   const renderContent = () => {
-    if (isLoading) {
+    if (!items && isLoading) {
       return [...Array(8)].map((_, index) => (
         <Box key={index} sx={{ borderRadius: 4 }}>
           <SneakersItemLoader />
@@ -12,11 +12,11 @@ const SneakersItemsList = ({ items, isLoading }) => {
       ));
     }
 
-    if (items.length === 0) {
+    if (items?.length === 0) {
       return <p>Could not load items...</p>;
     }
 
-    return items.map((item) => <SneakersItem key={item.id} item={item} />);
+    return items?.map((item) => <SneakersItem key={item.id} item={item} />);
   };
 
   return (

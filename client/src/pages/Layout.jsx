@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { setIsLoading } from '../redux/slices/sneakersSlice';
 import { Header } from '../components';
 import { useSelectAuth } from '../hooks/useSelectAuth';
 import { useSelectSneakers } from '../hooks/useSelectSneakers';
@@ -21,8 +20,6 @@ const Layout = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        dispatch(setIsLoading(true));
-
         await dispatch(getSneakersItems());
 
         if (token) {
@@ -34,8 +31,6 @@ const Layout = () => {
         }
       } catch (error) {
         console.log(error);
-      } finally {
-        dispatch(setIsLoading(false));
       }
     };
 

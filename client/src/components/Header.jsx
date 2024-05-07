@@ -3,7 +3,7 @@ import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { Container, Box, AppBar, Toolbar, Button, IconButton } from '@mui/material';
 import ToggleTheme from './ToggleTheme';
 import Navbar from './Navbar';
-import Userbar from './Userbar';
+import Authbar from './Authbar';
 
 const Header = () => {
   return (
@@ -25,7 +25,7 @@ const Header = () => {
               </IconButton>
             </Box>
 
-            <Userbar />
+            <Authbar />
           </Box>
         </Toolbar>
       </Container>

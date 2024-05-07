@@ -12,14 +12,22 @@ export const syncAndGetItems = createAsyncThunk(
 
       const localCartItems = getCartFromLocal();
 
-      const { data } = await axiosClient.post('/cart', localCartItems, {
-        headers: { Authorization: getAuthHeader() },
-      });
+      const {
+        data: { items },
+      } = await axiosClient.post(
+        '/cart',
+        { items: localCartItems },
+        {
+          headers: { Authorization: getAuthHeader() },
+        }
+      );
 
-      localStorage.setItem('cart', JSON.stringify(data));
-      dispatch(setItems(data));
+      console.log(items);
 
-      return data;
+      localStorage.setItem('cart', JSON.stringify(items));
+      dispatch(setItems(items));
+
+      return items;
     } catch (error) {
       console.log(error);
 
@@ -40,9 +48,13 @@ export const addCartItem = createAsyncThunk(
     try {
       dispatch(setIsLoading(true));
 
-      await axiosClient.post('/cart/add', item, {
-        headers: { Authorization: getAuthHeader() },
-      });
+      await axiosClient.post(
+        '/cart/add',
+        { item },
+        {
+          headers: { Authorization: getAuthHeader() },
+        }
+      );
 
       dispatch(addItem(item));
     } catch (error) {
@@ -65,10 +77,10 @@ export const removeCartItem = createAsyncThunk(
     try {
       await axiosClient.delete('/cart/remove', {
         headers: { Authorization: getAuthHeader() },
-        data: item,
+        data: { item },
       });
 
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cart = getCartFromLocal();
 
       if (cart.length > 0) {
         const filtered = cart.filter((obj) => obj.id !== item.id);
@@ -87,27 +99,3 @@ export const removeCartItem = createAsyncThunk(
     }
   }
 );
-
-// export const getCartItems = createAsyncThunk(
-//   'cart/getCartItems',
-//   async (_, { dispatch }) => {
-//     try {
-//       dispatch(setIsLoading(true));
-
-//       const { data } = await axiosClient.get('/cart', {
-//         headers: { Authorization: getAuthHeader() },
-//       });
-
-//       localStorage.setItem('cart', JSON.stringify(data));
-//       dispatch(setItems(data));
-
-//       return data;
-//     } catch (error) {
-//       console.log(error);
-
-//       throw Error('Internal server error');
-//     } finally {
-//       dispatch(setIsLoading(false));
-//     }
-//   }
-// );

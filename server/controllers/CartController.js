@@ -2,7 +2,7 @@ import { axiosClient } from '../axios.js';
 
 export const syncAndGetItems = async (req, res) => {
   const { userId } = req;
-  const localCartItems = req.body; // localStorage cart items
+  const { items: localCartItems } = req.body; // localStorage cart items
 
   if (!localCartItems) {
     return res.status(422).json({ message: 'Missing items' });
@@ -16,15 +16,17 @@ export const syncAndGetItems = async (req, res) => {
     if (serverCartItems.length !== localCartItems.length) {
       // 3. If for some reason lengths dont match return server items without syncing
       console.log('server items returned');
-      return res.json(serverCartItems);
+      return res.json({ items: serverCartItems });
     }
 
     // 4. Else sync server items with local items
     const updatedUser = { id: userId, items: localCartItems };
 
     try {
-      const { data } = await axiosClient.put(`/cart/${userId}`, updatedUser);
-      return res.json(data.items);
+      const {
+        data: { items },
+      } = await axiosClient.put(`/cart/${userId}`, updatedUser);
+      return res.json({ items });
     } catch (error) {
       console.log('Error syncing items');
     }
@@ -35,7 +37,7 @@ export const syncAndGetItems = async (req, res) => {
 
       try {
         await axiosClient.post(`/cart`, newUser);
-        return res.json(newUser.items);
+        return res.json({ items: newUser.items });
       } catch (error) {
         return res.status(500).json({ message: 'Error creating new cart' });
       }
@@ -44,12 +46,12 @@ export const syncAndGetItems = async (req, res) => {
     return res.status(500).json({ message: 'Error getting cart items' });
   }
 
-  return res.json(localCartItems);
+  return res.json({ items: localCartItems });
 };
 
 export const addItem = async (req, res) => {
   const { userId } = req;
-  const item = req.body;
+  const { item } = req.body;
 
   if (!item) {
     return res.status(422).json({ message: 'Missing item' });
@@ -93,7 +95,7 @@ export const addItem = async (req, res) => {
 
 export const removeItem = async (req, res) => {
   const { userId } = req;
-  const item = req.body;
+  const { item } = req.body;
 
   if (!item) {
     return res.status(422).json({ message: 'Error removing item' });

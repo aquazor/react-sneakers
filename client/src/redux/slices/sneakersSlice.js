@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const sneakersSlice = createSlice({
   name: 'sneakers',
   initialState: {
-    items: [],
+    items: null,
     isLoading: null,
     sortValue: '',
   },
