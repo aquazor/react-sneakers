@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { register } from '../redux/thunks/authThunks';
+import { register } from '../../redux/thunks/authThunks';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import { ThemeProvider } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import { useThemeContext } from './theme/useThemeContext';
-import { Layout, Home, Cart, SignIn, SignUp } from './pages';
+import { Layout, Home, Cart, SignIn, SignUp, Item } from './pages';
 
 const App = () => {
   const { theme } = useThemeContext();
@@ -16,6 +16,7 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/sneakers/:id" element={<Item />} />
         </Route>
 
         <Route path="/sign-in" element={<SignIn />} />

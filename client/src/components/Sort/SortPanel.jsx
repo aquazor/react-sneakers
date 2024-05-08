@@ -28,16 +28,12 @@ const SortPanel = () => {
         <Button>Three</Button>
       </ButtonGroup>
 
-      <FormControl
-        size="small"
-        variant="standard"
-        sx={{ m: 1, minWidth: 180, color: 'white' }}
-      >
-        <InputLabel id="demo-simple-select-standard-label">Sort by</InputLabel>
+      <FormControl size="small" variant="standard" sx={{ minWidth: 180 }}>
+        <InputLabel id="select-standard-label">Sort by</InputLabel>
         <Select
           MenuProps={{ sx: { mt: 1 } }}
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
+          labelId="select-standard-label"
+          id="select-standard"
           value={sortValue}
           onChange={handleChange}
           label="Sort by"

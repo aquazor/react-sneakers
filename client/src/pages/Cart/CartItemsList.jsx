@@ -49,15 +49,7 @@ const CartItemsList = ({ items, isLoading }) => {
   };
 
   return (
-    <Box
-      my={5}
-      sx={{
-        display: items?.length === 0 ? 'flex' : 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, 210px)',
-        placeContent: 'center',
-        gap: 4,
-      }}
-    >
+    <Box component={'ul'} flexGrow={1} display={'flex'} flexDirection={'column'} gap={2}>
       {renderContent()}
     </Box>
   );

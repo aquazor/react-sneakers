@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material';
 
-const PageHeading = ({ children }) => {
+const PageHeading = ({ textAlign = 'center', children }) => {
   return (
     <Box my={4}>
-      <Typography component="h1" variant="h4" textAlign="center">
+      <Typography component="h1" variant="h4" textAlign={textAlign}>
         {children}
       </Typography>
     </Box>

@@ -1,5 +1,5 @@
-import SignUpForm from '../components/SignUpForm';
-import SignLayout from './SignLayout';
+import SignLayout from '../SignLayout';
+import SignUpForm from './SignUpForm';
 
 const SignUp = () => {
   return (

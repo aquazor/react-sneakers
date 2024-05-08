@@ -1,6 +1,7 @@
 import { Container } from '@mui/material';
-import { SneakersItemsList, SortPanel } from '../components/';
-import { useSelectSneakers } from '../hooks/useSelectSneakers';
+import { useSelectSneakers } from '../../hooks/useSelectSneakers';
+import { SortPanel } from '../../components';
+import SneakersItemsList from './SneakersItemsList';
 
 const Home = () => {
   const { items, isLoading } = useSelectSneakers();

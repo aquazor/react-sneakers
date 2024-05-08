@@ -1,5 +1,5 @@
-import SignInForm from '../components/SignInForm';
-import SignLayout from './SignLayout';
+import SignLayout from '../SignLayout';
+import SignInForm from './SignInForm';
 
 const SignIn = () => {
   return (

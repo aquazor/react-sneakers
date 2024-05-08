@@ -9,9 +9,9 @@ const CartSummary = ({ items }) => {
   const totalPrice = getTotalPrice(items);
 
   return (
-    <Box>
+    <Box minWidth={250}>
       <Typography variant="h6">Items count: {items?.length}</Typography>
-      <Typography variant="h6">Total price: {totalPrice}</Typography>
+      <Typography variant="h6">Total price: {totalPrice} Kč</Typography>
     </Box>
   );
 };

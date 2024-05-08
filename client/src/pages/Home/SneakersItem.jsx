@@ -1,10 +1,22 @@
+import { useNavigate } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
-import { FavoriteButton } from './';
-import { BASE_URL } from '../constants';
+import { BASE_URL } from '../../constants';
 
-const CardTemplate = ({ item, actionButton }) => {
+const SneakersItem = ({ item }) => {
+  const navigate = useNavigate();
+  const handleClick = () => navigate(`/sneakers/${item.id}`);
+
   return (
-    <Card elevation={2} sx={{ width: 210, borderRadius: 5 }} component="li">
+    <Card
+      onClick={handleClick}
+      sx={{
+        width: 210,
+        borderRadius: 5,
+        cursor: 'pointer',
+      }}
+      elevation={2}
+      component="li"
+    >
       <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, height: 1 }}>
         <Box
           sx={{
@@ -18,8 +30,6 @@ const CardTemplate = ({ item, actionButton }) => {
             sx={{ height: 120, width: 130, backgroundSize: 'contain' }}
             image={`${BASE_URL}/images/${item.url}`}
           />
-
-          <FavoriteButton absolute />
         </Box>
 
         <Box>
@@ -48,18 +58,16 @@ const CardTemplate = ({ item, actionButton }) => {
               color="text.secondary"
               textTransform={'uppercase'}
             >
-              ЦЕНА:
+              PRICE:
             </Typography>
             <Typography variant="body1" fontWeight={700}>
-              {item.price} грн.
+              {item.price} Kč
             </Typography>
           </Box>
-
-          {actionButton}
         </Box>
       </CardContent>
     </Card>
   );
 };
 
-export default CardTemplate;
+export default SneakersItem;
