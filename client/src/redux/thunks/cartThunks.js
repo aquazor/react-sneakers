@@ -1,6 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosClient } from '../../axios';
-import { setIsLoading, addItem, removeItem, setItems } from '../slices/cartSlice';
+import {
+  setIsLoading,
+  addItem,
+  removeItem,
+  setItems,
+  decrementCount,
+} from '../slices/cartSlice';
 import { getAuthHeader } from '../../utils/getAuthHeader';
 import { getCartFromLocal } from '../../utils/getCartFromLocal';
 
@@ -86,6 +92,28 @@ export const removeCartItem = createAsyncThunk(
       }
 
       dispatch(removeItem(item));
+    } catch (error) {
+      console.log(error);
+
+      if (error?.response?.status === 422) {
+        throw Error('Item not provided');
+      }
+
+      throw Error('Internal server error');
+    }
+  }
+);
+
+export const decrementItemCount = createAsyncThunk(
+  'cart/decrementItemCount',
+  async (item, { dispatch }) => {
+    try {
+      await axiosClient.delete('/cart/decrement', {
+        headers: { Authorization: getAuthHeader() },
+        data: { item },
+      });
+
+      dispatch(decrementCount(item));
     } catch (error) {
       console.log(error);
 

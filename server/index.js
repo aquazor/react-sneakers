@@ -17,8 +17,9 @@ app.post('/auth/login', AuthController.login);
 app.get('/items', ItemsController.getItems);
 
 app.post('/cart', checkAuth, CartController.syncAndGetItems);
-app.post('/cart/add', checkAuth, CartController.addItem);
+app.post('/cart/add', checkAuth, CartController.addOrUpdateItem);
 app.delete('/cart/remove', checkAuth, CartController.removeItem);
+app.delete('/cart/decrement', checkAuth, CartController.decrementItemCount);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

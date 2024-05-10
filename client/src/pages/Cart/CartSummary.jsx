@@ -1,16 +1,18 @@
 import { Box, Typography } from '@mui/material';
-import { getTotalPrice } from '../../utils/getTotalPrice';
+import { getTotalItemsPrice } from '../../utils/getTotalItemsPrice';
+import { getTotalItemsCount } from '../../utils/getTotalItemsCount';
 
 const CartSummary = ({ items }) => {
   if (!items || items?.length === 0) {
     return;
   }
 
-  const totalPrice = getTotalPrice(items);
+  const totalPrice = getTotalItemsPrice(items);
+  const totalCount = getTotalItemsCount(items);
 
   return (
     <Box minWidth={250}>
-      <Typography variant="h6">Items count: {items?.length}</Typography>
+      <Typography variant="h6">Items count: {totalCount}</Typography>
       <Typography variant="h6">Total price: {totalPrice} Kč</Typography>
     </Box>
   );

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   Box,
@@ -13,13 +14,15 @@ import {
 import { useSelectAuth } from '../../hooks/useSelectAuth';
 import { useSelectCart } from '../../hooks/useSelectCart';
 import { addCartItem } from '../../redux/thunks/cartThunks';
-import { setItems } from '../../redux/slices/sneakersSlice';
+import { setItems } from '../../redux/slices/cartSlice';
 import { getCartFromLocal } from '../../utils/getCartFromLocal';
 
 const ItemInfo = ({ item }) => {
-  const [value, setValue] = useState('');
+  const [selectedSize, setSelectedSize] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const { items: cartItems } = useSelectCart();
+
+  const select = useRef(null);
 
   const {
     userAuth: { token },
@@ -27,22 +30,54 @@ const ItemInfo = ({ item }) => {
 
   const dispatch = useDispatch();
 
-  const isInCart = Boolean(cartItems?.find((cartItem) => cartItem.id === item.id));
+  let itemOfChosenSize = null;
+  if (selectedSize) {
+    itemOfChosenSize = item.sizes.find((itemSize) => itemSize.value === selectedSize);
+  }
+
+  const cartItem = cartItems?.find(
+    (cartItem) => cartItem.itemId === item.id && cartItem.size === selectedSize
+  );
+
+  const cartItemCount = cartItem?.count || 0;
+  const itemCountOfChosenSize = itemOfChosenSize?.count || 0; // 0 if size is not chosen
+  const canAddMore = cartItemCount < itemCountOfChosenSize;
+
+  const disabled = !!itemCountOfChosenSize && !canAddMore;
 
   const handleAdd = async (item) => {
-    if (isInCart) {
+    if (disabled) {
       return;
     }
 
-    if (!value) {
+    if (!selectedSize) {
+      select.current.focus();
       setIsOpen(true);
       return;
     }
 
-    const cartItem = { ...item, size: value };
+    const { sizes, id, ...rest } = item;
+
+    const cartItem = {
+      ...rest,
+      id: nanoid(),
+      itemId: item.id,
+      size: selectedSize,
+      maxCount: itemCountOfChosenSize,
+      count: cartItemCount + 1,
+    };
 
     const cart = getCartFromLocal();
-    cart.push(cartItem);
+
+    const index = cart.findIndex(
+      (item) => item.itemId === cartItem.itemId && item.size === cartItem.size
+    );
+
+    if (index !== -1) {
+      cart[index] = { ...cartItem };
+    } else {
+      cart.push(cartItem);
+    }
 
     localStorage.setItem('cart', JSON.stringify(cart));
 
@@ -58,7 +93,7 @@ const ItemInfo = ({ item }) => {
     }
   };
 
-  const sizes = item.sizes.map((size, index) => {
+  const sizesList = item.sizes.map((size, index) => {
     const { count, value } = size;
 
     let infoText = '';
@@ -116,6 +151,7 @@ const ItemInfo = ({ item }) => {
       <FormControl variant="filled" sx={{ maxWidth: 250 }}>
         <InputLabel id="select-filled-label">Choose size</InputLabel>
         <Select
+          inputRef={select}
           onOpen={() => setIsOpen(true)}
           onClose={() => setIsOpen(false)}
           open={isOpen}
@@ -123,16 +159,16 @@ const ItemInfo = ({ item }) => {
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           label="Choose size"
-          onChange={(e) => setValue(e.target.value)}
-          value={value}
+          onChange={(e) => setSelectedSize(e.target.value)}
+          value={selectedSize}
         >
-          {sizes}
+          {sizesList}
         </Select>
       </FormControl>
 
       <Box alignSelf={'flex-end'} display={'flex'} height={1}>
         <Button
-          disabled={isInCart}
+          disabled={disabled}
           variant="contained"
           onClick={() => handleAdd(item)}
           size="large"

@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, CardMedia, Link, Paper, Typography } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { Box, CardMedia, IconButton, Link, Paper, Typography } from '@mui/material';
 import { useSelectAuth } from '../../hooks/useSelectAuth';
 import { setItems } from '../../redux/slices/cartSlice';
-import { removeCartItem } from '../../redux/thunks/cartThunks';
+import {
+  addCartItem,
+  decrementItemCount,
+  removeCartItem,
+} from '../../redux/thunks/cartThunks';
 import { getCartFromLocal } from '../../utils/getCartFromLocal';
 import { RemoveItemButton } from '../../components';
 import { BASE_URL } from '../../constants';
@@ -13,6 +19,7 @@ const CartItem = ({ item }) => {
   const {
     userAuth: { token },
   } = useSelectAuth();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -35,6 +42,82 @@ const CartItem = ({ item }) => {
       setIsLoading(true);
 
       await dispatch(removeCartItem(item));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const canAddMore = item.count < item.maxCount;
+
+  const handleIncrementCount = async (item) => {
+    if (!canAddMore) {
+      return;
+    }
+
+    const updatedItem = {
+      ...item,
+      count: item.count + 1,
+    };
+
+    const cart = getCartFromLocal();
+
+    const index = cart.findIndex(
+      (item) => item.itemId === updatedItem.itemId && item.size === updatedItem.size
+    );
+
+    if (index !== -1) {
+      cart[index] = { ...updatedItem };
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    if (!token) {
+      dispatch(setItems(cart));
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      await dispatch(addCartItem(updatedItem));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDecrementCount = async (item) => {
+    const updatedItem = {
+      ...item,
+      count: item.count - 1,
+    };
+
+    const cart = getCartFromLocal();
+
+    const index = cart.findIndex(
+      (item) => item.itemId === updatedItem.itemId && item.size === updatedItem.size
+    );
+
+    if (updatedItem.count < 1) {
+      cart.splice(index, 1);
+    } else {
+      cart[index] = { ...updatedItem };
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    if (!token) {
+      dispatch(setItems(cart));
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      await dispatch(decrementItemCount(updatedItem));
     } catch (error) {
       console.log(error);
     } finally {
@@ -66,18 +149,39 @@ const CartItem = ({ item }) => {
             image={`${BASE_URL}/images/${item.url}`}
           />
 
-          <Box width={1}>
-            <Link component={RouterLink} to={`/sneakers/${item.id}`}>
-              {item.description}
-            </Link>
+          <Box width={1} display={'flex'} justifyContent={'space-between'} gap={2}>
+            <div>
+              <Link component={RouterLink} to={`/sneakers/${item.itemId}`}>
+                {item.description}
+              </Link>
 
-            <Box component={'ul'}>
-              <Box display={'flex'} alignItems={'center'} gap={1} component={'li'}>
-                <Typography minWidth={80} variant="body2">
-                  Size:
-                </Typography>
-                <Typography variant="body1">{item.size}</Typography>
+              <Box component={'ul'}>
+                <Box display={'flex'} alignItems={'center'} gap={1} component={'li'}>
+                  <Typography minWidth={80} variant="body2">
+                    Size:
+                  </Typography>
+                  <Typography variant="body1">{item.size}</Typography>
+                </Box>
+
+                <Box display={'flex'} alignItems={'center'} gap={1} component={'li'}>
+                  <Typography minWidth={80} variant="body2">
+                    Count:
+                  </Typography>
+                  <Typography variant="body1">{item.count}</Typography>
+                </Box>
               </Box>
+            </div>
+
+            <Box display={'flex'} alignItems={'center'}>
+              <IconButton
+                onClick={() => handleIncrementCount(item)}
+                disabled={!canAddMore || isLoading}
+              >
+                <AddCircleOutlineIcon />
+              </IconButton>
+              <IconButton disabled={isLoading} onClick={() => handleDecrementCount(item)}>
+                <RemoveCircleOutlineIcon />
+              </IconButton>
             </Box>
           </Box>
         </Box>

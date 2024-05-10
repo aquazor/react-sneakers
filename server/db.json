@@ -43,7 +43,7 @@
       "description": "Puma X Aka Boku Future Rider",
       "sizes": [
         {
-          "count": 3,
+          "count": 5,
           "value": "39"
         },
         {
@@ -67,7 +67,7 @@
           "value": "44"
         }
       ],
-      "price": 2199
+      "price": 2100
     },
     {
       "id": "2",
@@ -99,7 +99,7 @@
           "value": "44"
         }
       ],
-      "price": 3399
+      "price": 3300
     },
     {
       "id": "3",
@@ -131,7 +131,7 @@
           "value": "44"
         }
       ],
-      "price": 4999
+      "price": 4900
     },
     {
       "id": "4",
@@ -163,7 +163,7 @@
           "value": "44"
         }
       ],
-      "price": 4199
+      "price": 4100
     },
     {
       "id": "5",
@@ -195,18 +195,39 @@
           "value": "44"
         }
       ],
-      "price": 2299
+      "price": 2200
     },
     {
       "id": "6",
       "url": "sneakers-6.png",
       "description": "Nike Blazer Mid Vintage Suede Black",
       "sizes": [
-        "41",
-        "43",
-        "44"
+        {
+          "count": 5,
+          "value": "39"
+        },
+        {
+          "count": 3,
+          "value": "40"
+        },
+        {
+          "count": 2,
+          "value": "41"
+        },
+        {
+          "count": 0,
+          "value": "42"
+        },
+        {
+          "count": 0,
+          "value": "43"
+        },
+        {
+          "count": 0,
+          "value": "44"
+        }
       ],
-      "price": 3899
+      "price": 3800
     }
   ],
   "cart": [
@@ -222,37 +243,14 @@
       "id": "dccb",
       "items": [
         {
-          "id": "2",
-          "url": "sneakers-2.png",
-          "description": "Jordan Air Jordan 11",
-          "sizes": [
-            {
-              "count": 7,
-              "value": "39"
-            },
-            {
-              "count": 0,
-              "value": "40"
-            },
-            {
-              "count": 2,
-              "value": "41"
-            },
-            {
-              "count": 1,
-              "value": "42"
-            },
-            {
-              "count": 0,
-              "value": "43"
-            },
-            {
-              "count": 1,
-              "value": "44"
-            }
-          ],
-          "price": 3399,
-          "size": "41"
+          "url": "sneakers-5.png",
+          "description": "Nike Blazer Mid Suede",
+          "price": 2200,
+          "id": "GjslEDTwXDG5u5RbikFM9",
+          "itemId": "5",
+          "size": "43",
+          "maxCount": 4,
+          "count": 1
         }
       ]
     },
