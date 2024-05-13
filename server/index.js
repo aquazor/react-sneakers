@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use('/images', express.static('storage/img'));
+app.use('/images', express.static('storage/img', { maxAge: '2d' }));
 
 app.get('/auth/getMe', checkAuth, AuthController.getMe);
 app.post('/auth/register', AuthController.register);

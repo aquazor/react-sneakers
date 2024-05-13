@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import { BASE_URL } from '../../constants';
 
 const SneakersItem = ({ item }) => {
@@ -7,31 +7,21 @@ const SneakersItem = ({ item }) => {
   const handleClick = () => navigate(`/sneakers/${item.id}`);
 
   return (
-    <Card
+    <Paper
       onClick={handleClick}
       sx={{
-        width: 210,
-        borderRadius: 5,
+        display: 'grid',
+        width: 250,
+        borderRadius: '5px 15px',
         cursor: 'pointer',
+        overflow: 'hidden',
       }}
       elevation={2}
       component="li"
     >
-      <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, height: 1 }}>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
-          }}
-        >
-          <CardMedia
-            sx={{ height: 120, width: 130, backgroundSize: 'contain' }}
-            image={`${BASE_URL}/images/${item.url}`}
-          />
-        </Box>
+      <img height={280} width={'100%'} src={`${BASE_URL}/images/${item.url}`} />
 
+      <Box p={2} display={'grid'}>
         <Box>
           <Typography
             variant="subtitle1"
@@ -45,7 +35,6 @@ const SneakersItem = ({ item }) => {
 
         <Box
           sx={{
-            mt: 'auto',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -65,8 +54,8 @@ const SneakersItem = ({ item }) => {
             </Typography>
           </Box>
         </Box>
-      </CardContent>
-    </Card>
+      </Box>
+    </Paper>
   );
 };
 

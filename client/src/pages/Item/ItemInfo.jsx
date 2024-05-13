@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -18,32 +18,42 @@ import { setItems } from '../../redux/slices/cartSlice';
 import { getCartFromLocal } from '../../utils/getCartFromLocal';
 
 const ItemInfo = ({ item }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedSize, setSelectedSize] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const { items: cartItems } = useSelectCart();
 
   const select = useRef(null);
 
-  const {
-    userAuth: { token },
-  } = useSelectAuth();
+  const { token } = useSelectAuth().userAuth;
 
   const dispatch = useDispatch();
 
-  let itemOfChosenSize = null;
+  let itemOfSelectedSize = null;
   if (selectedSize) {
-    itemOfChosenSize = item.sizes.find((itemSize) => itemSize.value === selectedSize);
+    // Determine an instance of an item of the selected size
+    itemOfSelectedSize = item.sizes.find((itemSize) => itemSize.value === selectedSize);
   }
 
+  // Search for an item with the same itemId & size in cart
   const cartItem = cartItems?.find(
     (cartItem) => cartItem.itemId === item.id && cartItem.size === selectedSize
   );
 
+  // Get count of the found item in cart, set 0 if not found
   const cartItemCount = cartItem?.count || 0;
-  const itemCountOfChosenSize = itemOfChosenSize?.count || 0; // 0 if size is not chosen
-  const canAddMore = cartItemCount < itemCountOfChosenSize;
 
-  const disabled = !!itemCountOfChosenSize && !canAddMore;
+  // Get max count of an item of selected size (max count in stock),
+  // set 0 if itemOfSelectedSize is null (size is not selected)
+  const itemOfSelectedSizeMaxCount = itemOfSelectedSize?.count || 0;
+
+  // Determine if more items can be added,
+  // if count of an item with the same itemId & size in cart < max count of an item with the selected size
+  const canAddMore = cartItemCount < itemOfSelectedSizeMaxCount;
+
+  // Add button is disabled if size is selected and cant add more items of this size
+  const sizeIsSelected = !!selectedSize;
+  const disabled = (sizeIsSelected && !canAddMore) || isLoading;
 
   const handleAdd = async (item) => {
     if (disabled) {
@@ -63,7 +73,8 @@ const ItemInfo = ({ item }) => {
       id: nanoid(),
       itemId: item.id,
       size: selectedSize,
-      maxCount: itemCountOfChosenSize,
+      code: itemOfSelectedSize.code,
+      maxCount: itemOfSelectedSizeMaxCount,
       count: cartItemCount + 1,
     };
 
@@ -87,9 +98,12 @@ const ItemInfo = ({ item }) => {
     }
 
     try {
+      setIsLoading(true);
       await dispatch(addCartItem(cartItem));
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -134,18 +148,26 @@ const ItemInfo = ({ item }) => {
         </Typography>
       </Box>
 
-      <Box>
-        <Typography
-          variant="h6"
-          component="p"
-          color="text.secondary"
-          textTransform={'uppercase'}
-        >
-          PRICE:
-        </Typography>
-        <Typography variant="h5" fontWeight={700}>
-          {item.price} Kč
-        </Typography>
+      <Box component={'ul'} display={'grid'} gap={2}>
+        <Box component="li">
+          <Typography variant="body2" color="text.secondary" textTransform={'uppercase'}>
+            CODE: {itemOfSelectedSize ? itemOfSelectedSize.code : item.code}
+          </Typography>
+        </Box>
+
+        <Box component="li">
+          <Typography
+            variant="h6"
+            component="h5"
+            color="text.secondary"
+            textTransform={'uppercase'}
+          >
+            PRICE:
+          </Typography>
+          <Typography variant="h5" component={'p'} fontWeight={700}>
+            {item.price} Kč
+          </Typography>
+        </Box>
       </Box>
 
       <FormControl variant="filled" sx={{ maxWidth: 250 }}>

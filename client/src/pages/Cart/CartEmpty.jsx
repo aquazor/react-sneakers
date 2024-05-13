@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import { BASE_URL } from '../../constants';
 
 const CartEmpty = () => {
   return (
@@ -9,7 +10,12 @@ const CartEmpty = () => {
       alignItems={'center'}
       justifyContent={'center'}
     >
-      <img width={120} height={120} src="/images/cart-empty.png" alt="empty cart" />
+      <img
+        width={120}
+        height={120}
+        src={`${BASE_URL}/images/cart-empty.png`}
+        alt="empty cart"
+      />
 
       <Box mt={2} textAlign={'center'}>
         <Typography variant="h5">Your cart is empty</Typography>

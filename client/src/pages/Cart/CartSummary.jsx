@@ -11,7 +11,7 @@ const CartSummary = ({ items }) => {
   const totalCount = getTotalItemsCount(items);
 
   return (
-    <Box minWidth={250}>
+    <Box minWidth={220}>
       <Typography variant="h6">Items count: {totalCount}</Typography>
       <Typography variant="h6">Total price: {totalPrice} Kč</Typography>
     </Box>

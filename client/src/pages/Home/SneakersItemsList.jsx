@@ -1,15 +1,10 @@
 import { Box } from '@mui/material';
 import SneakersItem from './SneakersItem';
-import SneakersItemLoader from './SneakersItemLoader';
 
 const SneakersItemsList = ({ items, isLoading }) => {
   const renderContent = () => {
     if (!items && isLoading) {
-      return [...Array(8)].map((_, index) => (
-        <Box key={index} sx={{ borderRadius: 4 }}>
-          <SneakersItemLoader />
-        </Box>
-      ));
+      return <p>Loading...</p>;
     }
 
     if (items?.length === 0) {
@@ -25,7 +20,7 @@ const SneakersItemsList = ({ items, isLoading }) => {
       my={5}
       sx={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, 210px)',
+        gridTemplateColumns: 'repeat(auto-fill, 250px)',
         placeContent: 'center',
         gap: 3,
       }}
