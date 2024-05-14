@@ -517,7 +517,30 @@
     },
     {
       "id": "dccb",
-      "items": []
+      "items": [
+        {
+          "url": "puma-palermo.webp",
+          "description": "Puma Palermo",
+          "code": "00139",
+          "price": 2100,
+          "id": "7HaBpvMNeG8Ec-N01JFrT",
+          "itemId": "1",
+          "size": "39",
+          "maxCount": 5,
+          "count": 5
+        },
+        {
+          "url": "adidas-originals-superstar-82.webp",
+          "description": "Adidas Originals Superstar 82",
+          "code": "01041",
+          "price": 2800,
+          "id": "7ICCq_B_uWlgHMrMS295C",
+          "itemId": "10",
+          "size": "41",
+          "maxCount": 2,
+          "count": 2
+        }
+      ]
     },
     {
       "id": "714a",

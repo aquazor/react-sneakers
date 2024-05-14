@@ -4,20 +4,23 @@ import { BASE_URL } from '../../constants';
 import { RemoveItemButton } from '../../components';
 import IncrementCountButton from './IncrementCountButton';
 import DecrementCountButton from './DecrementCountButton';
+import CartItemSection from './CartItemSection';
+import { blueGrey, grey } from '@mui/material/colors';
 
 const CartItem = ({ item }) => {
   return (
     <Paper
       sx={{
         width: 1,
-        borderRadius: '5px 15px',
+        borderRadius: '20px 5px 5px 20px',
         p: 1.5,
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? blueGrey[900] : grey[50]),
       }}
       component={'li'}
       elevation={2}
     >
-      <Box display={'flex'}>
-        <Box flexShrink={0} borderRadius={'5px 15px'} overflow={'hidden'}>
+      <Box display={'flex'} alignItems={'center'} gap={2}>
+        <Box flexShrink={0} borderRadius={'20px 5px 5px 20px'} overflow={'hidden'}>
           <img
             loading="lazy"
             height={140}
@@ -27,25 +30,13 @@ const CartItem = ({ item }) => {
         </Box>
 
         <Box
-          flexGrow={1}
           display={'grid'}
-          gridTemplateColumns={'1fr 1fr auto auto'}
           position={'relative'}
-          px={2}
-          py={1}
+          gridTemplateColumns={'1fr minmax(auto, 180px) minmax(auto, 180px)'}
+          flexGrow={1}
           gap={2}
         >
-          <Box display={'grid'} gridTemplateRows={'auto 1fr'} gap={1}>
-            <Typography
-              variant={'body2'}
-              component={'h5'}
-              textTransform={'uppercase'}
-              textAlign={'center'}
-              lineHeight={1}
-            >
-              PRODUCT
-            </Typography>
-
+          <CartItemSection heading={'Product'}>
             <Box my={'auto'}>
               <Link component={RouterLink} to={`/sneakers/${item.itemId}`}>
                 {item.description}
@@ -56,38 +47,42 @@ const CartItem = ({ item }) => {
                   <Typography minWidth={80} variant="body2">
                     Size:
                   </Typography>
-                  <Typography variant="body1">{item.size}</Typography>
+                  <Typography minWidth={'fit-content'} variant="subtitle2">
+                    {item.size}
+                  </Typography>
                 </Box>
 
                 <Box display={'flex'} alignItems={'center'} gap={1} component={'li'}>
                   <Typography minWidth={80} variant="body2">
                     Count:
                   </Typography>
-                  <Typography variant="body1">{item.count}</Typography>
+                  <Typography minWidth={'fit-content'} variant="subtitle2">
+                    {item.count}
+                  </Typography>
+                </Box>
+
+                <Box display={'flex'} alignItems={'center'} gap={1} component={'li'}>
+                  <Typography minWidth={80} variant="body2">
+                    Price:
+                  </Typography>
+                  <Typography minWidth={'fit-content'} variant="subtitle2">
+                    {item.price} Kč
+                  </Typography>
                 </Box>
 
                 <Box display={'flex'} alignItems={'center'} gap={1} component={'li'}>
                   <Typography minWidth={80} variant="body2">
                     Code:
                   </Typography>
-                  <Typography variant="body2">{item.code}</Typography>
+                  <Typography minWidth={'fit-content'} variant="subtitle2">
+                    {item.code}
+                  </Typography>
                 </Box>
               </Box>
             </Box>
-          </Box>
+          </CartItemSection>
 
-          <Box display={'grid'} gridTemplateRows={'auto 1fr'} gap={1}>
-            <Typography
-              variant={'body2'}
-              component={'h5'}
-              textTransform={'uppercase'}
-              textAlign={'center'}
-              lineHeight={1}
-              mb={'auto'}
-            >
-              QTY
-            </Typography>
-
+          <CartItemSection heading={'Quantity'}>
             <Box display={'flex'} alignItems={'center'} justifyContent={'center'} gap={1}>
               <IncrementCountButton item={item} />
 
@@ -97,29 +92,18 @@ const CartItem = ({ item }) => {
 
               <DecrementCountButton item={item} />
             </Box>
-          </Box>
+          </CartItemSection>
 
-          <Box display={'grid'} gridTemplateRows={'auto 1fr'} gap={1}>
-            <Typography
-              variant={'body2'}
-              component={'h5'}
-              textTransform={'uppercase'}
-              textAlign={'center'}
-              lineHeight={1}
-              mb={'auto'}
-            >
-              PRICE
-            </Typography>
-
+          <CartItemSection heading={'Price'}>
             <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
-              <Typography variant="body1">{item.price} Kč</Typography>
+              <Typography variant="body1">{item.price * item.count} Kč</Typography>
             </Box>
-          </Box>
+          </CartItemSection>
 
           <Box
             position={'absolute'}
-            top={-10}
-            right={-10}
+            bottom={-5}
+            right={-5}
             display={'flex'}
             alignItems={'flex-end'}
           >

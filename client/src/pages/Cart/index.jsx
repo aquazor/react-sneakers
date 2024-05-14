@@ -8,10 +8,17 @@ const Cart = () => {
   const { items, isLoading } = useSelectCart();
 
   return (
-    <Container>
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '80vh',
+        position: 'relative',
+      }}
+    >
       <PageHeading>Cart page</PageHeading>
 
-      <Box display={'flex'} gap={3}>
+      <Box flexGrow={1} display={'flex'} mb={4} gap={3}>
         <CartItemsList items={items} isLoading={isLoading} />
         <CartSummary items={items} isLoading={isLoading} />
       </Box>

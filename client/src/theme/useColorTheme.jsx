@@ -1,5 +1,5 @@
-import { createTheme } from '@mui/material';
 import { useMemo, useState } from 'react';
+import { createTheme } from '@mui/material';
 
 export const useColorTheme = () => {
   const [mode, setMode] = useState(localStorage.getItem('mode') || 'light');
