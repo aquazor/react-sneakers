@@ -49,7 +49,7 @@ const CartItemsList = ({ items, isLoading }) => {
   };
 
   return (
-    <Box component={'ul'} flexGrow={1} display={'flex'} flexDirection={'column'} gap={3}>
+    <Box component={'ul'} flexGrow={2} display={'flex'} flexDirection={'column'} gap={3}>
       {renderContent()}
     </Box>
   );

@@ -20,7 +20,8 @@ const Cart = () => {
 
       <Box flexGrow={1} display={'flex'} mb={4} gap={3}>
         <CartItemsList items={items} isLoading={isLoading} />
-        <CartSummary items={items} isLoading={isLoading} />
+
+        {items && <CartSummary items={items} isLoading={isLoading} />}
       </Box>
     </Container>
   );

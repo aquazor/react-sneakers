@@ -11,7 +11,12 @@ const ItemCard = ({ item }) => {
       borderRadius={'5px 10%'}
       overflow={'hidden'}
     >
-      <img height={'100%'} width={'100%'} src={`${BASE_URL}/images/${item.url}`} />
+      <Box
+        component={'img'}
+        height={'100%'}
+        width={'100%'}
+        src={`${BASE_URL}/images/${item.url}`}
+      ></Box>
     </Box>
   );
 };

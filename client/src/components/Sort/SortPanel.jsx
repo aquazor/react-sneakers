@@ -1,13 +1,5 @@
 import { useDispatch } from 'react-redux';
-import {
-  Box,
-  ButtonGroup,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-} from '@mui/material';
+import { Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { setSortValue } from '../../redux/slices/sneakersSlice';
 import { useSelectSneakers } from '../../hooks/useSelectSneakers';
 
@@ -22,12 +14,6 @@ const SortPanel = () => {
 
   return (
     <Box my={2} display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
-      <ButtonGroup color="inherit" variant="text" aria-label="Basic button group">
-        <Button>One</Button>
-        <Button>Two</Button>
-        <Button>Three</Button>
-      </ButtonGroup>
-
       <FormControl size="small" variant="standard" sx={{ minWidth: 180 }}>
         <InputLabel id="select-standard-label">Sort by</InputLabel>
         <Select

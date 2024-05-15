@@ -29,7 +29,6 @@ const Header = () => {
             <Box
               sx={{
                 flexGrow: 1,
-                display: { xs: 'none', md: 'flex' },
               }}
             >
               <IconButton color="inherit" to="/cart" component={RouterLink}>

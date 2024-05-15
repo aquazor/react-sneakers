@@ -1,7 +1,7 @@
 import './App.css';
 import { ThemeProvider } from '@emotion/react';
-import { Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
 import { useThemeContext } from './theme/useThemeContext';
 import { Layout, Home, Cart, SignIn, SignUp, Item } from './pages';
 

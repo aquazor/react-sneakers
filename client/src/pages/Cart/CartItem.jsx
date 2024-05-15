@@ -6,27 +6,59 @@ import IncrementCountButton from './IncrementCountButton';
 import DecrementCountButton from './DecrementCountButton';
 import CartItemSection from './CartItemSection';
 import { blueGrey, grey } from '@mui/material/colors';
+import { useTheme } from '@emotion/react';
 
 const CartItem = ({ item }) => {
+  const theme = useTheme();
+
   return (
     <Paper
       sx={{
         width: 1,
-        borderRadius: '20px 5px 5px 20px',
+        borderRadius: '10px',
         p: 1.5,
         bgcolor: (theme) => (theme.palette.mode === 'dark' ? blueGrey[900] : grey[50]),
       }}
       component={'li'}
       elevation={2}
     >
-      <Box display={'flex'} alignItems={'center'} gap={2}>
-        <Box flexShrink={0} borderRadius={'20px 5px 5px 20px'} overflow={'hidden'}>
-          <img
+      <Box
+        display={'flex'}
+        alignItems={'center'}
+        gap={2}
+        sx={{
+          [theme.breakpoints.down('md')]: {
+            flexDirection: 'column',
+            alignItems: 'stretch',
+            gap: 1,
+          },
+        }}
+      >
+        <Box
+          flexShrink={0}
+          borderRadius={'10px'}
+          height={140}
+          width={150}
+          overflow={'hidden'}
+          sx={{
+            [theme.breakpoints.down('md')]: {
+              alignSelf: 'center',
+              width: '90%',
+              height: 300,
+            },
+            [theme.breakpoints.down('sm')]: {
+              width: '75%',
+              height: 150,
+            },
+          }}
+        >
+          <Box
+            component={'img'}
             loading="lazy"
-            height={140}
-            width={150}
+            height={'100%'}
+            width={'100%'}
             src={`${BASE_URL}/images/${item.url}`}
-          />
+          ></Box>
         </Box>
 
         <Box
@@ -35,9 +67,25 @@ const CartItem = ({ item }) => {
           gridTemplateColumns={'1fr minmax(auto, 180px) minmax(auto, 180px)'}
           flexGrow={1}
           gap={2}
+          sx={{
+            [theme.breakpoints.down('md')]: {
+              gridTemplateColumns: '1fr minmax(auto, 130px) minmax(auto, 130px)',
+              gap: 1,
+            },
+            [theme.breakpoints.down('sm')]: {
+              gridTemplateColumns: '1fr',
+            },
+          }}
         >
           <CartItemSection heading={'Product'}>
-            <Box my={'auto'}>
+            <Box
+              sx={{
+                [theme.breakpoints.down('sm')]: {
+                  display: 'grid',
+                  placeContent: 'center',
+                },
+              }}
+            >
               <Link component={RouterLink} to={`/sneakers/${item.itemId}`}>
                 {item.description}
               </Link>
@@ -96,7 +144,7 @@ const CartItem = ({ item }) => {
 
           <CartItemSection heading={'Price'}>
             <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
-              <Typography variant="body1">{item.price * item.count} Kč</Typography>
+              <Typography>{item.price * item.count} Kč</Typography>
             </Box>
           </CartItemSection>
 
