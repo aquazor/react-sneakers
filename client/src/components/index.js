@@ -8,8 +8,11 @@ import PageHeading from './ui/PageHeading';
 import ConfirmLogoutModal from './ConfirmLogoutModal';
 import RemoveItemButton from './ui/RemoveItemButton';
 import AddCartButton from './ui/AddCartButton';
+import SearchInput from './SearchInput';
+import SortBrand from './Sort/SortBrand';
 
 export {
+  SearchInput,
   AddCartButton,
   RemoveItemButton,
   ConfirmLogoutModal,
@@ -20,4 +23,5 @@ export {
   Authbar,
   PageHeading,
   FavoriteButton,
+  SortBrand,
 };

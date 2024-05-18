@@ -14,7 +14,7 @@ export const getSneakersItems = createAsyncThunk(
 
       const { data } = await axiosClient.get(url);
 
-      dispatch(setItems(data));
+      dispatch(setItems(data.items));
     } catch (error) {
       console.log(error);
 

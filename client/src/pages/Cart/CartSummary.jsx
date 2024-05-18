@@ -2,10 +2,8 @@ import { Box, Button, Chip, Divider, Paper, Typography } from '@mui/material';
 import { blueGrey } from '@mui/material/colors';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { getTotalItemsPrice } from '../../utils/getTotalItemsPrice';
-import { useTheme } from '@emotion/react';
 
 const CartSummary = ({ items }) => {
-  const theme = useTheme();
   const totalPrice = getTotalItemsPrice(items);
 
   return (
@@ -17,13 +15,13 @@ const CartSummary = ({ items }) => {
         flexGrow: 1,
         display: 'flex',
         flexDirection: 'column',
-        minWidth: 230,
-        maxHeight: 360,
+        minWidth: 150,
+        height: 360,
         py: 1.5,
         px: 1,
-        bgcolor: theme.palette.mode === 'dark' ? blueGrey[900] : blueGrey[50],
+        bgcolor: (theme) =>
+          theme.palette.mode === 'dark' ? blueGrey[900] : blueGrey[50],
         borderRadius: '10px',
-        [theme.breakpoints.down('md')]: { minWidth: 150 },
       }}
     >
       <Divider>
@@ -31,11 +29,11 @@ const CartSummary = ({ items }) => {
       </Divider>
 
       <Box flexGrow={1} p={1}>
-        <Typography variant="h6" component={'h4'}>
+        <Typography variant="h6" component={'h6'}>
           Cart total:
-          <Typography fontWeight={700} variant="h5">
-            {totalPrice} Kč
-          </Typography>
+        </Typography>
+        <Typography fontWeight={700} variant="h5" component={'p'}>
+          {totalPrice} Kč
         </Typography>
       </Box>
 

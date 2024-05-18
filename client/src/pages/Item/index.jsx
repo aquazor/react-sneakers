@@ -34,7 +34,7 @@ const Item = () => {
           <Box my={2} display={'flex'} gap={3}>
             <Box>
               <Typography variant="h6" component={'h6'}>
-                {item.description}
+                {item.name}
               </Typography>
 
               <Typography>

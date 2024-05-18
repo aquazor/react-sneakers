@@ -7,7 +7,7 @@ import { getCartFromLocal } from '../../utils/getCartFromLocal';
 import { setItems } from '../../redux/slices/cartSlice';
 import { removeCartItem } from '../../redux/thunks/cartThunks';
 
-const RemoveItemButton = ({ item }) => {
+const RemoveItemButton = ({ item, color = 'inherit' }) => {
   const [isLoading, setIsLoading] = useState();
   const { token } = useSelectAuth().userAuth;
 
@@ -45,6 +45,7 @@ const RemoveItemButton = ({ item }) => {
       size="small"
       title="Remove from cart"
       sx={{
+        color,
         opacity: 0.5,
         '&:hover': {
           opacity: 1,

@@ -11,7 +11,7 @@ const SneakersItem = ({ item }) => {
       onClick={handleClick}
       sx={{
         display: 'grid',
-        width: 250,
+        width: 260,
         borderRadius: '5px 15px',
         cursor: 'pointer',
         overflow: 'hidden',
@@ -29,7 +29,7 @@ const SneakersItem = ({ item }) => {
             fontSize={'1rem'}
             lineHeight={1.2}
           >
-            {item.description}
+            {item.name}
           </Typography>
         </Box>
 

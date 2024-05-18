@@ -39,8 +39,8 @@
   "items": [
     {
       "id": "1",
+      "name": "Puma Palermo",
       "url": "puma-palermo.webp",
-      "description": "Puma Palermo",
       "code": "00100",
       "sizes": [
         {
@@ -78,8 +78,8 @@
     },
     {
       "id": "2",
+      "name": "Adidas Originals Niteball",
       "url": "adidas-originals-niteball.webp",
-      "description": "Adidas Originals Niteball",
       "code": "00200",
       "sizes": [
         {
@@ -117,8 +117,8 @@
     },
     {
       "id": "3",
+      "name": "Asics Gel NYC",
       "url": "asics-gel-nyc.webp",
-      "description": "Asics Gel NYC",
       "code": "00300",
       "sizes": [
         {
@@ -156,8 +156,8 @@
     },
     {
       "id": "4",
+      "name": "Asics GT 2160",
       "url": "asics-gt-2160.webp",
-      "description": "Asics GT 2160",
       "code": "00400",
       "sizes": [
         {
@@ -195,8 +195,8 @@
     },
     {
       "id": "5",
+      "name": "Puma Future Rider Play on",
       "url": "puma-future-rider-play-on.webp",
-      "description": "Puma Future Rider Play on",
       "code": "00500",
       "sizes": [
         {
@@ -234,8 +234,8 @@
     },
     {
       "id": "6",
+      "name": "Adidas Originals Gazelle 85",
       "url": "adidas-originals-gazelle-85.webp",
-      "description": "Adidas Originals Gazelle 85",
       "code": "00600",
       "sizes": [
         {
@@ -273,8 +273,8 @@
     },
     {
       "id": "7",
+      "name": "Puma Suede Decon",
       "url": "puma-suede-decon.webp",
-      "description": "Puma Suede Decon",
       "code": "00700",
       "sizes": [
         {
@@ -312,8 +312,8 @@
     },
     {
       "id": "8",
+      "name": "Puma Velophasis Bliss",
       "url": "puma-velophasis-bliss.webp",
-      "description": "Puma Velophasis Bliss",
       "code": "00800",
       "sizes": [
         {
@@ -351,8 +351,8 @@
     },
     {
       "id": "9",
+      "name": "Puma Suede XL Hairy",
       "url": "puma-suede-xl-hairy.webp",
-      "description": "Puma Suede XL Hairy",
       "code": "00900",
       "sizes": [
         {
@@ -390,8 +390,8 @@
     },
     {
       "id": "10",
+      "name": "Adidas Originals Superstar 82",
       "url": "adidas-originals-superstar-82.webp",
-      "description": "Adidas Originals Superstar 82",
       "code": "01000",
       "sizes": [
         {
@@ -429,8 +429,8 @@
     },
     {
       "id": "11",
+      "name": "Adidas Originals Predator Mundial",
       "url": "adidas-originals-predator-mundial.webp",
-      "description": "Adidas Originals Predator Mundial",
       "code": "01100",
       "sizes": [
         {
@@ -468,8 +468,8 @@
     },
     {
       "id": "12",
+      "name": "Adidas AVRYN",
       "url": "adidas-avryn.webp",
-      "description": "Adidas AVRYN",
       "code": "01200",
       "sizes": [
         {
@@ -519,59 +519,15 @@
       "id": "dccb",
       "items": [
         {
-          "url": "puma-palermo.webp",
-          "description": "Puma Palermo",
-          "code": "00141",
-          "price": 2100,
-          "id": "pj6lEMKxuDTsM2ENyonl8",
-          "itemId": "1",
-          "size": "41",
-          "maxCount": 2,
-          "count": 2
-        },
-        {
-          "url": "puma-palermo.webp",
-          "description": "Puma Palermo",
-          "code": "00142",
-          "price": 2100,
-          "id": "ToEYzH3lewcK_Wcpr_BMp",
-          "itemId": "1",
-          "size": "42",
-          "maxCount": 3,
-          "count": 1
-        },
-        {
-          "url": "puma-palermo.webp",
-          "description": "Puma Palermo",
-          "code": "00144",
-          "price": 2100,
-          "id": "cTtOpAtP75XGul71jTfwq",
-          "itemId": "1",
-          "size": "44",
-          "maxCount": 1,
-          "count": 1
-        },
-        {
-          "url": "adidas-originals-gazelle-85.webp",
-          "description": "Adidas Originals Gazelle 85",
-          "code": "00641",
-          "price": 3800,
-          "id": "ZuPj8jpIKxchUzZ2jIhJL",
-          "itemId": "6",
-          "size": "41",
-          "maxCount": 2,
-          "count": 2
-        },
-        {
-          "url": "adidas-originals-gazelle-85.webp",
-          "description": "Adidas Originals Gazelle 85",
-          "code": "00639",
-          "price": 3800,
-          "id": "5atXlLvLnB57dhD2xCiA6",
-          "itemId": "6",
+          "name": "Asics Gel NYC",
+          "url": "asics-gel-nyc.webp",
+          "code": "00339",
+          "price": 4500,
+          "id": "1k50HQqqVf3nekKzP6mDn",
+          "itemId": "3",
           "size": "39",
-          "maxCount": 5,
-          "count": 2
+          "maxCount": 3,
+          "count": 3
         }
       ]
     },
