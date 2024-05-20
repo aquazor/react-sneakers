@@ -430,35 +430,7 @@
   ],
   "cart": [
     {
-      "id": "61f4",
-      "items": []
-    },
-    {
-      "id": "e230",
-      "items": []
-    },
-    {
       "id": "dccb",
-      "items": [
-        {
-          "name": "Asics Gel NYC",
-          "url": "asics-gel-nyc.webp",
-          "code": "00339",
-          "price": 4500,
-          "id": "1k50HQqqVf3nekKzP6mDn",
-          "itemId": "3",
-          "size": "39",
-          "maxCount": 3,
-          "count": 3
-        }
-      ]
-    },
-    {
-      "id": "714a",
-      "items": []
-    },
-    {
-      "id": "4be0",
       "items": []
     }
   ]

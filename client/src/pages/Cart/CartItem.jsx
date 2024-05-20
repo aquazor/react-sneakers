@@ -1,11 +1,11 @@
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Link, Paper, Typography } from '@mui/material';
 import { blueGrey, grey } from '@mui/material/colors';
-import { BASE_URL } from '../../constants';
 import { RemoveItemButton } from '../../components';
 import IncrementCountButton from './IncrementCountButton';
 import DecrementCountButton from './DecrementCountButton';
 import CartItemSection from './CartItemSection';
+import { BASE_URL } from '../../constants';
 
 const CartItem = ({ item }) => {
   return (

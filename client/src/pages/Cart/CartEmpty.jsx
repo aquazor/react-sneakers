@@ -4,6 +4,7 @@ import { BASE_URL } from '../../constants';
 const CartEmpty = () => {
   return (
     <Box
+      width={1}
       mt={3}
       display={'flex'}
       flexDirection={'column'}
