@@ -10,8 +10,10 @@ import RemoveItemButton from './ui/RemoveItemButton';
 import AddCartButton from './ui/AddCartButton';
 import SearchInput from './SearchInput';
 import SortBrand from './Sort/SortBrand';
+import ApplyFilterHint from './ApplyFilterHint';
 
 export {
+  ApplyFilterHint,
   SearchInput,
   AddCartButton,
   RemoveItemButton,

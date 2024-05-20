@@ -50,8 +50,6 @@ export const sneakersSlice = createSlice({
             return valueA.price - valueB.price;
           });
 
-      console.log(sortedItems);
-
       state.filteredItems = sortedItems;
     },
     clearFilters: (state) => {

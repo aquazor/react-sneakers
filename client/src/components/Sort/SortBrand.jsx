@@ -8,7 +8,7 @@ import { BRANDS } from '../../constants';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-const SortBrand = ({ selectedBrands, onChange }) => {
+const SortBrand = ({ value, onChange }) => {
   const handleChange = (event, updatedBrands) => {
     onChange(updatedBrands);
   };
@@ -25,7 +25,7 @@ const SortBrand = ({ selectedBrands, onChange }) => {
       {...defaultProps}
       disableCloseOnSelect
       onChange={handleChange}
-      value={selectedBrands}
+      value={value}
       renderOption={(props, brand, { selected }) => {
         return (
           <li {...props}>

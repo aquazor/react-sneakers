@@ -50,22 +50,24 @@ const Home = () => {
           onKeyDown={handleKeyDown}
         />
 
-        <SortPanel sortValue={filters.sortValue} onChange={handleSortValueChange} />
+        <SortPanel value={filters.sortValue} onChange={handleSortValueChange} />
 
         <Box>
           <SortBrand
-            selectedBrands={filters.selectedBrands}
+            value={filters.selectedBrands}
             onChange={handleSelectedBrandsChange}
           />
         </Box>
 
-        <Button variant="contained" onClick={handleApplyFilter}>
-          Apply Filter
-        </Button>
+        <Box width={1} display={'grid'} gap={1}>
+          <Button fullWidth variant="contained" onClick={handleApplyFilter}>
+            Apply Filter
+          </Button>
 
-        <Button variant="contained" onClick={handleClearFilter}>
-          Clear Filter
-        </Button>
+          <Button fullWidth variant="contained" onClick={handleClearFilter}>
+            Clear Filter
+          </Button>
+        </Box>
       </Box>
 
       <Box flexGrow={1}>
