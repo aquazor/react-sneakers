@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node index.js",
     "server": "nodemon node index.js",
     "json": "json-server --port 3003 --watch db.json",
     "test": "echo \"Error: no test specified\" && exit 1"
