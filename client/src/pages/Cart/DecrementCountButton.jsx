@@ -21,9 +21,7 @@ const DecrementCountButton = ({ item }) => {
 
     const cart = getCartFromLocal();
 
-    const index = cart.findIndex(
-      (item) => item.itemId === updatedItem.itemId && item.size === updatedItem.size
-    );
+    const index = cart.findIndex((item) => item.code === updatedItem.code);
 
     if (updatedItem.count < 1) {
       cart.splice(index, 1);

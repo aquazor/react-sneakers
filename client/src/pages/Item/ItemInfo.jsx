@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   Box,
@@ -37,7 +36,7 @@ const ItemInfo = ({ item }) => {
 
   // Search for an item with the same itemId & size in cart
   const cartItem = cartItems?.find(
-    (cartItem) => cartItem.itemId === item.id && cartItem.size === selectedSize
+    (cartItem) => cartItem.code === itemOfSelectedSize?.code
   );
 
   // Get count of the found item in cart, set 0 if not found
@@ -66,12 +65,11 @@ const ItemInfo = ({ item }) => {
       return;
     }
 
-    const { sizes, id, ...rest } = item;
-
     const cartItem = {
-      ...rest,
-      id: nanoid(),
-      itemId: item.id,
+      name: item.name,
+      url: item.url,
+      price: item.price,
+      itemId: item._id,
       size: selectedSize,
       code: itemOfSelectedSize.code,
       maxCount: itemOfSelectedSizeMaxCount,

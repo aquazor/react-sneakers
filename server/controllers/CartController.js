@@ -1,4 +1,5 @@
 import { axiosClient } from '../axios.js';
+import Cart from '../models/Cart.js';
 
 export const syncAndGetItems = async (req, res) => {
   const { userId } = req;
@@ -10,43 +11,37 @@ export const syncAndGetItems = async (req, res) => {
 
   try {
     // 1. Get items from db
-    const { data: userCartData } = await axiosClient.get(`/cart/${userId}`);
-    const serverCartItems = userCartData.items;
+    let userCart = await Cart.findOne({ userId });
+
+    if (!userCart) {
+      // 2. If user was not found, create a new user with local items
+      const newUserCart = new Cart({ userId, items: localCartItems });
+
+      try {
+        await newUserCart.save();
+        return res.json({ items: newUserCart.items });
+      } catch (error) {
+        return res.status(500).json({ error: error.message });
+      }
+    }
+
+    const serverCartItems = userCart.items;
 
     if (serverCartItems.length !== localCartItems.length) {
-      // 3. If for some reason lengths dont match return server items without syncing
-      console.log('server items returned');
+      // 3. If for some reason lengths don't match, return server items without syncing
+      console.log('Server items returned');
       return res.json({ items: serverCartItems });
     }
 
     // 4. Else sync server items with local items
-    const updatedUser = { id: userId, items: localCartItems };
+    userCart.items = localCartItems;
 
-    try {
-      const {
-        data: { items },
-      } = await axiosClient.put(`/cart/${userId}`, updatedUser);
-      return res.json({ items });
-    } catch (error) {
-      console.log('Error syncing items');
-    }
+    await userCart.save();
+
+    return res.json({ items: localCartItems });
   } catch (error) {
-    if (error?.response?.status === 404) {
-      // 2. If user was not found create a new user with local items
-      const newUser = { id: userId, items: localCartItems };
-
-      try {
-        await axiosClient.post(`/cart`, newUser);
-        return res.json({ items: newUser.items });
-      } catch (error) {
-        return res.status(500).json({ message: 'Error creating new cart' });
-      }
-    }
-
-    return res.status(500).json({ message: 'Error getting cart items' });
+    return res.status(500).json({ error: error.message });
   }
-
-  return res.json({ items: localCartItems });
 };
 
 export const addOrUpdateItem = async (req, res) => {
@@ -54,51 +49,36 @@ export const addOrUpdateItem = async (req, res) => {
   const { item } = req.body;
 
   if (!item) {
-    return res.status(422).json({ message: 'Missing item' });
+    return res.status(422).json({ message: 'Missing Item' });
   }
 
   try {
-    const { data: cartData } = await axiosClient.get(`/cart`);
+    let cart = await Cart.findOne({ userId });
+    let updatedItem;
 
-    const user = cartData.find((user) => user.id === userId);
-
-    if (!user) {
-      // if user was not found create a new user, add an item and post the user
-      const newUser = { id: userId, items: [{ ...item }] };
-
-      try {
-        await axiosClient.post(`/cart`, newUser);
-      } catch (error) {
-        return res.status(500).json({ message: 'Error creating new cart' });
-      }
-
-      return res.json({ message: 'Item added successfully' });
-    }
-
-    const cartItems = user.items;
-
-    const index = cartItems.findIndex(
-      (cartItem) => item.itemId === cartItem.itemId && item.size === cartItem.size
-    );
-
-    if (index !== -1) {
-      const newCount = cartItems[index].count + 1;
-
-      cartItems[index] = { ...cartItems[index], count: newCount };
+    if (!cart) {
+      updatedItem = { ...item };
+      cart = new Cart({ userId, items: [updatedItem] });
     } else {
-      cartItems.push(item);
+      const index = cart.items.findIndex((cartItem) => cartItem.code === item.code);
+
+      if (index !== -1) {
+        cart.items[index].count += 1;
+        updatedItem = cart.items[index];
+      } else {
+        updatedItem = { ...item };
+        cart.items.push(updatedItem);
+      }
     }
 
-    const updatedUser = { id: userId, items: [...cartItems] };
-    await axiosClient.put(`/cart/${userId}`, updatedUser);
+    await cart.save();
 
-    return res.json({ message: 'Item added or updated successfully' });
+    updatedItem = cart.items.find((cartItem) => cartItem.code === item.code);
+
+    return res.json({ item: updatedItem });
   } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({ message: 'Error adding item' });
+    return res.status(500).json({ error: error.message });
   }
-
-  return res.json({ message: 'Item added successfully' });
 };
 
 export const removeItem = async (req, res) => {
@@ -106,29 +86,25 @@ export const removeItem = async (req, res) => {
   const { item } = req.body;
 
   if (!item) {
-    return res.status(422).json({ message: 'Error removing item' });
+    return res.status(422).json({ message: 'Missing Item' });
   }
 
   try {
-    const { data: userCartData } = await axiosClient.get(`/cart/${userId}`);
+    let cart = await Cart.findOne({ userId });
 
-    const filtered = userCartData.items.filter((obj) => obj.id !== item.id);
-
-    let updatedUser;
-    if (filtered.length > 0) {
-      updatedUser = { id: userId, items: [...filtered] };
-    } else {
-      updatedUser = { id: userId, items: [] };
+    if (!cart) {
+      return res.status(404).json({ message: 'Cart not found' });
     }
 
-    await axiosClient.put(`/cart/${userId}`, updatedUser);
-  } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({ message: 'Error removing item' });
-  }
+    cart.items = cart.items.filter((cartItem) => cartItem.code !== item.code);
 
-  console.log('Item removed successfully');
-  return res.json({ message: 'Item removed successfully' });
+    await cart.save();
+
+    return res.json({ message: 'Item removed successfully' });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 export const decrementItemCount = async (req, res) => {
@@ -140,30 +116,28 @@ export const decrementItemCount = async (req, res) => {
   }
 
   try {
-    const { data: userCartData } = await axiosClient.get(`/cart/${userId}`);
-    const cartItems = userCartData.items;
+    let cart = await Cart.findOne({ userId });
 
-    const index = cartItems.findIndex(
-      (cartItem) => item.itemId === cartItem.itemId && item.size === cartItem.size
-    );
-
-    if (index !== -1) {
-      const newCount = cartItems[index].count - 1;
-
-      if (newCount > 0) {
-        cartItems[index] = { ...cartItems[index], count: newCount };
-      } else {
-        cartItems.splice(index, 1);
-      }
+    if (!cart) {
+      return res.status(404).json({ message: 'Cart not found' });
     }
 
-    const updatedUser = { id: userId, items: [...cartItems] };
+    const index = cart.items.findIndex((cartItem) => cartItem.code === item.code);
 
-    await axiosClient.put(`/cart/${userId}`, updatedUser);
+    if (index !== -1) {
+      if (cart.items[index].count > 1) {
+        cart.items[index].count -= 1;
+      } else {
+        cart.items.splice(index, 1);
+      }
+    } else {
+      return res.status(404).json({ message: 'Item not found in cart' });
+    }
+
+    await cart.save();
 
     return res.json({ message: 'Item count decremented successfully' });
   } catch (error) {
-    console.error(error.message);
-    return res.status(500).json({ message: 'Error updating cart' });
+    return res.status(500).json({ error: error.message });
   }
 };

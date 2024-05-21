@@ -14,7 +14,7 @@ const SneakersItemsList = ({ items }) => {
       }}
     >
       {items?.map((item) => (
-        <SneakersItem key={item.id} item={item} />
+        <SneakersItem key={item._id} item={item} />
       ))}
     </Box>
   );

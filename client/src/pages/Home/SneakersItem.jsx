@@ -4,7 +4,7 @@ import { BASE_URL } from '../../constants';
 
 const SneakersItem = ({ item }) => {
   const navigate = useNavigate();
-  const handleClick = () => navigate(`/sneakers/${item.id}`);
+  const handleClick = () => navigate(`/sneakers/${item._id}`);
 
   return (
     <Paper

@@ -52,7 +52,7 @@ export const addCartItem = createAsyncThunk(
     try {
       dispatch(setIsLoading(true));
 
-      await axiosClient.post(
+      const { data } = await axiosClient.post(
         '/cart/add',
         { item },
         {
@@ -60,7 +60,7 @@ export const addCartItem = createAsyncThunk(
         }
       );
 
-      dispatch(addItem(item));
+      dispatch(addItem(data.item));
     } catch (error) {
       console.log(error);
 
@@ -87,7 +87,7 @@ export const removeCartItem = createAsyncThunk(
       const cart = getCartFromLocal();
 
       if (cart.length > 0) {
-        const filtered = cart.filter((obj) => obj.id !== item.id);
+        const filtered = cart.filter((cartItem) => cartItem.code !== item.code);
         localStorage.setItem('cart', JSON.stringify(filtered));
       }
 

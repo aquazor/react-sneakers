@@ -8,7 +8,7 @@ const Item = () => {
   const { items } = useSelectSneakers();
   const { id } = useParams();
 
-  const item = items?.find((item) => item.id === id);
+  const item = items?.find((item) => item._id === id);
 
   const renderContent = () => {
     if (!items) {

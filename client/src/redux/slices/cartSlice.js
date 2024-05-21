@@ -15,10 +15,7 @@ export const cartSlice = createSlice({
         state.items = [];
       }
 
-      const index = state.items.findIndex(
-        (item) =>
-          item.itemId === action.payload.itemId && item.size === action.payload.size
-      );
+      const index = state.items.findIndex((item) => item.code === action.payload.code);
 
       if (index !== -1) {
         state.items[index] = { ...action.payload };
@@ -27,10 +24,7 @@ export const cartSlice = createSlice({
       }
     },
     decrementCount: (state, action) => {
-      const index = state.items.findIndex(
-        (item) =>
-          item.itemId === action.payload.itemId && item.size === action.payload.size
-      );
+      const index = state.items.findIndex((item) => item.code === action.payload.code);
 
       if (action.payload.count < 1) {
         state.items.splice(index, 1);
@@ -39,7 +33,7 @@ export const cartSlice = createSlice({
       }
     },
     removeItem: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload.id);
+      state.items = state.items.filter((item) => item.code !== action.payload.code);
     },
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
