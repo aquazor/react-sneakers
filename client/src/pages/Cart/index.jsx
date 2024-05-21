@@ -56,7 +56,17 @@ const Cart = () => {
     >
       <PageHeading>Cart page</PageHeading>
 
-      <Box flexGrow={1} display={'flex'} mb={4} gap={2}>
+      <Box
+        flexGrow={1}
+        display={'flex'}
+        mb={4}
+        gap={2}
+        sx={{
+          '@media (max-width: 800px)': {
+            flexDirection: 'column-reverse',
+          },
+        }}
+      >
         {content}
 
         {items?.length > 0 && <CartSummary items={items} isLoading={isLoading} />}

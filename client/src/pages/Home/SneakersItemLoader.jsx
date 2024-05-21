@@ -4,9 +4,9 @@ const SneakersItemLoader = () => {
   return (
     <ContentLoader
       speed={1}
-      width={210}
-      height={282}
-      viewBox="0 0 210 282"
+      width={260}
+      height={380}
+      viewBox="0 0 260 380"
       backgroundColor="#e0e0e0"
       foregroundColor="#ffffff"
     >

@@ -21,11 +21,15 @@ const SortBrand = ({ value, onChange }) => {
   return (
     <Autocomplete
       multiple
+      fullWidth
       id="sort-brand"
       {...defaultProps}
       disableCloseOnSelect
       onChange={handleChange}
       value={value}
+      renderInput={(params) => (
+        <TextField {...params} label="Brands" variant="standard" />
+      )}
       renderOption={(props, brand, { selected }) => {
         return (
           <li {...props}>
@@ -39,10 +43,6 @@ const SortBrand = ({ value, onChange }) => {
           </li>
         );
       }}
-      fullWidth
-      renderInput={(params) => (
-        <TextField {...params} label="Brands" variant="standard" />
-      )}
     />
   );
 };

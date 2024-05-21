@@ -10,6 +10,12 @@ const ItemCard = ({ item }) => {
       maxHeight={500}
       borderRadius={'5px 10%'}
       overflow={'hidden'}
+      sx={{
+        '@media (max-width: 600px)': {
+          maxWidth: 300,
+          height: 200,
+        },
+      }}
     >
       <Box
         component={'img'}

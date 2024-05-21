@@ -139,7 +139,7 @@ const ItemInfo = ({ item }) => {
   });
 
   return (
-    <Box flexShrink={0} flexGrow={1} display={'flex'} flexDirection={'column'} gap={3}>
+    <Box flexGrow={1} display={'flex'} flexDirection={'column'} gap={3}>
       <Box>
         <Typography variant="h4" component="h1">
           {item.name}

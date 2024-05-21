@@ -16,7 +16,7 @@ const CartSummary = ({ items }) => {
         display: 'flex',
         flexDirection: 'column',
         minWidth: 150,
-        height: 360,
+        maxHeight: 360,
         py: 1.5,
         px: 1,
         bgcolor: (theme) =>

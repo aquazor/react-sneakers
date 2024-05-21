@@ -1,12 +1,13 @@
 import { useDispatch } from 'react-redux';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useSelectSneakers } from '../../hooks/useSelectSneakers';
 import { SortPanel, SearchInput, SortBrand } from '../../components';
 import SneakersItemsList from './SneakersItemsList';
 import { applyFilters, clearFilters, setFilters } from '../../redux/slices/sneakersSlice';
+import SneakersItemLoader from './SneakersItemLoader';
 
 const Home = () => {
-  const { filteredItems, filters } = useSelectSneakers();
+  const { filteredItems, filters, isLoading } = useSelectSneakers();
 
   const dispatch = useDispatch();
 
@@ -18,8 +19,8 @@ const Home = () => {
     dispatch(clearFilters());
   };
 
-  const handleSearchTermChange = (e) => {
-    dispatch(setFilters({ ...filters, searchTerm: e.target.value }));
+  const handleSearchTermChange = (value) => {
+    dispatch(setFilters({ ...filters, searchTerm: value }));
   };
 
   const handleSelectedBrandsChange = (brands) => {
@@ -37,37 +38,50 @@ const Home = () => {
   };
 
   return (
-    <Container
-      maxWidth={'xl'}
-      sx={{ my: 2, display: 'flex', justifyContent: 'space-between', gap: 3 }}
-    >
-      <Box display={'flex'} flexDirection={'column'} gap={3} width={'250px'} my={4}>
-        <SearchInput
-          id={'search-sneakers'}
-          fullWidth
-          value={filters.searchTerm}
-          onChange={handleSearchTermChange}
-          onKeyDown={handleKeyDown}
-        />
+    <Box sx={{ maxWidth: '1750px' }} mx={'auto'} my={2} px={2}>
+      <Box
+        display={'grid'}
+        gridTemplateColumns={'repeat(auto-fit, minmax(200px, 1fr))'}
+        justifyContent={'center'}
+        alignItems={'end'}
+        gap={2}
+        my={4}
+      >
+        {!filteredItems && isLoading ? (
+          [...Array(5)].map((_, index) => <SneakersItemLoader key={index} />)
+        ) : (
+          <>
+            <SearchInput
+              fullWidth
+              id={'search-sneakers'}
+              value={filters.searchTerm}
+              onChange={handleSearchTermChange}
+              handleApplyFilter={handleApplyFilter}
+              onKeyDown={handleKeyDown}
+            />
 
-        <SortPanel value={filters.sortValue} onChange={handleSortValueChange} />
+            <SortPanel
+              value={filters.sortValue}
+              onChange={handleSortValueChange}
+              handleApplyFilter={handleApplyFilter}
+            />
 
-        <Box>
-          <SortBrand
-            value={filters.selectedBrands}
-            onChange={handleSelectedBrandsChange}
-          />
-        </Box>
+            <SortBrand
+              value={filters.selectedBrands}
+              onChange={handleSelectedBrandsChange}
+            />
 
-        <Box width={1} display={'grid'} gap={1}>
-          <Button fullWidth variant="contained" onClick={handleApplyFilter}>
-            Apply Filter
-          </Button>
+            <Box width={1} display={'grid'} gap={1}>
+              <Button fullWidth variant="contained" onClick={handleApplyFilter}>
+                Apply Filter
+              </Button>
 
-          <Button fullWidth variant="contained" onClick={handleClearFilter}>
-            Clear Filter
-          </Button>
-        </Box>
+              <Button fullWidth variant="contained" onClick={handleClearFilter}>
+                Clear Filter
+              </Button>
+            </Box>
+          </>
+        )}
       </Box>
 
       <Box flexGrow={1}>
@@ -79,7 +93,7 @@ const Home = () => {
 
         <SneakersItemsList items={filteredItems} />
       </Box>
-    </Container>
+    </Box>
   );
 };
 

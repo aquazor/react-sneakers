@@ -21,7 +21,17 @@ const Item = () => {
 
     return (
       <>
-        <Box display={'flex'} justifyContent={'space-between'} gap={3}>
+        <Box
+          display={'flex'}
+          justifyContent={'space-between'}
+          gap={3}
+          sx={{
+            '@media (max-width: 600px)': {
+              flexDirection: 'column',
+              alignItems: 'center',
+            },
+          }}
+        >
           <ItemCard item={item} />
           <ItemInfo item={item} />
         </Box>
@@ -63,7 +73,7 @@ const Item = () => {
 
   return (
     <Container>
-      <Box my={4}>{renderContent()}</Box>
+      <Box my={3}>{renderContent()}</Box>
     </Container>
   );
 };
