@@ -3,6 +3,7 @@ import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import { useThemeContext } from './theme/useThemeContext';
+import { DefaultHelmet } from './components/Helmets';
 import { Layout, Home, Cart, SignIn, SignUp, Item } from './pages';
 
 const App = () => {
@@ -11,6 +12,8 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
+      <DefaultHelmet />
 
       <Routes>
         <Route path="/" element={<Layout />}>

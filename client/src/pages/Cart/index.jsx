@@ -6,6 +6,7 @@ import { useSelectCart } from '../../hooks/useSelectCart';
 import { setItems } from '../../redux/slices/cartSlice';
 import { syncAndGetItems } from '../../redux/thunks/cartThunks';
 import { getCartFromLocal } from '../../utils/getCartFromLocal';
+import { CartPageHelmet } from '../../components/Helmets';
 import { PageHeading } from '../../components';
 import CartSummary from './CartSummary';
 import CartItemsList from './CartItemsList';
@@ -54,6 +55,8 @@ const Cart = () => {
         position: 'relative',
       }}
     >
+      <CartPageHelmet />
+
       <PageHeading>Cart page</PageHeading>
 
       <Box

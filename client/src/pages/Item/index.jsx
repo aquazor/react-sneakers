@@ -3,6 +3,7 @@ import { Box, Container, Typography } from '@mui/material';
 import { useSelectSneakers } from '../../hooks/useSelectSneakers';
 import ItemCard from './ItemCard';
 import ItemInfo from './ItemInfo';
+import { ItemPageHelmet } from '../../components/Helmets';
 
 const Item = () => {
   const { items } = useSelectSneakers();
@@ -21,6 +22,8 @@ const Item = () => {
 
     return (
       <>
+        <ItemPageHelmet title={item.name} description={item.name} />
+
         <Box
           display={'flex'}
           justifyContent={'space-between'}

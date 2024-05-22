@@ -139,7 +139,7 @@ const ItemInfo = ({ item }) => {
   });
 
   return (
-    <Box flexGrow={1} display={'flex'} flexDirection={'column'} gap={3}>
+    <Box flexGrow={1} display={'flex'} flexDirection={'column'} gap={3} minWidth={250}>
       <Box>
         <Typography variant="h4" component="h1">
           {item.name}
@@ -186,8 +186,9 @@ const ItemInfo = ({ item }) => {
         </Select>
       </FormControl>
 
-      <Box alignSelf={'flex-end'} display={'flex'} height={1}>
+      <Box alignSelf={'flex-end'} display={'flex'} width={1} maxWidth={250} height={1}>
         <Button
+          fullWidth
           disabled={disabled}
           variant="contained"
           onClick={() => handleAdd(item)}

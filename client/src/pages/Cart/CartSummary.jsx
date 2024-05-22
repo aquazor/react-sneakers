@@ -22,13 +22,16 @@ const CartSummary = ({ items }) => {
         bgcolor: (theme) =>
           theme.palette.mode === 'dark' ? blueGrey[900] : blueGrey[50],
         borderRadius: '10px',
+        '@media (max-width: 800px)': {
+          position: 'static',
+        },
       }}
     >
       <Divider>
         <Chip sx={{ height: '18px' }} label="Total" size="small" />
       </Divider>
 
-      <Box flexGrow={1} p={1}>
+      <Box flexGrow={1} p={1} my={1}>
         <Typography variant="h6" component={'h6'}>
           Cart total:
         </Typography>

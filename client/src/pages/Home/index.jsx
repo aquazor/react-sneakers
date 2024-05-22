@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Box, Button, Typography } from '@mui/material';
 import { useSelectSneakers } from '../../hooks/useSelectSneakers';
 import { SortPanel, SearchInput, SortBrand } from '../../components';
+import { HomePageHelmet } from '../../components/Helmets';
 import SneakersItemsList from './SneakersItemsList';
 import { applyFilters, clearFilters, setFilters } from '../../redux/slices/sneakersSlice';
 import SneakersItemLoader from './SneakersItemLoader';
@@ -39,6 +40,8 @@ const Home = () => {
 
   return (
     <Box sx={{ maxWidth: '1750px' }} mx={'auto'} my={2} px={2}>
+      <HomePageHelmet />
+
       <Box
         display={'grid'}
         gridTemplateColumns={'repeat(auto-fit, minmax(200px, 1fr))'}
