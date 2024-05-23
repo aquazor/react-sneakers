@@ -44,7 +44,7 @@ const CartItem = ({ item }) => {
 
         <CartItemSection flexBasis={'33%'} flexGrow={2} heading={'Product'}>
           <Box>
-            <Link component={RouterLink} to={`/sneakers/${item.itemId}`}>
+            <Link component={RouterLink} to={`/sneakers?id=${item.itemId}`}>
               {item.name}
             </Link>
 

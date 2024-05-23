@@ -8,3 +8,15 @@ ol,
 li {
   list-style: none;
 }
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font: inherit;
+}

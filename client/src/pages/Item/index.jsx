@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Box, Container, Typography } from '@mui/material';
 import { useSelectSneakers } from '../../hooks/useSelectSneakers';
 import ItemCard from './ItemCard';
@@ -7,9 +7,15 @@ import { ItemPageHelmet } from '../../components/Helmets';
 
 const Item = () => {
   const { items } = useSelectSneakers();
-  const { id } = useParams();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const id = queryParams.get('id');
+  const size = queryParams.get('size') || '';
 
   const item = items?.find((item) => item._id === id);
+  const isValidSize = item?.sizes.some((sizeObj) => sizeObj.value === size);
 
   const renderContent = () => {
     if (!items) {
@@ -36,7 +42,7 @@ const Item = () => {
           }}
         >
           <ItemCard item={item} />
-          <ItemInfo item={item} />
+          <ItemInfo item={item} size={isValidSize ? size : ''} />
         </Box>
 
         <Box my={2}>

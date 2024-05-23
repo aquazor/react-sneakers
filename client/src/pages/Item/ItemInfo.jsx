@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
@@ -10,29 +10,43 @@ import {
   Select,
   Typography,
 } from '@mui/material';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelectAuth } from '../../hooks/useSelectAuth';
 import { useSelectCart } from '../../hooks/useSelectCart';
 import { addCartItem } from '../../redux/thunks/cartThunks';
 import { setItems } from '../../redux/slices/cartSlice';
 import { getCartFromLocal } from '../../utils/getCartFromLocal';
 
-const ItemInfo = ({ item }) => {
+const ItemInfo = ({ item, size = '' }) => {
+  const [selectedSize, setSelectedSize] = useState(size);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedSize, setSelectedSize] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+
   const { items: cartItems } = useSelectCart();
+  const { token } = useSelectAuth().userAuth;
 
   const select = useRef(null);
 
-  const { token } = useSelectAuth().userAuth;
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
 
-  let itemOfSelectedSize = null;
-  if (selectedSize) {
-    // Determine an instance of an item of the selected size
-    itemOfSelectedSize = item.sizes.find((itemSize) => itemSize.value === selectedSize);
-  }
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+
+    if (selectedSize) {
+      queryParams.set('size', selectedSize);
+    } else {
+      queryParams.delete('size');
+    }
+
+    navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
+  }, [selectedSize, navigate, location.pathname, location.search]);
+
+  // Determine an instance of an item of the selected size
+  const itemOfSelectedSize = selectedSize
+    ? item.sizes.find((itemSize) => itemSize.value === selectedSize)
+    : null;
 
   // Search for an item with the same itemId & size in cart
   const cartItem = cartItems?.find(
@@ -116,7 +130,17 @@ const ItemInfo = ({ item }) => {
     }
 
     return (
-      <MenuItem disabled={count <= 0} key={index} value={size.value}>
+      <MenuItem
+        disabled={count <= 0}
+        key={index}
+        value={value}
+        sx={{
+          width: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
         <Box
           width={1}
           display={'flex'}
@@ -168,22 +192,37 @@ const ItemInfo = ({ item }) => {
         </Box>
       </Box>
 
-      <FormControl variant="filled" sx={{ maxWidth: 250 }}>
-        <InputLabel id="select-filled-label">Choose size</InputLabel>
+      <FormControl variant="filled" sx={{ maxWidth: 250, position: 'relative' }}>
+        <InputLabel id="select-size-label">Choose size</InputLabel>
         <Select
           inputRef={select}
           onOpen={() => setIsOpen(true)}
           onClose={() => setIsOpen(false)}
           open={isOpen}
           MenuProps={{ sx: { mt: 1 } }}
-          labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-filled"
+          labelId="select-size-label"
+          id="select-size"
           label="Choose size"
           onChange={(e) => setSelectedSize(e.target.value)}
           value={selectedSize}
         >
           {sizesList}
         </Select>
+
+        {cartItemCount > 0 && (
+          <Typography
+            variant="body2"
+            component={'p'}
+            position={'absolute'}
+            top={-25}
+            right={0}
+          >
+            Selected in cart:{' '}
+            <Typography component={'span'} fontWeight={700} color={'success.main'}>
+              {cartItemCount}
+            </Typography>
+          </Typography>
+        )}
       </FormControl>
 
       <Box alignSelf={'flex-end'} display={'flex'} width={1} maxWidth={250} height={1}>

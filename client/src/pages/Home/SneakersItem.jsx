@@ -1,25 +1,51 @@
-import { useNavigate } from 'react-router-dom';
-import { Box, Paper, Typography } from '@mui/material';
+import { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Box, MenuItem, Paper, Slide, Typography } from '@mui/material';
 import { BASE_URL } from '../../constants';
 
 const SneakersItem = ({ item }) => {
-  const navigate = useNavigate();
-  const handleClick = () => navigate(`/sneakers/${item._id}`);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const sizesList = item.sizes.map((size, index) => {
+    const { count, value } = size;
+
+    return (
+      <MenuItem
+        component={RouterLink}
+        to={`/sneakers?id=${item._id}&size=${value}`}
+        key={index}
+        disabled={count <= 0}
+        value={value}
+        sx={{
+          width: 1,
+          justifyContent: 'center',
+          borderRadius: 2,
+          bgcolor: 'GrayText',
+          color: 'white',
+        }}
+      >
+        {value}
+      </MenuItem>
+    );
+  });
 
   return (
     <Paper
-      onClick={handleClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       sx={{
+        position: 'relative',
         display: 'grid',
         width: 260,
         borderRadius: '5px 15px',
-        cursor: 'pointer',
         overflow: 'hidden',
       }}
       elevation={2}
       component="li"
     >
-      <img height={280} width={'100%'} src={`${BASE_URL}/images/${item.url}`} />
+      <RouterLink to={`/sneakers?id=${item._id}`}>
+        <img height={280} width={'100%'} src={`${BASE_URL}/images/${item.url}`} />
+      </RouterLink>
 
       <Box p={2} display={'grid'}>
         <Box>
@@ -55,6 +81,26 @@ const SneakersItem = ({ item }) => {
           </Box>
         </Box>
       </Box>
+
+      {isHovered && (
+        <Slide direction={'left'} in={isHovered}>
+          <Box
+            position={'absolute'}
+            top={0}
+            right={0}
+            height={1}
+            maxWidth={'70px'}
+            display={'flex'}
+            flexWrap={'wrap'}
+            gap={1}
+            p={1}
+            bgcolor={'gray'}
+            component={'ul'}
+          >
+            {sizesList}
+          </Box>
+        </Slide>
+      )}
     </Paper>
   );
 };
