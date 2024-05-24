@@ -1,21 +1,28 @@
 import { Box } from '@mui/material';
 import { BASE_URL } from '../../constants';
 
-const ItemCard = ({ item }) => {
+const ItemCard = ({
+  item,
+  maxWidth = 200,
+  maxHeight = 200,
+  borderRadius = 2,
+  ...rest
+}) => {
   return (
     <Box
       flexShrink={1}
       width={1}
-      maxWidth={500}
-      maxHeight={500}
-      borderRadius={'5px 10%'}
+      maxWidth={maxWidth}
+      maxHeight={maxHeight}
+      borderRadius={borderRadius}
       overflow={'hidden'}
       sx={{
-        '@media (max-width: 600px)': {
-          maxWidth: 300,
-          height: 200,
+        '@media (max-width: 768px)': {
+          maxWidth: 350,
+          height: 250,
         },
       }}
+      {...rest}
     >
       <Box
         component={'img'}

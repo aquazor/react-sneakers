@@ -1,41 +1,5 @@
 {
-  "users": [
-    {
-      "id": "61f4",
-      "email": "test01@test.com",
-      "password": "123"
-    },
-    {
-      "id": "9a96",
-      "email": "test02@test.com",
-      "password": "123"
-    },
-    {
-      "id": "fa2c",
-      "email": "test03@test.com",
-      "password": "123"
-    },
-    {
-      "id": "e230",
-      "email": "kek@kek.com",
-      "password": "12341234Rt"
-    },
-    {
-      "id": "dccb",
-      "email": "kek01@kek.com",
-      "password": "12341234Rt"
-    },
-    {
-      "id": "714a",
-      "email": "kek02@kek.com",
-      "password": "12341234Rt"
-    },
-    {
-      "id": "4be0",
-      "email": "kek03@kek.com",
-      "password": "12341234Rt"
-    }
-  ],
+  "users": [],
   "items": [
     {
       "id": "1",
