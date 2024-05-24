@@ -1,4 +1,3 @@
-import './App.css';
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';

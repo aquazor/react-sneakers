@@ -10,6 +10,7 @@ export const sneakersSlice = createSlice({
       searchTerm: '',
       selectedBrands: [],
       sortValue: '',
+      selectedSizes: [],
     },
   },
   reducers: {
@@ -25,7 +26,7 @@ export const sneakersSlice = createSlice({
     },
     applyFilters: (state) => {
       const { items, filters } = state;
-      const { searchTerm, selectedBrands, sortValue } = filters;
+      const { searchTerm, selectedBrands, sortValue, selectedSizes } = filters;
 
       const searchFilteredItems = items.filter((item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase().trim())
@@ -41,9 +42,21 @@ export const sneakersSlice = createSlice({
         );
       });
 
+      const sizeFilteredItems = brandFilteredItems.filter((item) => {
+        if (selectedSizes.length === 0) {
+          return true;
+        }
+
+        return selectedSizes.some((size) =>
+          item.sizes.some(
+            (itemSize) => +itemSize.count !== 0 && +itemSize.value === +size.value
+          )
+        );
+      });
+
       const sortedItems = !sortValue
-        ? brandFilteredItems
-        : brandFilteredItems.sort((prev, next) => {
+        ? sizeFilteredItems
+        : sizeFilteredItems.sort((prev, next) => {
             const valueA = sortValue === 1 ? next : prev;
             const valueB = sortValue === 1 ? prev : next;
 
@@ -53,7 +66,12 @@ export const sneakersSlice = createSlice({
       state.filteredItems = sortedItems;
     },
     clearFilters: (state) => {
-      state.filters = { searchTerm: '', selectedBrands: [], sortValue: '' };
+      state.filters = {
+        searchTerm: '',
+        selectedBrands: [],
+        sortValue: '',
+        selectedSizes: [],
+      };
       state.filteredItems = state.items;
     },
   },

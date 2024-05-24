@@ -1,11 +1,16 @@
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, Container, Typography } from '@mui/material';
 import { useSelectSneakers } from '../../hooks/useSelectSneakers';
+import { ItemPageHelmet } from '../../components/Helmets';
 import ItemCard from './ItemCard';
 import ItemInfo from './ItemInfo';
-import { ItemPageHelmet } from '../../components/Helmets';
 
 const Item = () => {
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
   const { items } = useSelectSneakers();
 
   const location = useLocation();

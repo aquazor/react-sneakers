@@ -1,12 +1,12 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { Container, Box, AppBar, Toolbar, Button, IconButton } from '@mui/material';
-import { blue } from '@mui/material/colors';
+import { Box, AppBar, Toolbar, Button, IconButton } from '@mui/material';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import { blue } from '@mui/material/colors';
 import { useSelectCart } from '../hooks/useSelectCart';
+import { getTotalItemsCount } from '../utils/getTotalItemsCount';
 import ToggleTheme from './ToggleTheme';
 import Navbar from './Navbar';
 import Authbar from './Authbar';
-import { getTotalItemsCount } from '../utils/getTotalItemsCount';
 
 const Header = () => {
   const { items } = useSelectCart();
@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Box maxWidth={1750} px={2} mx={'auto'} width={1}>
         <Toolbar disableGutters>
           <Button component={RouterLink} to="/" variant="contained" size="large">
             LOGO
@@ -59,7 +59,7 @@ const Header = () => {
             <Authbar />
           </Box>
         </Toolbar>
-      </Container>
+      </Box>
     </AppBar>
   );
 };

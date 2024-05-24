@@ -1,42 +1,23 @@
-import { useDispatch } from 'react-redux';
 import { Box, Button, Typography } from '@mui/material';
-import { useSelectSneakers } from '../../hooks/useSelectSneakers';
-import { SortPanel, SearchInput, SortBrand } from '../../components';
+import { useSneakersFilters } from '../../hooks/useSneakersFilters';
+import { SortPanel, SearchInput, SortBrand, SortSize } from '../../components';
 import { HomePageHelmet } from '../../components/Helmets';
 import SneakersItemsList from './SneakersItemsList';
-import { applyFilters, clearFilters, setFilters } from '../../redux/slices/sneakersSlice';
 import SneakersItemLoader from './SneakersItemLoader';
 
 const Home = () => {
-  const { filteredItems, filters, isLoading } = useSelectSneakers();
-
-  const dispatch = useDispatch();
-
-  const handleApplyFilter = () => {
-    dispatch(applyFilters());
-  };
-
-  const handleClearFilter = () => {
-    dispatch(clearFilters());
-  };
-
-  const handleSearchTermChange = (value) => {
-    dispatch(setFilters({ ...filters, searchTerm: value }));
-  };
-
-  const handleSelectedBrandsChange = (brands) => {
-    dispatch(setFilters({ ...filters, selectedBrands: brands }));
-  };
-
-  const handleSortValueChange = (value) => {
-    dispatch(setFilters({ ...filters, sortValue: value }));
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      handleApplyFilter();
-    }
-  };
+  const {
+    filteredItems,
+    filters,
+    isLoading,
+    handleApplyFilter,
+    handleClearFilter,
+    handleSearchTermChange,
+    handleSelectedBrandsChange,
+    handleSelectedSizesChange,
+    handleSortValueChange,
+    handleKeyDown,
+  } = useSneakersFilters();
 
   return (
     <Box sx={{ maxWidth: '1750px' }} mx={'auto'} my={2} px={2}>
@@ -72,6 +53,11 @@ const Home = () => {
             <SortBrand
               value={filters.selectedBrands}
               onChange={handleSelectedBrandsChange}
+            />
+
+            <SortSize
+              value={filters.selectedSizes}
+              onChange={handleSelectedSizesChange}
             />
 
             <Box width={1} display={'grid'} gap={1}>

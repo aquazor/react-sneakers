@@ -11,6 +11,7 @@ const SneakersItem = ({ item }) => {
 
     return (
       <MenuItem
+        disableRipple
         component={RouterLink}
         to={`/sneakers?id=${item._id}&size=${value}`}
         key={index}
@@ -20,8 +21,17 @@ const SneakersItem = ({ item }) => {
           width: 1,
           justifyContent: 'center',
           borderRadius: 2,
-          bgcolor: 'GrayText',
+          bgcolor: (theme) =>
+            theme.palette.mode === 'dark'
+              ? theme.palette.primary.main
+              : theme.palette.primary.light,
           color: 'white',
+          '&:hover': {
+            bgcolor: (theme) =>
+              theme.palette.mode === 'dark'
+                ? theme.palette.primary.dark
+                : theme.palette.primary.main,
+          },
         }}
       >
         {value}
@@ -88,12 +98,12 @@ const SneakersItem = ({ item }) => {
             position={'absolute'}
             top={0}
             right={0}
-            height={1}
-            maxWidth={'70px'}
+            maxWidth={'50px'}
             display={'flex'}
             flexWrap={'wrap'}
             gap={1}
             p={1}
+            borderRadius={'0px 0px 0px 10px'}
             bgcolor={'gray'}
             component={'ul'}
           >
