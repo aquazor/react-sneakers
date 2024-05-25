@@ -27,8 +27,13 @@ const SortBrand = ({ value, onChange }) => {
       disableCloseOnSelect
       onChange={handleChange}
       value={value}
-      renderInput={(params) => (
-        <TextField {...params} label="Brands" variant="standard" />
+      renderInput={({ inputProps, ...rest }) => (
+        <TextField
+          {...rest}
+          inputProps={{ ...inputProps, readOnly: true }}
+          label="Brands"
+          variant="standard"
+        />
       )}
       renderOption={(props, brand, { selected }) => {
         return (

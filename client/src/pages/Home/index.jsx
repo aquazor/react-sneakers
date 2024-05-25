@@ -3,7 +3,7 @@ import { useSneakersFilters } from '../../hooks/useSneakersFilters';
 import { SortPanel, SearchInput, SortBrand, SortSize } from '../../components';
 import { HomePageHelmet } from '../../components/Helmets';
 import SneakersItemsList from './SneakersItemsList';
-import SneakersItemLoader from './SneakersItemLoader';
+import PageSkeleton from './PageSkeleton';
 
 const Home = () => {
   const {
@@ -20,21 +20,21 @@ const Home = () => {
   } = useSneakersFilters();
 
   return (
-    <Box sx={{ maxWidth: '1750px' }} mx={'auto'} my={2} px={2}>
+    <Box sx={{ maxWidth: '1750px' }} mx={'auto'} my={4} px={2}>
       <HomePageHelmet />
 
-      <Box
-        display={'grid'}
-        gridTemplateColumns={'repeat(auto-fit, minmax(200px, 1fr))'}
-        justifyContent={'center'}
-        alignItems={'end'}
-        gap={2}
-        my={4}
-      >
-        {!filteredItems && isLoading ? (
-          [...Array(5)].map((_, index) => <SneakersItemLoader key={index} />)
-        ) : (
-          <>
+      {!filteredItems && isLoading ? (
+        <PageSkeleton />
+      ) : (
+        <>
+          <Box
+            display={'grid'}
+            gridTemplateColumns={'repeat(auto-fit, minmax(200px, 1fr))'}
+            justifyContent={'center'}
+            alignItems={'end'}
+            gap={2}
+            my={4}
+          >
             <SearchInput
               fullWidth
               id={'search-sneakers'}
@@ -69,19 +69,19 @@ const Home = () => {
                 Clear Filter
               </Button>
             </Box>
-          </>
-        )}
-      </Box>
+          </Box>
 
-      <Box flexGrow={1}>
-        {filteredItems?.length === 0 && (
-          <Typography my={2} paragraph>
-            Nothing found for your search query.
-          </Typography>
-        )}
+          <div>
+            {filteredItems?.length === 0 && (
+              <Typography my={2} paragraph>
+                Nothing found for your search query.
+              </Typography>
+            )}
 
-        <SneakersItemsList items={filteredItems} />
-      </Box>
+            <SneakersItemsList items={filteredItems} />
+          </div>
+        </>
+      )}
     </Box>
   );
 };

@@ -27,7 +27,14 @@ const SortSize = ({ value, onChange }) => {
       disableCloseOnSelect
       onChange={handleChange}
       value={value}
-      renderInput={(params) => <TextField {...params} label="Sizes" variant="standard" />}
+      renderInput={({ inputProps, ...rest }) => (
+        <TextField
+          {...rest}
+          inputProps={{ ...inputProps, readOnly: true }}
+          label="Sizes"
+          variant="standard"
+        />
+      )}
       renderOption={(props, size, { selected }) => {
         return (
           <li {...props}>

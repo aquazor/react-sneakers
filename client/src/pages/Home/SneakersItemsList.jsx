@@ -5,7 +5,7 @@ const SneakersItemsList = ({ items }) => {
   return (
     <Box
       component="ul"
-      my={5}
+      my={4}
       sx={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, 260px)',
