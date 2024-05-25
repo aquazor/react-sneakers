@@ -81,7 +81,7 @@ const Item = () => {
             ))}
           </Tabs>
 
-          <Box flexGrow={1}>
+          <Box flexGrow={1} px={2}>
             <TabPanel value={activeTab} name={TABS[0]}>
               <BaseInfoTab item={item} size={isValidSize ? size : ''} />
             </TabPanel>

@@ -8,10 +8,12 @@ const BaseInfoSection = ({ item, size }) => {
       display={'flex'}
       justifyContent={'space-between'}
       gap={3}
+      width={1}
       sx={{
         '@media (max-width: 768px)': {
           flexDirection: 'column',
           alignItems: 'center',
+          maxWidth: '75%',
         },
       }}
     >

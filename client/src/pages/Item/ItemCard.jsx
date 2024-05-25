@@ -18,7 +18,6 @@ const ItemCard = ({
       overflow={'hidden'}
       sx={{
         '@media (max-width: 768px)': {
-          maxWidth: 350,
           height: 250,
         },
       }}

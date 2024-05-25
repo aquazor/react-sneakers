@@ -29,7 +29,7 @@ const DescriptionSection = ({ item }) => {
 
         <div>
           <Typography sx={{ textDecoration: 'underline' }} variant="h6" component={'h5'}>
-            Styling:
+            Styling
           </Typography>
 
           <Typography>
@@ -41,7 +41,7 @@ const DescriptionSection = ({ item }) => {
 
         <div>
           <Typography sx={{ textDecoration: 'underline' }} variant="h6" component={'h5'}>
-            Silhouette:
+            Silhouette
           </Typography>
 
           <Typography>
@@ -53,7 +53,7 @@ const DescriptionSection = ({ item }) => {
 
         <div>
           <Typography sx={{ textDecoration: 'underline' }} variant="h6" component={'h5'}>
-            Colorways:
+            Colorways
           </Typography>
 
           <Typography>
@@ -65,7 +65,7 @@ const DescriptionSection = ({ item }) => {
 
         <div>
           <Typography sx={{ textDecoration: 'underline' }} variant="h6" component={'h5'}>
-            Signature Branding:
+            Signature Branding
           </Typography>
 
           <Typography>

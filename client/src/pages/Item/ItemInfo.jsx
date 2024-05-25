@@ -163,7 +163,17 @@ const ItemInfo = ({ item, size = '' }) => {
   });
 
   return (
-    <Box flexGrow={1} display={'flex'} flexDirection={'column'} gap={3} minWidth={250}>
+    <Box
+      flexGrow={1}
+      display={'flex'}
+      flexDirection={'column'}
+      gap={3}
+      minWidth={250}
+      width={1}
+      sx={{
+        '@media (max-width: 768px)': {},
+      }}
+    >
       <Box>
         <Typography variant="h4" component="h1">
           {item.name}
@@ -192,7 +202,17 @@ const ItemInfo = ({ item, size = '' }) => {
         </Box>
       </Box>
 
-      <FormControl variant="filled" sx={{ maxWidth: 250, position: 'relative' }}>
+      <FormControl
+        variant="filled"
+        sx={{
+          width: 1,
+          maxWidth: 300,
+          position: 'relative',
+          '@media (max-width: 768px)': {
+            maxWidth: 'unset',
+          },
+        }}
+      >
         <InputLabel id="select-size-label">Choose size</InputLabel>
         <Select
           inputRef={select}
@@ -225,7 +245,18 @@ const ItemInfo = ({ item, size = '' }) => {
         )}
       </FormControl>
 
-      <Box alignSelf={'flex-end'} display={'flex'} width={1} maxWidth={250} height={1}>
+      <Box
+        alignSelf={'flex-end'}
+        display={'flex'}
+        maxWidth={300}
+        width={1}
+        height={1}
+        sx={{
+          '@media (max-width: 768px)': {
+            maxWidth: 'unset',
+          },
+        }}
+      >
         <Button
           fullWidth
           disabled={disabled}

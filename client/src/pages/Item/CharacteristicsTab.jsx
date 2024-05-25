@@ -21,7 +21,7 @@ const CharacteristicsSection = ({ item }) => {
 
         <div>
           <Typography sx={{ textDecoration: 'underline' }} variant="h6" component={'h5'}>
-            Upper Material:
+            Upper Material
           </Typography>
 
           <Typography>
@@ -33,7 +33,7 @@ const CharacteristicsSection = ({ item }) => {
 
         <div>
           <Typography sx={{ textDecoration: 'underline' }} variant="h6" component={'h5'}>
-            Textile Lining:
+            Textile Lining
           </Typography>
 
           <Typography>
@@ -46,7 +46,7 @@ const CharacteristicsSection = ({ item }) => {
 
         <div>
           <Typography sx={{ textDecoration: 'underline' }} variant="h6" component={'h5'}>
-            Insole:
+            Insole
           </Typography>
 
           <Typography>
@@ -58,7 +58,7 @@ const CharacteristicsSection = ({ item }) => {
 
         <div>
           <Typography sx={{ textDecoration: 'underline' }} variant="h6" component={'h5'}>
-            Outsole:
+            Outsole
           </Typography>
 
           <Typography>
