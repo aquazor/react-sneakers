@@ -1,37 +1,61 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  Box,
+  Grid,
+  Typography,
+  Avatar,
+  Button,
+  TextField,
+  Link,
+  CircularProgress,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import { register } from '../../redux/thunks/authThunks';
+import { PASSWORD_REGEX } from '../../constants';
+import { register as registerUser } from '../../redux/thunks/authThunks';
+
+const schema = z
+  .object({
+    email: z
+      .string()
+      .email('Invalid email.')
+      .max(255, 'Email must me maximum 255 characters.'),
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters long.')
+      .max(20, 'Password must be maximum 20 characters long.')
+      .regex(
+        PASSWORD_REGEX,
+        'Password must contain one uppercase, one lowercase, one number and no special characters.'
+      ),
+    password_confirm: z.string(),
+  })
+  .refine((data) => data.password === data.password_confirm, {
+    message: 'Passwords must match.',
+    path: ['password_confirm'],
+  });
 
 const SignUpForm = () => {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm({ resolver: zodResolver(schema) });
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const data = new FormData(event.currentTarget);
-
-    const email = data.get('email');
-    const password = data.get('password');
-
-    if (!password || !email) {
-      return;
-    }
-
+  const onSubmit = async (data) => {
     try {
-      await dispatch(register(data)).unwrap();
+      await dispatch(registerUser(data)).unwrap();
 
       navigate('/sign-in');
     } catch (error) {
-      console.log(error);
+      setError('root', { message: error.message });
     }
   };
 
@@ -48,10 +72,12 @@ const SignUpForm = () => {
       <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
         <LockOutlinedIcon />
       </Avatar>
+
       <Typography component="h1" variant="h5">
         Sign up
       </Typography>
-      <Box component="form" width={1} noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+
+      <Box component="form" width={1} noValidate onSubmit={handleSubmit(onSubmit)} mt={3}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -62,8 +88,12 @@ const SignUpForm = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              {...register('email')}
+              error={Boolean(errors.email)}
+              helperText={errors.email && errors.email.message}
             />
           </Grid>
+
           <Grid item xs={12}>
             <TextField
               required
@@ -73,12 +103,52 @@ const SignUpForm = () => {
               type="password"
               id="password"
               autoComplete="new-password"
+              {...register('password')}
+              error={Boolean(errors.password)}
+              helperText={errors.password && errors.password.message}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              name="password_confirm"
+              label="Confirm Password"
+              type="password"
+              id="password_confirm"
+              autoComplete="new-password"
+              {...register('password_confirm')}
+              error={Boolean(errors.password_confirm)}
+              helperText={errors.password_confirm && errors.password_confirm.message}
             />
           </Grid>
         </Grid>
-        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+
+        {errors.root && (
+          <Typography mt={1} component="p" variant="body1" color="error">
+            {errors.root.message}
+          </Typography>
+        )}
+
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
           Sign Up
+          {isSubmitting && (
+            <CircularProgress
+              thickness={4}
+              sx={{ position: 'absolute', right: 10 }}
+              color="inherit"
+              size={24}
+            />
+          )}
         </Button>
+
         <Grid container justifyContent="flex-end">
           <Grid item>
             <Link component={RouterLink} to="/sign-in">

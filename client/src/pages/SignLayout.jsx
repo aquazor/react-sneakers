@@ -1,8 +1,7 @@
 import { Navigate } from 'react-router-dom';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import ToggleTheme from '../components/ToggleTheme';
+import { Slide, Paper, Grid } from '@mui/material';
 import { useSelectAuth } from '../hooks/useSelectAuth';
+import ToggleTheme from '../components/ToggleTheme';
 
 const SignLayout = ({ children }) => {
   const {
@@ -29,6 +28,7 @@ const SignLayout = ({ children }) => {
           backgroundPosition: 'center',
         }}
       />
+
       <Grid
         item
         xs={12}
@@ -38,8 +38,11 @@ const SignLayout = ({ children }) => {
         elevation={6}
         square
         position={'relative'}
+        overflow={'hidden'}
       >
-        {children}
+        <Slide direction="left" in timeout={300}>
+          <div>{children}</div>
+        </Slide>
 
         <ToggleTheme className={{ position: 'absolute', top: 4, right: 4 }} />
       </Grid>
