@@ -34,10 +34,10 @@ const Home = () => {
   const currentItems = filteredItems?.slice(firstItemIndex, lastItemIndex);
 
   useEffect(() => {
-    if (pagesCount <= 1) {
-      setCurrentPage(1);
+    if (pagesCount > 0 && currentPage > pagesCount) {
+      setCurrentPage(pagesCount);
     }
-  }, [pagesCount]);
+  }, [pagesCount, currentPage]);
 
   return (
     <Box sx={{ maxWidth: '1500px' }} mx={'auto'} my={2} px={2}>
