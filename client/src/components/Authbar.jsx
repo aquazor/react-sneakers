@@ -1,15 +1,13 @@
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Box, IconButton, Typography } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import { useSelectAuth } from '../hooks/useSelectAuth';
 import { useState } from 'react';
 import ConfirmLogoutModal from './ConfirmLogoutModal';
 
 const Authbar = () => {
-  const {
-    userAuth: { token },
-  } = useSelectAuth();
+  const { token } = useSelectAuth().userAuth;
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => setIsOpen(false);
@@ -19,7 +17,7 @@ const Authbar = () => {
   const from = location?.pathname || '/';
 
   return (
-    <Box sx={{ flexGrow: 0 }}>
+    <>
       {!token ? (
         <IconButton
           title="Sign In"
@@ -45,7 +43,7 @@ const Authbar = () => {
       )}
 
       <ConfirmLogoutModal open={isOpen} onClose={handleClose} />
-    </Box>
+    </>
   );
 };
 

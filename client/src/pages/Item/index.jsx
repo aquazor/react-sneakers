@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Container, Tab, useMediaQuery } from '@mui/material';
 import { useSelectSneakers } from '../../hooks/useSelectSneakers';
-import { useScrollTop } from '../../hooks/useScrollTop';
+import { useScrollTopEffect } from '../../hooks/useScrollTopEffect';
 import { ItemPageHelmet } from '../../components/Helmets';
 import { TABS } from '../../constants';
 import BaseInfoTab from './InfoTab';
@@ -12,7 +12,7 @@ import TabPanel from './TabPanel';
 import Tabs from './Tabs';
 
 const Item = () => {
-  useScrollTop();
+  useScrollTopEffect();
 
   const location = useLocation();
   const navigate = useNavigate();

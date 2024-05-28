@@ -19,6 +19,7 @@ const SneakersItem = ({ item }) => {
         value={value}
         sx={{
           width: 1,
+          minHeight: 'auto',
           justifyContent: 'center',
           borderRadius: 2,
           bgcolor: (theme) =>
