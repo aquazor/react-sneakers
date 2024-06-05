@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import ItemCard from './ItemCard';
+import ItemImage from './ItemImage';
 
 const CharacteristicsSection = ({ item }) => {
   return (
@@ -75,7 +75,7 @@ const CharacteristicsSection = ({ item }) => {
           {item.name}
         </Typography>
 
-        <ItemCard item={item} maxHeight={500} maxWidth={'100%'} />
+        <ItemImage item={item} maxHeight={500} maxWidth={'100%'} />
       </Box>
     </Box>
   );

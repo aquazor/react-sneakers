@@ -1,9 +1,9 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 
 const itemsPerPageConfig = {
-  sm: 4, // Small devices
-  md: 6, // Medium devices
-  lg: 8, // Medium devices
+  sm: 3, // Small devices (< 600px)
+  md: 6, // Medium devices (600px - 1199px)
+  lg: 8, // Medium devices (=> 1200px)
 };
 
 const useItemsPerPage = () => {

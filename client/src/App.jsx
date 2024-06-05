@@ -3,7 +3,7 @@ import { CssBaseline } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import { useThemeContext } from './theme/useThemeContext';
 import { DefaultHelmet } from './components/Helmets';
-import { Layout, Home, Cart, SignIn, SignUp, Item } from './pages';
+import { Layout, Home, Cart, SignIn, SignUp, Item, NotFound } from './pages';
 
 const App = () => {
   const { theme } = useThemeContext();
@@ -19,6 +19,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/sneakers" element={<Item />} />
+
+          <Route path="*" element={<NotFound />} />
         </Route>
 
         <Route path="/sign-in" element={<SignIn />} />

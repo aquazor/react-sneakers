@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import ItemCard from './ItemCard';
+import ItemImage from './ItemImage';
 import ItemInfo from './ItemInfo';
 
 const BaseInfoSection = ({ item, size }) => {
@@ -17,7 +17,7 @@ const BaseInfoSection = ({ item, size }) => {
         },
       }}
     >
-      <ItemCard item={item} maxWidth={500} maxHeight={500} borderRadius={'5px 10%'} />
+      <ItemImage item={item} maxWidth={500} maxHeight={650} borderRadius={'5px 10%'} />
       <ItemInfo item={item} size={size} />
     </Box>
   );

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { BASE_URL } from '../../constants';
 
-const ItemCard = ({
+const ItemImage = ({
   item,
   maxWidth = 200,
   maxHeight = 200,
@@ -33,4 +33,4 @@ const ItemCard = ({
   );
 };
 
-export default ItemCard;
+export default ItemImage;

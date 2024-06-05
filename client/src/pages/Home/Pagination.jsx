@@ -3,13 +3,11 @@ import { Pagination as LibPagination } from '@mui/material';
 const Pagination = ({ pagesCount, currentPage, setCurrentPage }) => {
   const handleChange = (event, page) => {
     setCurrentPage(page);
-    window.scroll(0, 0);
   };
 
   return (
     <LibPagination
-      showFirstButton={pagesCount > 3}
-      showLastButton={pagesCount > 3}
+      siblingCount={0}
       color="primary"
       page={currentPage}
       count={pagesCount}

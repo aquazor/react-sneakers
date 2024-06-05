@@ -37,8 +37,8 @@ export const sneakersSlice = createSlice({
           return true;
         }
 
-        return selectedBrands.some((brand) =>
-          item.name.toLowerCase().includes(brand.name.toLowerCase())
+        return selectedBrands.some((brandName) =>
+          item.name.toLowerCase().includes(brandName.toLowerCase())
         );
       });
 
@@ -49,7 +49,7 @@ export const sneakersSlice = createSlice({
 
         return selectedSizes.some((size) =>
           item.sizes.some(
-            (itemSize) => +itemSize.count !== 0 && +itemSize.value === +size.value
+            (itemSize) => +itemSize.count !== 0 && +itemSize.value === +size
           )
         );
       });
