@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Slide, Paper, Grid } from '@mui/material';
+import { Slide, Paper, Grid, Box } from '@mui/material';
 import { useSelectAuth } from '../hooks/useSelectAuth';
 import ToggleTheme from '../components/ToggleTheme';
 
@@ -44,7 +44,9 @@ const SignLayout = ({ children }) => {
           <div>{children}</div>
         </Slide>
 
-        <ToggleTheme className={{ position: 'absolute', top: 4, right: 4 }} />
+        <Box position={'absolute'} top={4} right={4}>
+          <ToggleTheme />
+        </Box>
       </Grid>
     </Grid>
   );
