@@ -1,6 +1,6 @@
-import { Link as RouterLink } from 'react-router-dom';
 import { Box, AppBar } from '@mui/material';
 import Navbar from './Navbar';
+import Logo from './Logo';
 
 const Header = () => {
   return (
@@ -12,15 +12,7 @@ const Header = () => {
           justifyContent={'space-between'}
           py={1}
         >
-          <Box
-            flexShrink={0}
-            borderRadius={2}
-            overflow={'hidden'}
-            component={RouterLink}
-            to="/"
-          >
-            <img height={50} src="./logo.webp" />
-          </Box>
+          <Logo />
 
           <Navbar />
         </Box>

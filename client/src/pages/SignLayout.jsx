@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { Slide, Paper, Grid, Box } from '@mui/material';
 import { useSelectAuth } from '../hooks/useSelectAuth';
-import ToggleTheme from '../components/ToggleTheme';
+import { GoHomeLink, ToggleTheme } from '../components';
 
 const SignLayout = ({ children }) => {
   const {
@@ -41,13 +41,22 @@ const SignLayout = ({ children }) => {
         position={'relative'}
         overflow={'hidden'}
       >
+        <Box
+          display={'flex'}
+          justifyContent={'space-between'}
+          alignItems={'center'}
+          gap={1}
+          p={1}
+          borderRadius={20}
+        >
+          <GoHomeLink />
+
+          <ToggleTheme />
+        </Box>
+
         <Slide direction="left" in timeout={300}>
           <div>{children}</div>
         </Slide>
-
-        <Box position={'absolute'} top={4} right={4}>
-          <ToggleTheme />
-        </Box>
       </Grid>
     </Grid>
   );

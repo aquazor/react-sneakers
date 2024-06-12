@@ -5,25 +5,16 @@ import { getMe } from '../redux/thunks/authThunks';
 import { useSelectAuth } from '../hooks/useSelectAuth';
 
 const RequireAuth = () => {
-  const {
-    userAuth: { token },
-  } = useSelectAuth();
+  const { token } = useSelectAuth().userAuth;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const authMe = async () => {
-      try {
-        console.log('Authenticating...');
-        await dispatch(getMe());
-      } catch (error) {
-        console.log(error);
-      }
-
-      console.log('Finished authenticating');
-    };
-
-    authMe();
+    try {
+      dispatch(getMe());
+    } catch (error) {
+      console.log(error);
+    }
   }, [dispatch]);
 
   if (!token || token === 'undefined' || token === 'null') {

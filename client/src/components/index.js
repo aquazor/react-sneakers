@@ -1,5 +1,6 @@
 import Header from './Header';
 import Navbar from './Navbar';
+import Logo from './Logo';
 import ToggleTheme from './ToggleTheme';
 import Authbar from './Authbar';
 import ConfirmLogoutModal from './ConfirmLogoutModal';
@@ -15,6 +16,7 @@ import SortBrand from './Sort/SortBrand';
 import SortSize from './Sort/SortSize';
 
 import ApplyFilterHint from './ApplyFilterHint';
+import GoHomeLink from './GoHomeLink';
 
 export {
   ApplyFilterHint,
@@ -31,4 +33,6 @@ export {
   FavoriteButton,
   SortBrand,
   SortSize,
+  Logo,
+  GoHomeLink,
 };

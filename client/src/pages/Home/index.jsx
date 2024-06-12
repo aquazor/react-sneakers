@@ -9,7 +9,7 @@ const Home = () => {
   const { filteredItems, isLoading } = useSneakersFilters();
 
   return (
-    <Box sx={{ maxWidth: '1500px' }} mx={'auto'} my={2} px={2}>
+    <Box sx={{ maxWidth: '1500px' }} mx={'auto'} px={2}>
       <HomePageHelmet />
 
       {!filteredItems && isLoading ? (

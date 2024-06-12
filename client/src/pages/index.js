@@ -6,5 +6,16 @@ import RequireAuth from './RequireAuth';
 import SignIn from './SignIn';
 import Item from './Item';
 import NotFound from './NotFound';
+import SecondaryLayout from './SecondaryLayout';
 
-export { Home, Cart, SignIn, Layout, SignUp, RequireAuth, Item, NotFound };
+export {
+  Home,
+  Cart,
+  SignIn,
+  Layout,
+  SignUp,
+  RequireAuth,
+  Item,
+  NotFound,
+  SecondaryLayout,
+};
