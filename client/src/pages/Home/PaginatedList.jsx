@@ -23,14 +23,6 @@ const PaginatedList = ({ items }) => {
 
   return (
     <Box flexGrow={1} my={2}>
-      <Box display={'flex'} justifyContent={'center'}>
-        <Pagination
-          pagesCount={pagesCount}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      </Box>
-
       <SneakersItemsList items={currentItems} />
 
       <Box display={'flex'} justifyContent={'center'}>

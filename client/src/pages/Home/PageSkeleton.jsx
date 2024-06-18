@@ -33,7 +33,7 @@ const PageSkeleton = () => {
             gap: 3,
           }}
         >
-          {[...Array(10)].map((_, index) => (
+          {[...Array(5)].map((_, index) => (
             <Paper
               elevation={2}
               sx={{ borderRadius: '5px 15px', overflow: 'hidden' }}
